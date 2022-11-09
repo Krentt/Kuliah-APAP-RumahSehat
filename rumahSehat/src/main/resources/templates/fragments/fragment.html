@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>View Course</title>
+  <head th:fragment="css">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+  </head>
+  <head th:fragment="js">
+    <script
+            src="https://code.jquery.com/jquery-3.4.1.min.js"
+            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetYMGWSFIBw8HfCJo="
+            crossorigin="anonymous">
+    </script>
+    <script src="https://getbootsrap.com/docs/4.1/assets/js/vendor/popper.min.js"></script>
+    <script th:src="@{/js.bootstrap.min.js}"></script>
+  </head>
+</head>
+<body>
+<nav th:fragment="navbar (var)" class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand font-weight-bold text-primary" href="#">RumahSehat</a>
+  <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#narbarNavAltMarkup"
+          aria-controls="navnarNavAltMarkup"
+          aria-expanded="false"
+          aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse">
+
+    <!--      NAVBAR ITEM-->
+    <ul class="navbar-nav mr-auto">
+      <a class="nav-item nav-link" th:href="@{/}" th:classappend="${var} == 'home' ? 'active' : 'text-secondary'">
+        Beranda<span class="sr-only">(current)</span>
+      </a>
+      <a class="nav-item nav-link" th:href="@{/}" th:classappend="${var} == 'item1' ? 'active' : 'text-secondary'">
+        Item 1
+      </a>
+      <a class="nav-item nav-link" th:href="@{/}" th:classappend="${var} == 'item2' ? 'active' : 'text-secondary'">
+        Item 2
+      </a>
+    </ul>
+<!--    END OF NAVBAR ITEM-->
+
+    <form class="form-inline my-2 my-lg-0" th:action="@{/}" method="GET">
+      <input class="form-control mr-sm-2" type="search"
+             name="code" placeholder="Search..." aria-label="Search">
+      <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
+    </form>
+
+<!--    LOG OUT-->
+<!--    <ul class="navbar-nav pull-right">-->
+<!--      <a class="nav-item nav-link text-text-secondary" th:href="@{/}">Logout</a>-->
+<!--    </ul>-->
+<!--    END OF LOG OUT -->
+  </div>
+</nav>
+</body>
+</html>
