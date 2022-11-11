@@ -17,7 +17,16 @@
         <div class="alert alert-danger" role="alert" th:text="${error}" th:if="${error}"></div>
 <!--        END OF FLASH MESSAGE-->
         <br>
+        <h2 class="text-center" th:text="'Hello '+${#httpServletRequest.remoteUser}+'!'">Login as</h2>
         <h2>Selamat datang di Rumah Sehat</h2>
+
+<!--        Button untuk fitur admin-->
+        <div class="d-flex justify-content-center">
+            <a th:href="@{/user/view-dokter}" class="mx-2 btn btn-outline-primary">Lihat Semua Dokter</a>
+            <a th:href="@{/user/view-apoteker}" class="mx-2 btn btn-outline-success">Lihat Semua Apoteker</a>
+        </div>
+<!--        End of Button untuk fitur admin-->
+
     </div>
 </div>
 </body>
