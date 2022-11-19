@@ -18,7 +18,7 @@
 </head>
 <body>
 <nav th:fragment="navbar (var)" class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand font-weight-bold text-primary" href="#">RumahSehat</a>
+  <a class="navbar-brand font-weight-bold" style="color:#3F3B6C;" href="#">RumahSehat</a>
   <button
           class="navbar-toggler"
           type="button"
@@ -33,14 +33,8 @@
 
     <!--      NAVBAR ITEM-->
     <ul class="navbar-nav mr-auto">
-      <a class="nav-item nav-link" th:href="@{/}" th:classappend="${var} == 'home' ? 'active' : 'text-secondary'">
+      <a class="nav-item nav-link" style="color:#3F3B6C;" th:href="@{/}" th:classappend="${var} == 'home' ? 'active' : 'text-secondary'">
         Beranda<span class="sr-only">(current)</span>
-      </a>
-      <a class="nav-item nav-link" th:href="@{/}" th:classappend="${var} == 'item1' ? 'active' : 'text-secondary'">
-        Item 1
-      </a>
-      <a class="nav-item nav-link" th:href="@{/}" th:classappend="${var} == 'item2' ? 'active' : 'text-secondary'">
-        Item 2
       </a>
     </ul>
 <!--    END OF NAVBAR ITEM-->
@@ -48,12 +42,12 @@
     <form class="form-inline my-2 my-lg-0" th:action="@{/}" method="GET">
       <input class="form-control mr-sm-2" type="search"
              name="code" placeholder="Search..." aria-label="Search">
-      <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
+      <button class="btn btn-light my-2 my-sm-0" style="color:#3F3B6C;" type="submit">Search</button>
     </form>
 
 <!--    LOG OUT-->
     <ul class="navbar-nav pull-right">
-      <a class="nav-item nav-link text-text-secondary" th:href="@{/logout-sso}">Logout</a>
+      <a class="nav-item nav-link text-text-secondary" style="color:#3F3B6C;" th:href="@{/logout-sso}">Logout</a>
     </ul>
 <!--    END OF LOG OUT -->
   </div>

@@ -7,26 +7,84 @@
     <title>Beranda</title>
     <object th:include="fragments/fragment :: css" th:remove="tag"></object>
     <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+    <style>
+        body {
+            background-image: url('https://www.linkpicture.com/q/Mesh-132.png');
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+        }
+    </style>
 </head>
 <body>
 <nav th:replace="fragments/fragment :: navbar(${'home'})"></nav>
 <div class="d-flex justify-content-center">
     <div class="m-4">
-<!--        FLASH MESSAGE-->
+        <!--        FLASH MESSAGE-->
         <div class="alert alert-primary" role="alert" th:text="${success}" th:if="${success}"></div>
         <div class="alert alert-danger" role="alert" th:text="${error}" th:if="${error}"></div>
-<!--        END OF FLASH MESSAGE-->
+        <!--        END OF FLASH MESSAGE-->
         <br>
-        <h2 class="text-center" th:text="'Hello '+${#httpServletRequest.remoteUser}+'!'">Login as</h2>
-        <h2>Selamat datang di Rumah Sehat</h2>
-
-<!--        Button untuk fitur admin-->
-        <div class="d-flex justify-content-center">
-            <a th:href="@{/user/view-dokter}" class="mx-2 btn btn-outline-primary">Lihat Semua Dokter</a>
-            <a th:href="@{/user/view-apoteker}" class="mx-2 btn btn-outline-success">Lihat Semua Apoteker</a>
+        <h2 class="text-center text-white" th:text="'Hello '+${#httpServletRequest.remoteUser}+'!'">Login as</h2>
+        <h2>
+            <div class="text-center text-white">Selamat datang di Rumah Sehat</div>
+        </h2>
+        <br>
+        <div class="card-header text-center rounded-circle" style="color:#3F3B6C;">
+            <h2> List of Features: </h2>
         </div>
-<!--        End of Button untuk fitur admin-->
-
+        <br>
+        <!--        Button untuk fitur admin-->
+        <div class="card-header">
+            <br>
+            <div class="d-flex justify-content-center">
+                <div class="col">
+                    <div class="row justify-content-center">
+                        <a th:href="@{/}" class="mx-2 btn text-white" style="background-color: #3F3B6C;">Menambah
+                            Dokter</a>
+                    </div>
+                    <br>
+                    <div class="row justify-content-center">
+                        <a th:href="@{/}" class="mx-2 btn text-white" style="background-color: #3F3B6C;">Menambah
+                            Apoteker</a>
+                    </div>
+                    <br>
+                    <div class="row justify-content-center">
+                        <a th:href="@{/user/view-dokter}" class="mx-2 btn text-white"
+                           style="background-color: #3F3B6C;">Lihat
+                            Semua Dokter</a>
+                    </div>
+                    <br>
+                    <div class="row justify-content-center">
+                        <a th:href="@{/user/view-apoteker}" class="mx-2 btn text-white"
+                           style="background-color: #3F3B6C;">Lihat
+                            Semua Apoteker</a>
+                    </div>
+                    <br>
+                    <div class="row justify-content-center">
+                        <a th:href="@{/}" class="mx-2 btn text-white" style="background-color: #3F3B6C;">Lihat Jadwal
+                            Appointment</a>
+                    </div>
+                    <br>
+                    <div class="row justify-content-center">
+                        <a th:href="@{/}" class="mx-2 btn text-white" style="background-color: #3F3B6C;">Lihat Resep</a>
+                    </div>
+                    <br>
+                    <div class="row justify-content-center">
+                        <a th:href="@{/}" class="mx-2 btn text-white" style="background-color: #3F3B6C;">Membuat
+                            Resep</a>
+                    </div>
+                    <br>
+                    <div class="row justify-content-center">
+                        <a th:href="@{/obat/view-obat}" class="mx-2 btn text-white" style="background-color: #3F3B6C;">Lihat
+                            Semua
+                            Obat</a>
+                    </div>
+                    <br>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 </body>

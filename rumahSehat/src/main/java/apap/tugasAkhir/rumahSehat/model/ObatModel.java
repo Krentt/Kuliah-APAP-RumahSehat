@@ -1,0 +1,40 @@
+package apap.tugasAkhir.rumahSehat.model;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import java.io.Serializable;
+import java.util.List;
+
+@Entity
+@AllArgsConstructor
+@NoArgsConstructor
+@Setter
+@Getter
+public class ObatModel implements Serializable {
+    @Id
+    @Column(name = "id_obat")
+    private String idObat;
+
+    @NotNull
+    @Size(max = 255)
+    @Column(name = "nama_obat",nullable = false)
+    private String namaObat;
+
+    @NotNull
+    @Column(nullable = false)
+    private Integer stok;
+
+    @NotNull
+    @Column(nullable = false)
+    private Integer harga;
+
+    // Relasi dengan resep
+    @OneToMany(mappedBy = "obat", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<JumlahModel> listResep;
+}
