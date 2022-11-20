@@ -27,7 +27,7 @@ public class ObatModel implements Serializable {
     private String namaObat;
 
     @NotNull
-    @Column(nullable = false)
+    @Column(columnDefinition = "integer default 100",nullable = false)
     private Integer stok;
 
     @NotNull
