@@ -1,5 +1,6 @@
 package apap.tugasAkhir.rumahSehat.security;
 
+import apap.tugasAkhir.rumahSehat.model.PasienModel;
 import apap.tugasAkhir.rumahSehat.model.UserModel;
 import apap.tugasAkhir.rumahSehat.repository.UserDb;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         UserModel user = userDb.findByUsername(username);
+        if (user == null) {
+            throw new UsernameNotFoundException("User can not be found");
+        }
         Set<GrantedAuthority> grantedAuthorities = new HashSet<GrantedAuthority>();
         grantedAuthorities.add(new SimpleGrantedAuthority(user.getRole().getRole()));
         return new User(user.getUsername(), user.getPassword(), grantedAuthorities);
