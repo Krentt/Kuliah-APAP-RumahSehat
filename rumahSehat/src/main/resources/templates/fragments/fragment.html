@@ -1,56 +1,88 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>View Course</title>
-  <head th:fragment="css">
-    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
-  </head>
-  <head th:fragment="js">
-    <script
-            src="https://code.jquery.com/jquery-3.4.1.min.js"
-            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetYMGWSFIBw8HfCJo="
-            crossorigin="anonymous">
-    </script>
-    <script src="https://getbootsrap.com/docs/4.1/assets/js/vendor/popper.min.js"></script>
-    <script th:src="@{/js.bootstrap.min.js}"></script>
-  </head>
+    <meta charset="UTF-8">
+    <title>View Course</title>
+    <head th:fragment="css">
+        <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    </head>
+    <head th:fragment="js">
+        <script
+                src="https://code.jquery.com/jquery-3.4.1.min.js"
+                integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetYMGWSFIBw8HfCJo="
+                crossorigin="anonymous">
+        </script>
+        <script src="https://getbootsrap.com/docs/4.1/assets/js/vendor/popper.min.js"></script>
+        <script th:src="@{/js.bootstrap.min.js}"></script>
+    </head>
+    <style>
+        body {
+            background-image: url('https://www.linkpicture.com/q/Mesh-132.png');
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+        }
+    </style>
 </head>
 <body>
-<nav th:fragment="navbar (var)" class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand font-weight-bold" style="color:#3F3B6C;" href="#">RumahSehat</a>
-  <button
-          class="navbar-toggler"
-          type="button"
-          data-toggle="collapse"
-          data-target="#narbarNavAltMarkup"
-          aria-controls="navnarNavAltMarkup"
-          aria-expanded="false"
-          aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse">
+<nav th:fragment="navbar (var)" class="navbar navbar-expand-lg navbar-light">
+    <a class="navbar-brand font-weight-bold" style="color:#3F3B6C;" href="#">RumahSehat</a>
+    <button
+            class="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#narbarNavAltMarkup"
+            aria-controls="navnarNavAltMarkup"
+            aria-expanded="false"
+            aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse">
 
-    <!--      NAVBAR ITEM-->
-    <ul class="navbar-nav mr-auto">
-      <a class="nav-item nav-link" style="color:#3F3B6C;" th:href="@{/}" th:classappend="${var} == 'home' ? 'active' : 'text-secondary'">
-        Beranda<span class="sr-only">(current)</span>
-      </a>
-    </ul>
-<!--    END OF NAVBAR ITEM-->
+        <!--      NAVBAR ITEM-->
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item" th:classappend="${var=='home'} ? active">
+                <div th:if="${var=='home'}">
+                    <a class="nav-link font-weight-normal" style="color:#3F3B6C;" th:href="@{/}">Beranda</a>
+                </div>
+                <div th:unless="${var=='home'}">
+                    <a class="nav-link font-weight-normal" style="color:#F8F3F3;" th:href="@{/}">Beranda</a>
+                </div>
+            </li>
+            <li class="nav-item" th:classappend="${var=='obat'} ? active">
+                <div th:if="${var=='obat'}">
+                    <a class="nav-link font-weight-normal" style="color:#3F3B6C;"  th:href="@{/obat/view-obat}">Obat</a>
+                </div>
+                <div th:unless="${var=='obat'}">
+                    <a class="nav-link font-weight-normal" style="color:#F8F3F3;"  th:href="@{/obat/view-obat}">Obat</a>
+                </div>
+            </li>
+            <li class="nav-item" th:classappend="${var=='resep'} ? active">
+                <div th:if="${var=='resep'}">
+                    <a class="nav-link font-weight-normal" style="color:#3F3B6C;" th:href="@{/}">Resep</a>
+                </div>
+                <div th:unless="${var=='resep'}">
+                    <a class="nav-link font-weight-normal" style="color:#F8F3F3;" th:href="@{/}">Resep</a>
+                </div>
+            </li>
+            <li class="nav-item" th:classappend="${var=='appointment'} ? active">
+                <div th:if="${var=='appointment'}">
+                    <a class="nav-link font-weight-normal" style="color:#3F3B6C;" th:href="@{/}">Appointment</a>
+                </div>
+                <div th:unless="${var=='appointment'}">
+                    <a class="nav-link font-weight-normal" style="color:#F8F3F3;" th:href="@{/}">Appointment</a>
+                </div>
+            </li>
+        </ul>
+        <!--    END OF NAVBAR ITEM-->
 
-    <form class="form-inline my-2 my-lg-0" th:action="@{/}" method="GET">
-      <input class="form-control mr-sm-2" type="search"
-             name="code" placeholder="Search..." aria-label="Search">
-      <button class="btn btn-light my-2 my-sm-0" style="color:#3F3B6C;" type="submit">Search</button>
-    </form>
-
-<!--    LOG OUT-->
-    <ul class="navbar-nav pull-right">
-      <a class="nav-item nav-link text-text-secondary" style="color:#3F3B6C;" th:href="@{/logout-sso}">Logout</a>
-    </ul>
-<!--    END OF LOG OUT -->
-  </div>
+        <!--    LOG OUT-->
+        <ul class="navbar-nav pull-right">
+            <a class="nav-item nav-link btn text-white" style="background-color:#3F3B6C;" th:href="@{/logout-sso}">Logout</a>
+        </ul>
+        <!--    END OF LOG OUT -->
+    </div>
 </nav>
 </body>
 </html>
