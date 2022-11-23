@@ -4,11 +4,15 @@ import apap.tugasAkhir.rumahSehat.model.ApotekerModel;
 import apap.tugasAkhir.rumahSehat.model.DokterModel;
 import apap.tugasAkhir.rumahSehat.model.PasienModel;
 import apap.tugasAkhir.rumahSehat.model.RoleModel;
+import apap.tugasAkhir.rumahSehat.restModel.JwtResponse;
 import apap.tugasAkhir.rumahSehat.restModel.PasienDTO;
+import apap.tugasAkhir.rumahSehat.security.JwtTokenUtil;
 import apap.tugasAkhir.rumahSehat.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -77,22 +81,29 @@ public class UserController {
     }
 
     // Rest Controller PASIEN SIGN UP
-    @PostMapping(value = "/pasien-signup")
-    public ResponseEntity<?> registerPasien(@RequestBody PasienDTO pasienDTO){
-        // Check username
-        if (userService.getUserByUsername(pasienDTO.getUsername()) != null){
-            return new ResponseEntity<>("Username is already taken!", HttpStatus.BAD_REQUEST);
-        }
-        PasienModel pasienModel = new PasienModel();
-        pasienModel.setNama(pasienDTO.getNama());
-        pasienModel.setUsername(pasienDTO.getUsername());
-        pasienModel.setPassword(pasienDTO.getPassword());
-        pasienModel.setEmail(pasienDTO.getEmail());
-        pasienModel.setSaldoPasien(0L);
-        pasienModel.setUmurPasien(pasienDTO.getUmurPasien());
-        pasienModel.setIsSso(false);
-        pasienModel.setRole(roleService.getById(Long.valueOf(2)));
-        userService.addUser(pasienModel);
-        return new ResponseEntity<>("User registered succesfully", HttpStatus.OK);
-    }
+//    @PostMapping(value = "/pasien-signup")
+//    public ResponseEntity<?> registerPasien(@RequestBody PasienDTO pasienDTO){
+//        // Check username
+//        if (userService.getUserByUsername(pasienDTO.getUsername()) != null){
+//            return new ResponseEntity<>("Username is already taken!", HttpStatus.BAD_REQUEST);
+//        }
+//        PasienModel pasienModel = new PasienModel();
+//        pasienModel.setNama(pasienDTO.getNama());
+//        pasienModel.setUsername(pasienDTO.getUsername());
+//        pasienModel.setPassword(pasienDTO.getPassword());
+//        pasienModel.setEmail(pasienDTO.getEmail());
+//        pasienModel.setSaldoPasien(0L);
+//        pasienModel.setUmurPasien(pasienDTO.getUmurPasien());
+//        pasienModel.setIsSso(false);
+//        pasienModel.setRole(roleService.getById(Long.valueOf(2)));
+//        userService.addUser(pasienModel);
+//
+//        final UserDetails userDetails = jwtInMemoryUserDetailsService
+//                .loadUserByUsername(authenticationRequest.getUsername());
+//
+//        final String token = jwtTokenUtil.generateToken(pasienModel);
+//
+//        return ResponseEntity.ok(new JwtResponse(token));
+////        return new ResponseEntity<>("User registered succesfully", HttpStatus.OK);
+//    }
 }
