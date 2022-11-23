@@ -4,14 +4,76 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class Authh with ChangeNotifier{
-  void signup(String? username, String? password, String? email, String? umur) async{
-    Uri url = Uri.parse("http://10.0.2.2:8080/user/pasien-signup");
-    var response = await http.post(url, body: json.encode({
-      "username": username,
-      "password": password,
-      "email": email,
-      "umurPasien" : umur
-    }));
-    print(json.decode(response.body));
+  String? _idToken;
+
+  String? _tempidToken;
+
+  void tempData(){
+    _idToken = _tempidToken;
+    notifyListeners();
+  }
+
+  bool get isAuth{
+    return token != null;
+  }
+
+  String? get token{
+    return _idToken;
+  }
+
+
+  Future<void> signup(String? username, String? password, String? email, String? umur, String? nama) async{
+    Uri url = Uri.parse("http://10.0.2.2:8080/signup");
+
+    try{
+      var response = await http.post(url,
+          headers: {
+        "Content-Type" : "application/json"
+      },
+          body: json.encode({
+          "username": username,
+          "nama": nama,
+          "password": password,
+          "email": email,
+          "umurPasien" : umur
+      }));
+      var resp = json.decode(response.body);
+
+      if (resp["error"] != null){
+        throw resp["error"];
+      }
+
+      _tempidToken = resp["jwttoken"];
+      notifyListeners();
+
+    } catch (error){
+      rethrow;
+    }
+  }
+
+  Future<void> login(String? username, String? password) async{
+    Uri url = Uri.parse("http://10.0.2.2:8080/authenticate");
+
+    try{
+      var response = await http.post(url,
+          headers: {
+            "Content-Type" : "application/json"
+          },
+          body: json.encode({
+            "username": username,
+            "password": password,
+          }));
+      var resp = json.decode(response.body);
+
+      if (resp["error"] != null){
+        throw resp["error"];
+      }
+
+      _tempidToken = resp["jwttoken"];
+      notifyListeners();
+
+    } catch (error) {
+      rethrow;
+    }
   }
 }

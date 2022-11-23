@@ -18,12 +18,11 @@ class _LoginScreen extends State<LoginScreen> {
 
   Future<String?> _authUser(LoginData data) {
     debugPrint('Name: ${data.name}, Password: ${data.password}');
-    return Future.delayed(loginTime).then((_) {
-      if (!users.containsKey(data.name)) {
-        return 'User not exists';
-      }
-      if (users[data.name] != data.password) {
-        return 'Password does not match';
+    return Future.delayed(loginTime).then((_) async {
+      try{
+        await Provider.of<Authh>(context, listen: false).login(data.name, data.password);
+      } catch (err){
+        return "Password atau Username Salah!";
       }
       return null;
     });
@@ -34,8 +33,12 @@ class _LoginScreen extends State<LoginScreen> {
         'Password: ${data.password}, '
         'Email: ${data.additionalSignupData!["email"]},'
         'Umur: ${data.additionalSignupData!["umur"]},');
-    return Future.delayed(loginTime).then((_) {
-      Provider.of<Authh>(context, listen: false).signup(data.name, data.password, data.additionalSignupData!["email"], data.additionalSignupData!["umur"]);
+    return Future.delayed(loginTime).then((_) async {
+      try{
+        await Provider.of<Authh>(context, listen: false).signup(data.name, data.password, data.additionalSignupData!["email"], data.additionalSignupData!["umur"], data.additionalSignupData!["nama"]);
+      } catch (err){
+        return "Sign Up Gagal!";
+      }
       return null;
     });
   }
@@ -70,7 +73,7 @@ class _LoginScreen extends State<LoginScreen> {
           icon: Icon(Icons.email),
         ),
         const UserFormField(
-            keyName: 'Name'),
+            keyName: 'nama'),
         UserFormField(
           keyName: 'umur',
           displayName: 'Umur',
@@ -85,9 +88,10 @@ class _LoginScreen extends State<LoginScreen> {
         ),
       ],
       onSubmitAnimationCompleted: () {
-        Navigator.of(context).pushReplacement(MaterialPageRoute(
-          builder: (context) => HomePage(),
-        ));
+        // Navigator.of(context).pushReplacement(MaterialPageRoute(
+        //   builder: (context) => HomePage(),
+        // ));
+        Provider.of<Authh>(context, listen: false).tempData();
       },
       onRecoverPassword: _recoverPassword,
     );
