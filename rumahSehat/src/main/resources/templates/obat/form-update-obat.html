@@ -17,7 +17,7 @@
     </style>
 </head>
 <body>
-<nav th:replace="fragments/fragment :: navbar(${'home'})"></nav>
+<nav th:replace="fragments/fragment :: navbar(${'obat'})"></nav>
 <div class="container">
     <div class="card m-4 p-4" style="background-color: #F7F9FF;">
         <div class="card-body">
@@ -49,5 +49,9 @@
         </div>
     </div>
 </div>
+<footer th:fragment="footer" class="text-center text-white font-weight-normal" style="color:#3F3B6C;">
+    Copyright &copy; RUMAH SEHAT - 2022
+</footer>
+<br> <br>
 </body>
 </html>
