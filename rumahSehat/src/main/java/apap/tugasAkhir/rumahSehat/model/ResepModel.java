@@ -25,7 +25,7 @@ public class ResepModel implements Serializable {
 
     @NotNull
     @Column(nullable = false)
-    private Boolean isDone;
+    private Boolean isDone =false;
 
     @NotNull
     @Column(nullable = false)
