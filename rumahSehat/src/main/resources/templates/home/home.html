@@ -42,48 +42,48 @@
             <br>
             <div class="d-flex justify-content-center">
                 <div class="col">
-                    <div class="row justify-content-center">
-                        <a th:href="@{/}" class="mx-2 btn btn-block text-white" style="background-color: #3F3B6C;">Menambah
+                    <div class="row justify-content-center" th:if="${#authorization.expression('hasAuthority(''Admin'')')}">
+                        <a th:href="@{/user/add-dokter}" class="mx-2 btn btn-block text-white" style="background-color: #3F3B6C;">Menambah
                             Dokter</a>
+                        <br>
                     </div>
-                    <br>
-                    <div class="row justify-content-center">
-                        <a th:href="@{/}" class="mx-2 btn btn-block text-white" style="background-color: #3F3B6C;">Menambah
+                    <div class="row justify-content-center" th:if="${#authorization.expression('hasAuthority(''Admin'')')}">
+                        <a th:href="@{/user/add-apoteker}" class="mx-2 btn btn-block text-white" style="background-color: #3F3B6C;">Menambah
                             Apoteker</a>
+                        <br>
                     </div>
-                    <br>
-                    <div class="row justify-content-center">
+                    <div class="row justify-content-center" th:if="${#authorization.expression('hasAuthority(''Admin'')')}">
                         <a th:href="@{/user/view-dokter}" class="mx-2 btn btn-block text-white"
                            style="background-color: #3F3B6C;">Lihat
                             Semua Dokter</a>
+                        <br>
                     </div>
-                    <br>
-                    <div class="row justify-content-center">
+                    <div class="row justify-content-center" th:if="${#authorization.expression('hasAuthority(''Admin'')')}">
                         <a th:href="@{/user/view-apoteker}" class="mx-2 btn btn-block text-white"
                            style="background-color: #3F3B6C;">Lihat
                             Semua Apoteker</a>
+                        <br>
                     </div>
-                    <br>
-                    <div class="row justify-content-center">
+                    <div class="row justify-content-center" th:if="${#authorization.expression('hasAnyAuthority(''Admin'',''Dokter'')')}">
                         <a th:href="@{/}" class="mx-2 btn btn-block text-white" style="background-color: #3F3B6C;">Lihat Jadwal
                             Appointment</a>
+                        <br>
                     </div>
-                    <br>
-                    <div class="row justify-content-center">
+                    <div class="row justify-content-center" th:if="${#authorization.expression('hasAnyAuthority(''Admin'',''Apoteker'')')}">
                         <a th:href="@{/}" class="mx-2 btn btn-block text-white" style="background-color: #3F3B6C;">Lihat Resep</a>
+                        <br>
                     </div>
-                    <br>
-                    <div class="row justify-content-center">
+                    <div class="row justify-content-center" th:if="${#authorization.expression('hasAuthority(''Dokter'')')}">
                         <a th:href="@{/}" class="mx-2 btn btn-block text-white" style="background-color: #3F3B6C;">Membuat
                             Resep</a>
+                        <br>
                     </div>
-                    <br>
                     <div class="row justify-content-center" th:if="${#authorization.expression('hasAnyAuthority(''Admin'',''Apoteker'')')}">
                         <a th:href="@{/obat/view-obat}" class="mx-2 btn btn-block text-white" style="background-color: #3F3B6C;">Lihat
                             Semua
                             Obat</a>
+                        <br>
                     </div>
-                    <br>
                 </div>
             </div>
         </div>

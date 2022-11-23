@@ -50,7 +50,7 @@
                     <a class="nav-link font-weight-normal" style="color:#F8F3F3;" th:href="@{/}">Beranda</a>
                 </div>
             </li>
-            <li class="nav-item" th:classappend="${var=='obat'} ? active">
+            <li class="nav-item" th:classappend="${var=='obat'} ? active" th:if="${#authorization.expression('hasAnyAuthority(''Admin'',''Apoteker'')')}">
                 <div th:if="${var=='obat'}">
                     <a class="nav-link font-weight-normal" style="color:#3F3B6C;"  th:href="@{/obat/view-obat}">Obat</a>
                 </div>
@@ -58,7 +58,7 @@
                     <a class="nav-link font-weight-normal" style="color:#F8F3F3;"  th:href="@{/obat/view-obat}">Obat</a>
                 </div>
             </li>
-            <li class="nav-item" th:classappend="${var=='resep'} ? active">
+            <li class="nav-item" th:classappend="${var=='resep'} ? active" th:if="${#authorization.expression('hasAnyAuthority(''Admin'',''Apoteker'')')}">
                 <div th:if="${var=='resep'}">
                     <a class="nav-link font-weight-normal" style="color:#3F3B6C;" th:href="@{/}">Resep</a>
                 </div>
@@ -66,7 +66,7 @@
                     <a class="nav-link font-weight-normal" style="color:#F8F3F3;" th:href="@{/}">Resep</a>
                 </div>
             </li>
-            <li class="nav-item" th:classappend="${var=='appointment'} ? active">
+            <li class="nav-item" th:classappend="${var=='appointment'} ? active" th:if="${#authorization.expression('hasAnyAuthority(''Admin'',''Dokter'')')}">
                 <div th:if="${var=='appointment'}">
                     <a class="nav-link font-weight-normal" style="color:#3F3B6C;" th:href="@{/}">Appointment</a>
                 </div>

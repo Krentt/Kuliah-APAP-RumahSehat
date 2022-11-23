@@ -30,6 +30,8 @@ public class WebSecurityConfig {
                     .antMatchers("/login-sso","/validate-ticket").permitAll()
                     .antMatchers("/obat/view-obat").hasAnyAuthority("Admin","Apoteker")
                     .antMatchers("/obat/{idObat}/update").hasAuthority("Apoteker")
+                    .antMatchers("/user/add-dokter").hasAuthority("Admin")
+                    .antMatchers("/user/add-apoteker").hasAuthority("Admin")
                     .anyRequest().authenticated()
                     .and()
                     .formLogin()
