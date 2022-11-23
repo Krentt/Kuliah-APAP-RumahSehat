@@ -88,7 +88,7 @@ public class UserController {
         pasienModel.setUsername(pasienDTO.getUsername());
         pasienModel.setPassword(pasienDTO.getPassword());
         pasienModel.setEmail(pasienDTO.getEmail());
-        pasienModel.setSaldoPasien(pasienDTO.getSaldoPasien());
+        pasienModel.setSaldoPasien(0L);
         pasienModel.setUmurPasien(pasienDTO.getUmurPasien());
         pasienModel.setIsSso(false);
         pasienModel.setRole(roleService.getById(Long.valueOf(2)));
