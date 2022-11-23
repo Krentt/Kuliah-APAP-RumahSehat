@@ -61,6 +61,9 @@ class _LoginScreen extends State<LoginScreen> {
       onLogin: _authUser,
       onSignup: _signupUser,
       userType: LoginUserType.name,
+      messages: LoginMessages(
+        userHint: "Username"
+      ),
       userValidator: (value) {
         if (value == null){
           return "Tidak boleh kosong!";
@@ -73,7 +76,8 @@ class _LoginScreen extends State<LoginScreen> {
           icon: Icon(Icons.email),
         ),
         const UserFormField(
-            keyName: 'nama'),
+            keyName: 'nama',
+            displayName: "nama lengkap"),
         UserFormField(
           keyName: 'umur',
           displayName: 'Umur',
