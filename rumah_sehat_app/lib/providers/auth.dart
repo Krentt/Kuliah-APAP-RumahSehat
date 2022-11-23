@@ -76,4 +76,10 @@ class Authh with ChangeNotifier{
       rethrow;
     }
   }
+
+
+  void logout(){
+    _idToken = null;
+    notifyListeners();
+  }
 }
