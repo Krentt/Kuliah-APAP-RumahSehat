@@ -101,11 +101,13 @@ public class WebSecurityConfig {
             httpSecurity.csrf().disable()
                     .requestMatchers(matchers -> matchers
                             .antMatchers("/authenticate")
-                            .antMatchers("/user/pasien-signup")
-                            .antMatchers("/jwt-valid"))
+                            .antMatchers("/signup")
+                            .antMatchers("/jwt-valid")
+                            .antMatchers("/error"))
                     // dont authenticate this particular request
                     .authorizeRequests().antMatchers("/authenticate").permitAll()
-                    .antMatchers("/user/pasien-signup").permitAll()
+                    .antMatchers("/signup").permitAll()
+                    .antMatchers("/error").permitAll()
                     // all other requests need to be authenticated
                     .anyRequest().authenticated()
                     .and()
