@@ -80,30 +80,4 @@ public class UserController {
         return "user/view-all-apoteker";
     }
 
-    // Rest Controller PASIEN SIGN UP
-//    @PostMapping(value = "/pasien-signup")
-//    public ResponseEntity<?> registerPasien(@RequestBody PasienDTO pasienDTO){
-//        // Check username
-//        if (userService.getUserByUsername(pasienDTO.getUsername()) != null){
-//            return new ResponseEntity<>("Username is already taken!", HttpStatus.BAD_REQUEST);
-//        }
-//        PasienModel pasienModel = new PasienModel();
-//        pasienModel.setNama(pasienDTO.getNama());
-//        pasienModel.setUsername(pasienDTO.getUsername());
-//        pasienModel.setPassword(pasienDTO.getPassword());
-//        pasienModel.setEmail(pasienDTO.getEmail());
-//        pasienModel.setSaldoPasien(0L);
-//        pasienModel.setUmurPasien(pasienDTO.getUmurPasien());
-//        pasienModel.setIsSso(false);
-//        pasienModel.setRole(roleService.getById(Long.valueOf(2)));
-//        userService.addUser(pasienModel);
-//
-//        final UserDetails userDetails = jwtInMemoryUserDetailsService
-//                .loadUserByUsername(authenticationRequest.getUsername());
-//
-//        final String token = jwtTokenUtil.generateToken(pasienModel);
-//
-//        return ResponseEntity.ok(new JwtResponse(token));
-////        return new ResponseEntity<>("User registered succesfully", HttpStatus.OK);
-//    }
 }

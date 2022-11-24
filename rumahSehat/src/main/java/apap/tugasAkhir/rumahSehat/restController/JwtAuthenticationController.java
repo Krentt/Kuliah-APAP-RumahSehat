@@ -1,4 +1,4 @@
-package apap.tugasAkhir.rumahSehat.controller;
+package apap.tugasAkhir.rumahSehat.restController;
 
 import apap.tugasAkhir.rumahSehat.model.PasienModel;
 import apap.tugasAkhir.rumahSehat.restModel.PasienDTO;
