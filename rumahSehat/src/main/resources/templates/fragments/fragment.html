@@ -60,10 +60,10 @@
             </li>
             <li class="nav-item" th:classappend="${var=='resep'} ? active" th:if="${#authorization.expression('hasAnyAuthority(''Admin'',''Apoteker'')')}">
                 <div th:if="${var=='resep'}">
-                    <a class="nav-link font-weight-normal" style="color:#3F3B6C;" th:href="@{/}">Resep</a>
+                    <a class="nav-link font-weight-normal" style="color:#3F3B6C;" th:href="@{/resep/viewall}">Resep</a>
                 </div>
                 <div th:unless="${var=='resep'}">
-                    <a class="nav-link font-weight-normal" style="color:#F8F3F3;" th:href="@{/}">Resep</a>
+                    <a class="nav-link font-weight-normal" style="color:#F8F3F3;" th:href="@{/resep/viewall}">Resep</a>
                 </div>
             </li>
             <li class="nav-item" th:classappend="${var=='appointment'} ? active" th:if="${#authorization.expression('hasAnyAuthority(''Admin'',''Dokter'')')}">
