@@ -25,15 +25,17 @@ public class ResepModel implements Serializable {
 
     @NotNull
     @Column(nullable = false)
-    private Boolean isDone;
+    private Boolean isDone =false;
 
     @NotNull
     @Column(nullable = false)
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     private LocalDateTime createdAt;
 
-    // Relasi dengan obat
+    // Relasi dengan JumlahModel
     @OneToMany(mappedBy = "resep", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<JumlahModel> listObat;
+    private List<JumlahModel> listJumlahModel;
+
+
 
 }
