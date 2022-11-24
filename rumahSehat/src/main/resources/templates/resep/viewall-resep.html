@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <title>Rumah Sehat</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+    <style>
+        body {
+            background-image: url('https://www.linkpicture.com/q/Mesh-132.png');
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+        }
+    </style>
+</head>
+<body>
+<nav th:replace="fragments/fragment :: navbar(${'resep'})"></nav>
+
+<div class="container">
+    <div class="card m-4 p-4">
+        <div class="card-body">
+            <div class="justify-content-center">
+                <h2 class="text-center font-weight-bold" style="color: #3F3B6C;">Daftar Resep</h2>
+                <br>
+                <div class="card">
+                    <div class="card-header" style="background-color: #BCCEF8;">
+                        <div class="row">
+                            <div class="col">
+                                <h4 class="font-weight-bold" style="color: #3F3B6C;">Data Resep</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body" style="background-color: #F7F9FF;">
+                        <div class="justify-content-center">
+                            <table id="examples" class="table table-hover" style="background-color: #ffffff;">
+                                <thead style="background-color: #BCCEF8;" class="thead-light">
+                                <tr>
+                                    <th>Id Resep</th>
+                                    <th>Tanggal dan Waktu Resep Dibuat</th>
+                                    <th>Status Resep</th>
+                                    <th>Action</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="resep, iterationStatus : ${listResep}"
+                                    th:style="${iterationStatus.even} ? 'font-weight:bold;'">
+                                    <td th:text="${resep.id}"></td>
+                                    <td th:text="${#temporals.format(resep.createdAt, 'dd MMMM yyyy HH:mm')}"></td>
+                                    <td th:if="${resep.isDone}">Done</td>
+                                    <td th:unless="${resep.isDone}">Not Done</td>
+                                    <td>
+                                        <a class="btn btn-sm btn-primary" th:href="@{/}">Detail</a>
+                                    </td>
+
+
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer th:fragment="footer" class="text-center text-white font-weight-normal" style="color:#3F3B6C;">
+    Copyright &copy; RUMAH SEHAT - 2022
+</footer>
+<br> <br>
+</body>
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap5.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#examples').DataTable();
+    });
+</script>
+</html>
