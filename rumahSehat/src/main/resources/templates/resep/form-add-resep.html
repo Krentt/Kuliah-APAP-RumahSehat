@@ -6,10 +6,19 @@
           integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
     <object th:include="fragments/fragment :: css" th:remove="tag"></object>
     <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+    <style>
+        body {
+            background-image: url('https://www.linkpicture.com/q/Mesh-132.png');
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+        }
+    </style>
 </head>
 
 <body>
-<nav th:replace="fragments/fragment :: navbar(${'home'})"></nav>
+<nav th:replace="fragments/fragment :: navbar(${'resep'})"></nav>
 <div class="container">
     <div class="card m-4 p-4">
         <div class="card-body">
@@ -30,12 +39,12 @@
                         </th>
                         </thead>
                         <tbody>
-                        <tr th:each="obat, iterationStatus : *{listObat}">
+                        <tr th:each="jumlahModel, iterationStatus : *{listJumlahModel}">
                             <td>
-                                <select name="id" th:field="*{listObat[__${iterationStatus.index}__].id}"
+                                <select name="id" th:field="*{listJumlahModel[__${iterationStatus.index}__].id}"
                                         class="form-control">
-                                    <div th:each="obatEx, iterationStatus2 : ${listObatExisting}">
-                                        <option th:value="${obatEx.id}" th:text="${penyelenggaraEx.obat}"></option>
+                                    <div th:each="jumlahModelEx, iterationStatus2 : ${listJumlahModelExisting}">
+                                        <option th:value="${jumlahModelEx.obat}"></option>
                                     </div>
                                 </select>
                             </td>

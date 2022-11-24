@@ -32,8 +32,10 @@ public class ResepModel implements Serializable {
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     private LocalDateTime createdAt;
 
-    // Relasi dengan obat
+    // Relasi dengan JumlahModel
     @OneToMany(mappedBy = "resep", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<JumlahModel> listObat;
+    private List<JumlahModel> listJumlahModel;
+
+
 
 }

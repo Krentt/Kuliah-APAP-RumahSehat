@@ -28,21 +28,21 @@ public class ResepController {
     public String addResepFormPage(Model model) {
         ResepModel resep = new ResepModel();
 
-        List<JumlahModel> listObat= resep.getListObat();
-        List<JumlahModel> listObatNew = new ArrayList<JumlahModel>();
+        List<JumlahModel> listJumlahModel= resep.getListJumlahModel();
+        List<JumlahModel> listJumlahModelNew = new ArrayList<JumlahModel>();
 
-        resep.setListObat(listObatNew);
-        resep.getListObat().add(new JumlahModel());
+        resep.setListJumlahModel(listJumlahModelNew);
+        resep.getListJumlahModel().add(new JumlahModel());
 
         model.addAttribute("resep", resep);
-        model.addAttribute("listObatExisting", listObat);
+        model.addAttribute("listJumlahModelExisting", listJumlahModel);
         return "resep/form-add-resep";
     }
 
     @PostMapping(value="/add", params = {"save"})
     public String addResepSubmit(@ModelAttribute ResepModel resep, Model model) {
-        if (resep.getListObat() != null){
-            for (JumlahModel obat : resep.getListObat()){
+        if (resep.getListJumlahModel() != null){
+            for (JumlahModel obat : resep.getListJumlahModel()){
                 obat.setResep(resep);
             }
         }
@@ -55,14 +55,14 @@ public class ResepController {
             @ModelAttribute ResepModel resep,
             Model model
     ){
-        if (resep.getListObat() == null || resep.getListObat().size() == 0){
-            resep.setListObat(new ArrayList<>());
+        if (resep.getListJumlahModel() == null || resep.getListJumlahModel().size() == 0){
+            resep.setListJumlahModel(new ArrayList<>());
         }
-        resep.getListObat().add(new JumlahModel());
-        List<JumlahModel> listObat = resep.getListObat();
+        resep.getListJumlahModel().add(new JumlahModel());
+        List<JumlahModel> listJumlahModel = resep.getListJumlahModel();
 
         model.addAttribute("resep", resep);
-        model.addAttribute("listObatExisting", listObat);
+        model.addAttribute("listJumlahModelExisting", listJumlahModel);
 
         return "resep/form-add-resep";
     }
@@ -74,12 +74,12 @@ public class ResepController {
             Model model
     ) {
         final Integer rowId = Integer.valueOf(row);
-        resep.getListObat().remove(rowId.intValue());
+        resep.getListJumlahModel().remove(rowId.intValue());
 
-        List<JumlahModel> listObat = resep.getListObat();
+        List<JumlahModel> listJumlahModel = resep.getListJumlahModel();
 
         model.addAttribute("resep", resep);
-        model.addAttribute("listObatExisting", listObat);
+        model.addAttribute("listJumlahModelExisting", listJumlahModel);
 
         return "resep/form-add-resep";
     }

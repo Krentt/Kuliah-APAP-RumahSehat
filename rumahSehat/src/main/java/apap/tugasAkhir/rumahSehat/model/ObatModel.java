@@ -36,5 +36,7 @@ public class ObatModel implements Serializable {
 
     // Relasi dengan resep
     @OneToMany(mappedBy = "obat", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<JumlahModel> listResep;
+    private List<JumlahModel> listJumlahModel;
+
+    //Relasi dengan obat
 }
