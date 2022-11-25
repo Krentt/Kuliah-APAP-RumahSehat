@@ -74,13 +74,10 @@ public class WebSecurityConfig {
             // configure AuthenticationManager so that it knows from where to load
             // user for matching credentials
             // Use BCryptPasswordEncoder
-            auth.userDetailsService(jwtUserDetailsService).passwordEncoder(passwordEncoder());
+            auth.userDetailsService(jwtUserDetailsService).passwordEncoder(encoder);
         }
 
-        @Bean
-        public PasswordEncoder passwordEncoder() {
-            return new BCryptPasswordEncoder();
-        }
+        public BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
         @Bean
         @Override
