@@ -41,30 +41,18 @@ public class TagihanModel implements Serializable {
     @Column(name = "total")
     private Integer total;
 
-//    @NotNull
-//    @Size(max = 50)
-//    @Column(name = "kodeAppointment")
-//    private String kode_appointment;
-
     // Relasi dengan appointment
     @JsonManagedReference
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "kode", referencedColumnName = "kodeAppointment") // TODO: ga yakin bener
+//    @JoinColumn(name = "kode", referencedColumnName = "kodeAppointment") // TODO: ga yakin bener
     private AppointmentModel appointmentModel;
-
-    //For Dummy Testing, TODO: REMOVE when apppointment is done
-//    private ResepModel resep;
-    private int totalResep;
-    private int tarifDokter;
 
     public void calculateTotal(){
         int totalCurr = 0;
-
         for (JumlahModel j: this.appointmentModel.getResepModel().getListJumlahModel()
              ) {
             totalCurr += j.getObat().getHarga() * j.getKuantitas();
         }
-        this.totalResep = totalCurr;
-        this.total = totalResep + this.tarifDokter;
+        this.total = totalCurr + this.appointmentModel.getDokterModel().getTarifDokter();
     }
 }

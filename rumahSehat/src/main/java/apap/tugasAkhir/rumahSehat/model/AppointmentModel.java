@@ -36,15 +36,17 @@ public class AppointmentModel implements Serializable {
     @Column(name="isDone")
     private boolean isDone;
 
-    @NotNull
-    @Lob
-    @Column(name = "pasien")
-    private String pasien_Id;
+    // Relasi dengan pasien
+    @JsonManagedReference
+    @OneToOne(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "system-uuid", referencedColumnName = "pasien_Id") // TODO: ga yakin bener
+    private PasienModel pasienModel;
 
-    @NotNull
-    @Size(max = 50)
-    @Column(name = "dokter")
-    private String dokter_Id;
+    // Relasi dengan dokter
+    @JsonManagedReference
+    @OneToOne(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "system-uuid", referencedColumnName = "dokter_Id") // TODO: ga yakin bener
+    private DokterModel dokterModel;
 
     // Relasi dengan resep
     @JsonManagedReference
