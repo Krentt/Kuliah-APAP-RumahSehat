@@ -37,7 +37,7 @@ public class TagihanRESTController {
      * TODO: Add Pasien from Current Session Token
      * TODO: Functions, HTML
      */
-    @GetMapping(value = "")
+    @GetMapping(value = "/list")
     private List<TagihanModel> viewListTagihan(
             Model model) {
         List<TagihanModel> tagihanModelList = new ArrayList<>();
@@ -51,9 +51,10 @@ public class TagihanRESTController {
      * TODO: Add Pasien from Current Session Token
      * TODO: Change Dummy Functions into Smart Functions
      * TODO: Add function membayar (post)
+     * {id} adalah ID dari tagihan (BILL-x)
      */
     @GetMapping(value = "/{id}")
-    private TagihanModel viewPasienSaldo(
+    private TagihanModel viewTagihanDetail(
             @PathVariable String id,
             Model model) {
         List<JumlahModel> jml = new ArrayList<>();
@@ -80,23 +81,9 @@ public class TagihanRESTController {
         return tagihanModel;
     }
 
-
-    /**
-     * Cisco:Feat17
-     * TODO: Functions, HTML
-     */
-    @GetMapping(value = "/{id}/tagihan/{idTagihan}")
-    private String viewTagihan(
-            @PathVariable String id,
-            @PathVariable String idTagihan,
-            Model model) {
-        PasienModel pasien = pasienService.getPasienById(id);
-        model.addAttribute("pasien", pasien);
-        return "pasien/tagihan";
-    }
-
     /**
      * Cisco:View Resep (kedobelan sama no 11)
+     * {id} adalah ID dari Resep
      */
     @GetMapping(value = "/resep/{id}")
     private ResepModel viewResepJSON(
