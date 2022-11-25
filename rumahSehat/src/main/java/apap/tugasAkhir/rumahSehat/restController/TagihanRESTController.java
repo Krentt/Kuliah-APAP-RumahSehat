@@ -65,7 +65,7 @@ public class TagihanRESTController {
 
         JumlahModel empOne = new JumlahModel(1L, obatModel, resepModel, 1);
 
-        resepModel.getListObat().add(empOne);
+        resepModel.getListJumlahModel().add(empOne);
 
         //Setters for tagihan Model
         TagihanModel tagihanModel = new TagihanModel();
@@ -96,7 +96,7 @@ public class TagihanRESTController {
 
         JumlahModel empOne = new JumlahModel(1L, obatModel, resepModel, 1);
 
-        resepModel.getListObat().add(empOne);
+        resepModel.getListJumlahModel().add(empOne);
         return resepModel;
     }
 }

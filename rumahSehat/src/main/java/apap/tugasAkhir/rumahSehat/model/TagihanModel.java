@@ -53,7 +53,7 @@ public class TagihanModel {
     public void calculateTotal(){
         int totalCurr = 0;
 
-        for (JumlahModel j: this.resep.getListObat()
+        for (JumlahModel j: this.resep.getListJumlahModel()
              ) {
             totalCurr += j.getObat().getHarga() * j.getKuantitas();
         }
