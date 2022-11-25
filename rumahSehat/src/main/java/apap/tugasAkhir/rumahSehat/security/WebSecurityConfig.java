@@ -32,6 +32,8 @@ public class WebSecurityConfig {
                     .antMatchers("/obat/{idObat}/update").hasAuthority("Apoteker")
                     .antMatchers("/user/add-dokter").hasAuthority("Admin")
                     .antMatchers("/user/add-apoteker").hasAuthority("Admin")
+                    .antMatchers("/user/view-dokter").hasAuthority("Admin")
+                    .antMatchers("/user/view-apoteker").hasAuthority("Admin")
                     .anyRequest().authenticated()
                     .and()
                     .formLogin()
@@ -47,14 +49,6 @@ public class WebSecurityConfig {
 
         public BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
-        //    @Autowired
-//    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception{
-//        auth.inMemoryAuthentication()
-//                .passwordEncoder(encoder)
-//                .withUser("ayu")
-//                .password(encoder.encode("apap"))
-//                .roles("Admin");
-//    }
         @Autowired
         private UserDetailsService userDetailsService;
 

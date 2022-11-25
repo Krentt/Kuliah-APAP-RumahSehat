@@ -70,11 +70,11 @@
                         <br>
                     </div>
                     <div class="row justify-content-center" th:if="${#authorization.expression('hasAnyAuthority(''Admin'',''Apoteker'')')}">
-                        <a th:href="@{/}" class="mx-2 btn btn-block text-white" style="background-color: #3F3B6C;">Lihat Resep</a>
+                        <a th:href="@{/resep/viewall}" class="mx-2 btn btn-block text-white" style="background-color: #3F3B6C;">Lihat Resep</a>
                         <br>
                     </div>
                     <div class="row justify-content-center" th:if="${#authorization.expression('hasAuthority(''Dokter'')')}">
-                        <a th:href="@{/}" class="mx-2 btn btn-block text-white" style="background-color: #3F3B6C;">Membuat
+                        <a th:href="@{/resep/add}" class="mx-2 btn btn-block text-white" style="background-color: #3F3B6C;">Membuat
                             Resep</a>
                         <br>
                     </div>
@@ -89,9 +89,6 @@
         </div>
     </div>
 </div>
-<footer th:fragment="footer" class="text-center text-white font-weight-normal" style="color:#3F3B6C;">
-    Copyright &copy; RUMAH SEHAT - 2022
-</footer>
-<br> <br>
 </body>
+<footer th:replace="fragments/fragment :: footer"></footer>
 </html>

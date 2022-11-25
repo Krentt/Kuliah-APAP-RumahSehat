@@ -50,23 +50,26 @@
                     <a class="nav-link font-weight-normal" style="color:#F8F3F3;" th:href="@{/}">Beranda</a>
                 </div>
             </li>
-            <li class="nav-item" th:classappend="${var=='obat'} ? active" th:if="${#authorization.expression('hasAnyAuthority(''Admin'',''Apoteker'')')}">
+            <li class="nav-item" th:classappend="${var=='obat'} ? active"
+                th:if="${#authorization.expression('hasAnyAuthority(''Admin'',''Apoteker'')')}">
                 <div th:if="${var=='obat'}">
-                    <a class="nav-link font-weight-normal" style="color:#3F3B6C;"  th:href="@{/obat/view-obat}">Obat</a>
+                    <a class="nav-link font-weight-normal" style="color:#3F3B6C;" th:href="@{/obat/view-obat}">Obat</a>
                 </div>
                 <div th:unless="${var=='obat'}">
-                    <a class="nav-link font-weight-normal" style="color:#F8F3F3;"  th:href="@{/obat/view-obat}">Obat</a>
+                    <a class="nav-link font-weight-normal" style="color:#F8F3F3;" th:href="@{/obat/view-obat}">Obat</a>
                 </div>
             </li>
-            <li class="nav-item" th:classappend="${var=='resep'} ? active" th:if="${#authorization.expression('hasAnyAuthority(''Admin'',''Apoteker'')')}">
+            <li class="nav-item" th:classappend="${var=='resep'} ? active"
+                th:if="${#authorization.expression('hasAnyAuthority(''Admin'',''Apoteker'')')}">
                 <div th:if="${var=='resep'}">
-                    <a class="nav-link font-weight-normal" style="color:#3F3B6C;" th:href="@{/}">Resep</a>
+                    <a class="nav-link font-weight-normal" style="color:#3F3B6C;" th:href="@{/resep/viewall}">Resep</a>
                 </div>
                 <div th:unless="${var=='resep'}">
-                    <a class="nav-link font-weight-normal" style="color:#F8F3F3;" th:href="@{/}">Resep</a>
+                    <a class="nav-link font-weight-normal" style="color:#F8F3F3;" th:href="@{/resep/viewall}">Resep</a>
                 </div>
             </li>
-            <li class="nav-item" th:classappend="${var=='appointment'} ? active" th:if="${#authorization.expression('hasAnyAuthority(''Admin'',''Dokter'')')}">
+            <li class="nav-item" th:classappend="${var=='appointment'} ? active"
+                th:if="${#authorization.expression('hasAnyAuthority(''Admin'',''Dokter'')')}">
                 <div th:if="${var=='appointment'}">
                     <a class="nav-link font-weight-normal" style="color:#3F3B6C;" th:href="@{/}">Appointment</a>
                 </div>
@@ -84,5 +87,20 @@
         <!--    END OF LOG OUT -->
     </div>
 </nav>
+<footer th:fragment="footer" class="text-center">
+    <div class="border-top" style="background-color: #EEF1FF ">
+        <div class="container p-3 pb-0">
+            <h5 class="text-uppercase">Rumah Sehat</h5>
+            <p>Mencegah lebih baik daripada mengobati!</p>
+        </div>
+    </div>
+    <div class="border-top bg-light">
+        <!-- Copyright -->
+        <div class="p-3">
+            <p>© 2022 Rumah Sehat, Inc. All rights reserved.</p>
+        </div>
+        <!-- Copyright -->
+    </div>
+</footer>
 </body>
 </html>

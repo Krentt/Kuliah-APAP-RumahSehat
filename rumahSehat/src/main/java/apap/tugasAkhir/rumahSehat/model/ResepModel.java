@@ -26,7 +26,7 @@ public class ResepModel implements Serializable {
 
     @NotNull
     @Column(nullable = false)
-    private Boolean isDone;
+    private Boolean isDone =false;
 
     @NotNull
     @Column(nullable = false)
@@ -36,6 +36,8 @@ public class ResepModel implements Serializable {
     // Relasi dengan obat
     @JsonManagedReference
     @OneToMany(mappedBy = "resep", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<JumlahModel> listObat;
+    private List<JumlahModel> listJumlahModel;
+
+
 
 }
