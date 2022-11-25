@@ -21,8 +21,21 @@ public class PasienRESTController {
     @GetMapping(value = "/{Username}/profile")
     private PasienModel viewPasienProfile(
             @PathVariable String Username){
+        PasienModel pasienModel = new PasienModel();
+//        pasienModel = pasienService.getPasienByUsername(Username)
 
-        return pasienService.getPasienByUsername(Username);
+        //Dummy Data Test Set
+        pasienModel.setId("123e4567-e89b-12d3-a456-426614174000");
+        pasienModel.setNama("Test");
+        pasienModel.setUsername(Username);
+        pasienModel.setPassword("ASHDASHD");
+        pasienModel.setEmail("test@test.com");
+        pasienModel.setIsSso(false);
+        pasienModel.setRole(new RoleModel());
+        pasienModel.setSaldoPasien(100L);
+        pasienModel.setUmurPasien(45);
+
+        return pasienModel;
     }
 
     /** Cisco:Feat15 (Top Up Saldo Pasien)
@@ -30,12 +43,27 @@ public class PasienRESTController {
      * {username} adalah username dari akun pasien
      */
     @GetMapping(value = "{Username}/saldo")
-    private String viewPasienSaldoGet(
+    private PasienModel viewPasienSaldoGet(
             @PathVariable String Username,
             Model model){
-        PasienModel pasien = pasienService.getPasienByUsername(Username);
-        model.addAttribute("pasien", pasien);
-        return "pasien/saldo";
+        PasienModel pasienModel = new PasienModel();
+//        pasienModel = pasienService.getPasienByUsername(Username)
+
+        //Dummy Data Test Set
+        pasienModel.setId("123e4567-e89b-12d3-a456-426614174000");
+        pasienModel.setNama("Test2");
+        pasienModel.setUsername(Username);
+        pasienModel.setPassword("ASHDASHD");
+        pasienModel.setEmail("test@test.com");
+        pasienModel.setIsSso(false);
+        pasienModel.setRole(new RoleModel());
+        pasienModel.setSaldoPasien(100L);
+        pasienModel.setUmurPasien(45);
+
+
+        model.addAttribute("saldo", pasienModel.getSaldoPasien());
+
+        return pasienModel;
     }
 
     /** Cisco:Feat15 (Top Up Saldo Pasien)
@@ -43,11 +71,11 @@ public class PasienRESTController {
      * {username} adalah username dari akun pasien
      */
     @PostMapping(value = "{Username}/saldo")
-    private String viewPasienSaldoPost(
+    private PasienModel viewPasienSaldoPost(
             @PathVariable String Username,
             Model model){
         PasienModel pasien = pasienService.getPasienByUsername(Username);
         model.addAttribute("pasien", pasien);
-        return "pasien/saldo";
+        return pasien;
     }
 }
