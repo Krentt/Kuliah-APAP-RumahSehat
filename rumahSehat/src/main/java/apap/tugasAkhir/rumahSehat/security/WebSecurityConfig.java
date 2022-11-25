@@ -94,7 +94,9 @@ public class WebSecurityConfig {
                             .antMatchers("/authenticate")
                             .antMatchers("/signup")
                             .antMatchers("/jwt-valid")
-                            .antMatchers("/error"))
+                            .antMatchers("/error")
+                            .antMatchers("/tagihan/**")
+                            .antMatchers("/pasien/**"))
                     // dont authenticate this particular request
                     .authorizeRequests().antMatchers("/authenticate").permitAll()
                     .antMatchers("/signup").permitAll()
