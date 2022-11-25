@@ -1,5 +1,6 @@
 package apap.tugasAkhir.rumahSehat.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -33,6 +34,7 @@ public class ResepModel implements Serializable {
     private LocalDateTime createdAt;
 
     // Relasi dengan obat
+    @JsonManagedReference
     @OneToMany(mappedBy = "resep", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<JumlahModel> listObat;
 

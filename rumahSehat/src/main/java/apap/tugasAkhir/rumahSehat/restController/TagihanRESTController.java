@@ -4,19 +4,20 @@ import apap.tugasAkhir.rumahSehat.model.JumlahModel;
 import apap.tugasAkhir.rumahSehat.model.ObatModel;
 import apap.tugasAkhir.rumahSehat.model.PasienModel;
 import apap.tugasAkhir.rumahSehat.model.ResepModel;
+import apap.tugasAkhir.rumahSehat.model.TagihanModel;
 import apap.tugasAkhir.rumahSehat.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-@Controller
+@RestController
 @RequestMapping("/tagihan")
 public class TagihanRESTController {
     @Autowired
@@ -30,60 +31,85 @@ public class TagihanRESTController {
     @Autowired
     private PasienService pasienService;
 
-    /** Cisco:Feat14
+
+    /**
+     * Cisco:Feat16 (Melihat Daftar Tagihan pasien)
+     * TODO: Add Pasien from Current Session Token
      * TODO: Functions, HTML
      */
+    @GetMapping(value = "")
+    private List<TagihanModel> viewListTagihan(
+            Model model) {
+        List<TagihanModel> tagihanModelList = new ArrayList<>();
+
+        return tagihanModelList;
+    }
+
+
+    /**
+     * Cisco:Feat17 (Melihat Detail Tagihan Pasien)
+     * TODO: Add Pasien from Current Session Token
+     * TODO: Change Dummy Functions into Smart Functions
+     * TODO: Add function membayar (post)
+     */
     @GetMapping(value = "/{id}")
-    private ResepModel viewResepJSON(
-            @PathVariable Long id,
-            Model model){
+    private TagihanModel viewPasienSaldo(
+            @PathVariable String id,
+            Model model) {
         List<JumlahModel> jml = new ArrayList<>();
-        ResepModel resepModel = new ResepModel(id,false, LocalDateTime.now(), jml);
+        List<JumlahModel> jml2 = new ArrayList<>();
+        ResepModel resepModel = new ResepModel(1L, false, LocalDateTime.now(), jml);
 
-        ObatModel obatModel = new ObatModel();
+        ObatModel obatModel = new ObatModel("1", "Pfi", 100, 100, jml2);
 
-        JumlahModel empOne = new JumlahModel(1L,obatModel,resepModel,1);
-
+        JumlahModel empOne = new JumlahModel(1L, obatModel, resepModel, 1);
 
         resepModel.getListObat().add(empOne);
 
-        return resepModel;
+        //Setters for tagihan Model
+        TagihanModel tagihanModel = new TagihanModel();
+        tagihanModel.setId("BILL-1");
+        tagihanModel.setTanggalTerbuat(LocalDateTime.now());
+        tagihanModel.setTanggalBayar(LocalDateTime.now());
+        tagihanModel.setIsPaid(false);
+        tagihanModel.setResep(resepModel);
+        tagihanModel.setTarifDokter(100);
+        tagihanModel.calculateTotal();
+        tagihanModel.setKode_appointment("APT-1");
+
+        return tagihanModel;
     }
 
-    /** Cisco:Feat15
-     * TODO: Functions, HTML
-     */
-    @GetMapping(value = "/saldo/{id}")
-    private String viewPasienSaldo(
-            @PathVariable String id,
-            Model model){
-        PasienModel pasien = pasienService.getPasienById(id);
-        model.addAttribute("pasien", pasien);
-        return "pasien/saldo";
-    }
 
-    /** Cisco:Feat16
-     * TODO: Functions, HTML
-     */
-    @GetMapping(value = "/{id}/tagihan")
-    private String viewPasienTagihan(
-            @PathVariable String id,
-            Model model){
-        PasienModel pasien = pasienService.getPasienById(id);
-        model.addAttribute("pasien", pasien);
-        return "pasien/tagihanList";
-    }
-
-    /** Cisco:Feat17
+    /**
+     * Cisco:Feat17
      * TODO: Functions, HTML
      */
     @GetMapping(value = "/{id}/tagihan/{idTagihan}")
     private String viewTagihan(
             @PathVariable String id,
             @PathVariable String idTagihan,
-            Model model){
+            Model model) {
         PasienModel pasien = pasienService.getPasienById(id);
         model.addAttribute("pasien", pasien);
         return "pasien/tagihan";
+    }
+
+    /**
+     * Cisco:View Resep (kedobelan sama no 11)
+     */
+    @GetMapping(value = "/resep/{id}")
+    private ResepModel viewResepJSON(
+            @PathVariable Long id,
+            Model model) {
+        List<JumlahModel> jml = new ArrayList<>();
+        ResepModel resepModel = new ResepModel(id, false, LocalDateTime.now(), jml);
+
+        ObatModel obatModel = new ObatModel();
+
+        JumlahModel empOne = new JumlahModel(1L, obatModel, resepModel, 1);
+
+        resepModel.getListObat().add(empOne);
+        return resepModel;
     }
 }
