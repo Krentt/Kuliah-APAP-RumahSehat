@@ -36,6 +36,9 @@ dependencies {
 
 	// Supaya start app lgsg direct ke login
 	implementation 'org.springframework.boot:spring-boot-starter-security'
+
+	//Cisco
+	implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.0'
 }
 
 tasks.named('test') {
