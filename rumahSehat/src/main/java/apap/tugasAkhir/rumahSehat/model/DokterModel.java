@@ -12,6 +12,6 @@ import javax.persistence.Table;
 @Getter
 public class DokterModel extends UserModel{
     @Column(name="tarif")
-    private Long tarifDokter;
+    private int tarifDokter;
 
 }
