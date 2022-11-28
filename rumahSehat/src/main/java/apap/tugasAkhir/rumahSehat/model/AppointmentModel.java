@@ -1,18 +1,24 @@
 package apap.tugasAkhir.rumahSehat.model;
 
+import apap.tugasAkhir.rumahSehat.util.StringPrefixedSequenceIdGenerator;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.Generated;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Entity
@@ -24,39 +30,45 @@ public class AppointmentModel implements Serializable {
 //    @GeneratedValue(generator = "system-uuid")
 //    @GenericGenerator(name = "system-uuid", strategy = "uuid")
     //TODO: Generate according to soal: APT-x (APT-1, APT-2, ...)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE ,generator = "appoint_id")
+    @GenericGenerator(
+            name="appoint_id", strategy = "apap.tugasAkhir.rumahSehat.util.StringPrefixedSequenceIdGenerator",
+            parameters = {
+            @org.hibernate.annotations.Parameter(name = StringPrefixedSequenceIdGenerator.INCREMENT_PARAM, value = "0"),
+            @org.hibernate.annotations.Parameter(name = StringPrefixedSequenceIdGenerator.VALUE_PREFIX_PARAMETER, value = "APT_")
+    })
     private String kode;
 
     @NotNull
-    @Size(max = 50)
     @Column(name = "waktuAwal")
-    private LocalDateTime waktu_awal;
+    @DateTimeFormat(pattern = "dd-MM-yyyy HH:mm", iso = DateTimeFormat.ISO.DATE_TIME)
+    private LocalDateTime waktuAwal;
 
     @NotNull
-    @Size(max = 50)
     @Column(name="isDone")
     private boolean isDone;
 
     // Relasi dengan pasien
-    @JsonManagedReference
-    @OneToOne(cascade = CascadeType.ALL)
-//    @JoinColumn(name = "system-uuid", referencedColumnName = "pasien_Id") // TODO: ga yakin bener
+    @JsonBackReference(value = "pasien")
+    @ManyToOne(fetch=FetchType.EAGER)
+    @JoinColumn(name = "idPasien")
     private PasienModel pasienModel;
 
     // Relasi dengan dokter
-    @JsonManagedReference
-    @OneToOne(cascade = CascadeType.ALL)
-//    @JoinColumn(name = "system-uuid", referencedColumnName = "dokter_Id") // TODO: ga yakin bener
+    @JsonBackReference(value = "dokter")
+    @ManyToOne(fetch=FetchType.EAGER)
+    @JoinColumn(name = "idDokter")
     private DokterModel dokterModel;
 
     // Relasi dengan resep
-    @JsonManagedReference
-    @OneToOne(cascade = CascadeType.ALL)
-//    @JoinColumn(name = "id", referencedColumnName = "resep_Id") // TODO: ga yakin bener
-    private ResepModel resepModel;
+//    @JsonManagedReference
+//    @OneToOne(cascade = CascadeType.ALL)
+////    @JoinColumn(name = "id", referencedColumnName = "resep_Id") // TODO: ga yakin bener
+//    private ResepModel resepModel;
 
     // Relasi dengan tagihan
-    @JsonManagedReference
-    @OneToOne(cascade = CascadeType.ALL)
-//    @JoinColumn(name = "id", referencedColumnName = "tagihan_Id") // TODO: ga yakin bener
-    private TagihanModel tagihanModel;
+//    @JsonManagedReference
+//    @OneToOne(cascade = CascadeType.ALL)
+////    @JoinColumn(name = "id", referencedColumnName = "tagihan_Id") // TODO: ga yakin bener
+//    private TagihanModel tagihanModel;
 }

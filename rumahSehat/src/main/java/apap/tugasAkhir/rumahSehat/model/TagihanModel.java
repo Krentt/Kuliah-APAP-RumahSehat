@@ -47,12 +47,12 @@ public class TagihanModel implements Serializable {
 //    @JoinColumn(name = "kode", referencedColumnName = "kodeAppointment") // TODO: ga yakin bener
     private AppointmentModel appointmentModel;
 
-    public void calculateTotal(){
-        int totalCurr = 0;
-        for (JumlahModel j: this.appointmentModel.getResepModel().getListJumlahModel()
-             ) {
-            totalCurr += j.getObat().getHarga() * j.getKuantitas();
-        }
-        this.total = totalCurr + this.appointmentModel.getDokterModel().getTarifDokter();
-    }
+//    public void calculateTotal(){
+//        int totalCurr = 0;
+//        for (JumlahModel j: this.appointmentModel.getResepModel().getListJumlahModel()
+//             ) {
+//            totalCurr += j.getObat().getHarga() * j.getKuantitas();
+//        }
+//        this.total = totalCurr + this.appointmentModel.getDokterModel().getTarifDokter();
+//    }
 }

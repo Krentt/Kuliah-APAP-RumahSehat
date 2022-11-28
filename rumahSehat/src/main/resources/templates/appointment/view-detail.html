@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+  <title>Rumah Sehat</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+  <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+  <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+  <style>
+    body {
+      background-image: url('https://www.linkpicture.com/q/Mesh-132.png');
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-size: cover;
+    }
+  </style>
+</head>
+<body>
+<nav th:replace="fragments/fragment :: navbar(${'appointment'})"></nav>
+
+<div class="container">
+  <div class="card m-4 p-4">
+    <div class="card-body">
+      <div class="justify-content-center">
+        <h2 class="text-center font-weight-bold" style="color: #3F3B6C;">Detail Appointment</h2>
+        <br>
+        <div class="card">
+          <div class="card-header" style="background-color: #BCCEF8;">
+            <div class="row">
+              <div class="col">
+                <h4 class="font-weight-bold" style="color: #3F3B6C;" th:text="'Kode: ' + ${appointment.kode}"></h4>
+              </div>
+              <div class="col text-right">
+                <!--ToDo: Dibuat conditional (jika ada resep)-->
+                <a class="btn text-white font-weight-normal" style="background-color: #3F3B6C;" th:href="@{/}" >Detail Resep</a>
+              </div>
+            </div>
+          </div>
+          <div class="card-body" style="background-color: #F7F9FF;">
+            <div class="justify-content-center">
+              <div class="row">
+                <div class="col-sm-6">
+                  <h4 class="" style="color: #3F3B6C"><b>Nama Pasien</b></h4>
+                  <h5 class="" th:text="${appointment.pasienModel.nama}"></h5>
+                </div>
+                <div class="col-sm-6">
+                  <h4 class="" style="color: #3F3B6C"><b>Nama Dokter</b></h4>
+                  <h5 class="" th:text="${appointment.dokterModel.nama}"></h5>
+                </div>
+                <div class="col-sm-6 mt-3">
+                  <h4 class="" style="color: #3F3B6C"><b>Waktu Awal</b></h4>
+                  <h5 th:text="${#temporals.format(appointment.waktuAwal, 'dd MMMM yyyy HH:mm')}"></h5>
+                </div>
+                <div class="col-sm-6 mt-3">
+                  <h4 class="" style="color: #3F3B6C"><b>Status</b></h4>
+                  <h5 th:if="${appointment.isDone} == true" class="text-success"><b>SELESAI</b>></h5>
+                  <h5 th:unless="${appointment.isDone} == true" class="text-danger"><b>BELUM SELESAI</b></h5>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<footer th:replace="fragments/fragment :: footer"></footer>
+</body>
+
+</html>

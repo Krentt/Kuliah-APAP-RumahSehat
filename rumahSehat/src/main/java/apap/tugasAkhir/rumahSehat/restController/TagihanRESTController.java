@@ -73,10 +73,10 @@ public class TagihanRESTController {
         tagihanModel.setTanggalTerbuat(LocalDateTime.now());
         tagihanModel.setTanggalBayar(LocalDateTime.now());
         tagihanModel.setIsPaid(false);
-        tagihanModel.setResep(resepModel);
-        tagihanModel.setTarifDokter(100);
-        tagihanModel.calculateTotal();
-        tagihanModel.setKode_appointment("APT-1");
+//        tagihanModel.setResep(resepModel); // TODO: bikin error
+//        tagihanModel.setTarifDokter(100);
+//        tagihanModel.calculateTotal();
+//        tagihanModel.setKode_appointment("APT-1");
 
         return tagihanModel;
     }
