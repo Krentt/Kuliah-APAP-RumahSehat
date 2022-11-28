@@ -97,7 +97,8 @@ class _HomePageState extends State<HomePage> {
                               SizedBox(height: 15),
                               Text(
                                 "Welcome to Rumah Sehat",
-                                style: TextStyle(fontSize: 25),
+                                style: TextStyle(
+                                    fontSize: 30, fontWeight: FontWeight.bold),
                               ),
                               SizedBox(height: 15),
                               Text(
@@ -108,7 +109,7 @@ class _HomePageState extends State<HomePage> {
                                 "kesehatan dalam genggaman",
                                 style: TextStyle(fontSize: 15),
                               ),
-                              SizedBox(height: 30),
+                              SizedBox(height: 25),
                               Text(
                                 "Layanan kami",
                                 style: TextStyle(fontSize: 25),
