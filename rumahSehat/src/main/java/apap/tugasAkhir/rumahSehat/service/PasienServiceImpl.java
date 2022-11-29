@@ -32,4 +32,9 @@ public class PasienServiceImpl implements PasienService{
     public PasienModel getPasienByUsername(String Username) {
         return pasienDb.findByUsername(Username);
     }
+
+    @Override
+    public List<PasienModel> getAllPasien() {
+        return pasienDb.findAll();
+    }
 }
