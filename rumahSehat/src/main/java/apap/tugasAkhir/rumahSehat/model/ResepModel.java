@@ -1,5 +1,6 @@
 package apap.tugasAkhir.rumahSehat.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -38,6 +39,9 @@ public class ResepModel implements Serializable {
     @OneToMany(mappedBy = "resep", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<JumlahModel> listJumlahModel;
 
-
+    // Relasi dengan appointment
+    @JsonBackReference
+    @OneToOne(mappedBy = "resepModel")
+    private AppointmentModel appointment;
 
 }
