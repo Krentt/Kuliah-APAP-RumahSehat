@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface DokterDb extends JpaRepository<DokterModel, Long> {
+    DokterModel findByUsername(String username);
 }

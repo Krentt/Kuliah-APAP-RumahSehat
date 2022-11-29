@@ -17,19 +17,19 @@
     </style>
 </head>
 <body>
-<nav th:replace="fragments/fragment :: navbar(${'obat'})"></nav>
+<nav th:replace="fragments/fragment :: navbar(${'appointment'})"></nav>
 
 <div class="container">
     <div class="card m-4 p-4">
         <div class="card-body">
             <div class="justify-content-center">
-                <h2 class="text-center font-weight-bold" style="color: #3F3B6C;">Daftar Obat</h2>
+                <h2 class="text-center font-weight-bold" style="color: #3F3B6C;">Daftar Appointment</h2>
                 <br>
                 <div class="card">
                     <div class="card-header" style="background-color: #BCCEF8;">
                         <div class="row">
                             <div class="col">
-                                <h4 class="font-weight-bold" style="color: #3F3B6C;">Data Obat</h4>
+                                <h4 class="font-weight-bold" style="color: #3F3B6C;">Data Appointment</h4>
                             </div>
                         </div>
                     </div>
@@ -39,25 +39,24 @@
                                 <thead style="background-color: #BCCEF8;" class="thead-light">
                                 <tr>
                                     <th>No</th>
-                                    <th>Id Obat</th>
-                                    <th>Nama</th>
-                                    <th>Stok</th>
-                                    <th>Harga</th>
-                                    <th th:if="${#authorization.expression('hasAuthority(''Apoteker'')')}">Action</th>
+                                    <th>Nama Dokter</th>
+                                    <th>Nama Pasien</th>
+                                    <th>Waktu Awal Appointment</th>
+                                    <th>Status Appointment</th>
+                                    <th>Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr th:each="obat, iterationStatus : ${listObat}"
+                                <tr th:each="appt, iterationStatus : ${listAppointment}"
                                     th:style="${iterationStatus.even} ? 'font-weight:bold;'">
                                     <td th:text="${iterationStatus.count}"></td>
-                                    <td th:text="${obat.idObat}"></td>
-                                    <td th:text="${obat.namaObat}"></td>
-                                    <td th:text="${obat.stok}"></td>
-                                    <td th:text="${obat.harga}"></td>
-                                    <td th:if="${#authorization.expression('hasAuthority(''Apoteker'')')}">
-                                        <div>
-                                            <a class="btn btn-light text-white font-weight-normal" style="background-color: #3F3B6C;" th:href="@{/obat/}+${obat.idObat}+@{/update}" >Ubah Stok</a>
-                                        </div>
+                                    <td th:text="${appt.dokterModel != null} ? ${appt.dokterModel.nama} : 'Null'"></td>
+                                    <td th:text="${appt.pasienModel.nama}"></td>
+                                    <td th:text="${#temporals.format(appt.waktuAwal, 'dd-MM-YYYY HH:mm')}"></td>
+                                    <td th:if="${appt.isDone} == true" class="text-success"><b>SELESAI</b></td>
+                                    <td th:unless="${appt.isDone} == true" class="text-danger"><b>BELUM SELESAI</b></td>
+                                    <td>
+                                        <a class="btn btn-light text-white font-weight-normal" style="background-color: #3F3B6C;" th:href="@{/appointment/admin/} + ${appt.kode}" >Detail</a>
                                     </td>
                                 </tr>
                                 </tbody>

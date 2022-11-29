@@ -34,6 +34,8 @@ public class WebSecurityConfig {
                     .antMatchers("/user/add-apoteker").hasAuthority("Admin")
                     .antMatchers("/user/view-dokter").hasAuthority("Admin")
                     .antMatchers("/user/view-apoteker").hasAuthority("Admin")
+                    .antMatchers("/appointment/view-all").hasAuthority("Admin")
+                    .antMatchers("/appointment/dokter-view-all").hasAuthority("Dokter")
                     .anyRequest().authenticated()
                     .and()
                     .formLogin()
@@ -74,13 +76,10 @@ public class WebSecurityConfig {
             // configure AuthenticationManager so that it knows from where to load
             // user for matching credentials
             // Use BCryptPasswordEncoder
-            auth.userDetailsService(jwtUserDetailsService).passwordEncoder(passwordEncoder());
+            auth.userDetailsService(jwtUserDetailsService).passwordEncoder(encoder);
         }
 
-        @Bean
-        public PasswordEncoder passwordEncoder() {
-            return new BCryptPasswordEncoder();
-        }
+        public BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
         @Bean
         @Override
@@ -97,7 +96,11 @@ public class WebSecurityConfig {
                             .antMatchers("/authenticate")
                             .antMatchers("/signup")
                             .antMatchers("/jwt-valid")
-                            .antMatchers("/error"))
+                            .antMatchers("/error")
+                            .antMatchers("/tagihan/**")
+                            .antMatchers("/pasien/**")
+                            .antMatchers("/appointment/add")
+                            .antMatchers("/appointment/pasien-view-all"))
                     // dont authenticate this particular request
                     .authorizeRequests().antMatchers("/authenticate").permitAll()
                     .antMatchers("/signup").permitAll()

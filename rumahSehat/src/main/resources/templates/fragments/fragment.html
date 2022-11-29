@@ -27,62 +27,158 @@
 </head>
 <body>
 <nav th:fragment="navbar (var)" class="navbar navbar-expand-lg navbar-light">
-    <a class="navbar-brand font-weight-bold" style="color:#3F3B6C;" href="#">RumahSehat</a>
-    <button
-            class="navbar-toggler"
-            type="button"
-            data-toggle="collapse"
-            data-target="#narbarNavAltMarkup"
-            aria-controls="navnarNavAltMarkup"
-            aria-expanded="false"
-            aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse">
+    <div class="container-fluid">
+        <a class="navbar-brand font-weight-bold" style="color:#3F3B6C;" href="#">RumahSehat</a>
+        <button
+                class="navbar-toggler"
+                type="button"
+                data-toggle="collapse"
+                data-target="#narbarNavAltMarkup"
+                aria-controls="navbarNavAltMarkup"
+                aria-expanded="false"
+                aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 
-        <!--      NAVBAR ITEM-->
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item" th:classappend="${var=='home'} ? active">
-                <div th:if="${var=='home'}">
-                    <a class="nav-link font-weight-normal" style="color:#3F3B6C;" th:href="@{/}">Beranda</a>
-                </div>
-                <div th:unless="${var=='home'}">
-                    <a class="nav-link font-weight-normal" style="color:#F8F3F3;" th:href="@{/}">Beranda</a>
-                </div>
-            </li>
-            <li class="nav-item" th:classappend="${var=='obat'} ? active" th:if="${#authorization.expression('hasAnyAuthority(''Admin'',''Apoteker'')')}">
-                <div th:if="${var=='obat'}">
-                    <a class="nav-link font-weight-normal" style="color:#3F3B6C;"  th:href="@{/obat/view-obat}">Obat</a>
-                </div>
-                <div th:unless="${var=='obat'}">
-                    <a class="nav-link font-weight-normal" style="color:#F8F3F3;"  th:href="@{/obat/view-obat}">Obat</a>
-                </div>
-            </li>
-            <li class="nav-item" th:classappend="${var=='resep'} ? active" th:if="${#authorization.expression('hasAnyAuthority(''Admin'',''Apoteker'')')}">
-                <div th:if="${var=='resep'}">
-                    <a class="nav-link font-weight-normal" style="color:#3F3B6C;" th:href="@{/resep/viewall}">Resep</a>
-                </div>
-                <div th:unless="${var=='resep'}">
-                    <a class="nav-link font-weight-normal" style="color:#F8F3F3;" th:href="@{/resep/viewall}">Resep</a>
-                </div>
-            </li>
-            <li class="nav-item" th:classappend="${var=='appointment'} ? active" th:if="${#authorization.expression('hasAnyAuthority(''Admin'',''Dokter'')')}">
-                <div th:if="${var=='appointment'}">
-                    <a class="nav-link font-weight-normal" style="color:#3F3B6C;" th:href="@{/}">Appointment</a>
-                </div>
-                <div th:unless="${var=='appointment'}">
-                    <a class="nav-link font-weight-normal" style="color:#F8F3F3;" th:href="@{/}">Appointment</a>
-                </div>
-            </li>
-        </ul>
-        <!--    END OF NAVBAR ITEM-->
+            <!--      NAVBAR ITEM-->
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item" th:classappend="${var=='home'} ? active">
+                    <div th:if="${var=='home'}">
+                        <a class="nav-link font-weight-normal" style="color:#3F3B6C;" th:href="@{/}">Beranda</a>
+                    </div>
+                    <div th:unless="${var=='home'}">
+                        <a class="nav-link font-weight-normal" style="color:#F8F3F3;" th:href="@{/}">Beranda</a>
+                    </div>
+                </li>
+                <li class="nav-item" th:classappend="${var=='obat'} ? active"
+                    th:if="${#authorization.expression('hasAnyAuthority(''Admin'',''Apoteker'')')}">
+                    <div th:if="${var=='obat'}">
+                        <a class="nav-link font-weight-normal" style="color:#3F3B6C;"
+                           th:href="@{/obat/view-obat}">Obat</a>
+                    </div>
+                    <div th:unless="${var=='obat'}">
+                        <a class="nav-link font-weight-normal" style="color:#F8F3F3;"
+                           th:href="@{/obat/view-obat}">Obat</a>
+                    </div>
+                </li>
+                <li class="nav-item" th:classappend="${var=='resep'} ? active"
+                    th:if="${#authorization.expression('hasAnyAuthority(''Admin'',''Apoteker'')')}">
+                    <div th:if="${var=='resep'}">
+                        <a class="nav-link font-weight-normal" style="color:#3F3B6C;"
+                           th:href="@{/resep/viewall}">Resep</a>
+                    </div>
+                    <div th:unless="${var=='resep'}">
+                        <a class="nav-link font-weight-normal" style="color:#F8F3F3;"
+                           th:href="@{/resep/viewall}">Resep</a>
+                    </div>
+                </li>
+                <li class="nav-item" th:classappend="${var=='appointment'} ? active"
+                    th:if="${#authorization.expression('hasAnyAuthority(''Admin'',''Dokter'')')}">
+                    <div th:if="${var=='appointment'}">
+                        <a class="nav-link font-weight-normal" style="color:#3F3B6C;" th:href="@{/}">Appointment</a>
+                    </div>
+                    <div th:unless="${var=='appointment'}">
+                        <a class="nav-link font-weight-normal" style="color:#F8F3F3;" th:href="@{/}">Appointment</a>
+                    </div>
+                </li>
+            </ul>
+            <!--    END OF NAVBAR ITEM-->
 
-        <!--    LOG OUT-->
-        <ul class="navbar-nav pull-right">
-            <a class="nav-item nav-link btn text-white" style="background-color:#3F3B6C;" th:href="@{/logout-sso}">Logout</a>
-        </ul>
-        <!--    END OF LOG OUT -->
+            <!--    LOG OUT-->
+            <ul class="navbar-nav pull-right">
+                <a class="nav-item nav-link btn text-white" style="background-color:#3F3B6C;" th:href="@{/logout-sso}">Logout</a>
+            </ul>
+            <!--    END OF LOG OUT -->
+        </div>
     </div>
 </nav>
+<footer th:fragment="footer" class="text-center text-muted">
+    <section style="background-color: #F8F3F3">
+        <br>
+        <div class="container text-center text-md-start mt-5">
+            <!-- Grid row -->
+            <div class="row mt-3">
+                <!-- Grid column -->
+                <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+                    <!-- Content -->
+                    <h6 class="text-uppercase fw-bold mb-4">
+                        <i class="fas fa-gem me-3"></i>Rumah Sehat 057
+                    </h6>
+                    <p>
+                        Rumah Sehat 057 hadir untuk memenuhi kebutuhan dari mahasiswa Fakultas Ilmu Komputer Universitas
+                        Indonesia. Kami ada untuk kesehatan kalian semua!
+                    </p>
+                </div>
+                <!-- Grid column -->
+
+                <!-- Grid column -->
+                <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+                    <!-- Links -->
+                    <h6 class="text-uppercase fw-bold mb-4">
+                        Services
+                    </h6>
+                    <p>
+                        <a href="#!" class="text-reset">Beranda</a>
+                    </p>
+                    <p>
+                        <a href="#!" class="text-reset">Resep</a>
+                    </p>
+                    <p>
+                        <a href="#!" class="text-reset">Appointment</a>
+                    </p>
+                    <p>
+                        <a href="#!" class="text-reset">Obat</a>
+                    </p>
+                </div>
+                <!-- Grid column -->
+
+                <!-- Grid column -->
+                <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+                    <!-- Links -->
+                    <h6 class="text-uppercase fw-bold mb-4">
+                        Useful links
+                    </h6>
+                    <p>
+                        <a href="#!" class="text-reset">Settings</a>
+                    </p>
+                    <p>
+                        <a href="#!" class="text-reset">Help Desk</a>
+                    </p>
+                    <p>
+                        <a href="#!" class="text-reset">FAQ</a>
+                    </p>
+                    <p>
+                        <a href="#!" class="text-reset">Language</a>
+                    </p>
+                </div>
+                <!-- Grid column -->
+
+                <!-- Grid column -->
+                <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+                    <!-- Links -->
+                    <h6 class="text-uppercase fw-bold mb-4">Contact</h6>
+                    <p><i class="fas fa-home me-3"></i> Kukusan, Depok, Indonesia</p>
+                    <p>
+                        <i class="fas fa-envelope me-3"></i>
+                        KelompokAPAP057@lulusapap.com
+                    </p>
+                    <p><i class="fas fa-phone me-3"></i> + 62 057 057 057</p>
+                    <p><i class="fas fa-print me-3"></i> + 62 057 057 057</p>
+                </div>
+                <!-- Grid column -->
+            </div>
+            <!-- Grid row -->
+        </div>
+    </section>
+    <!-- Section: Links  -->
+    <div class="border-top bg-light">
+        <!-- Copyright -->
+        <div class="p-3" >
+            <p>© 2022 Rumah Sehat, Inc. All rights reserved.</p>
+        </div>
+        <!-- Copyright -->
+    </div>
+</footer>
 </body>
 </html>
