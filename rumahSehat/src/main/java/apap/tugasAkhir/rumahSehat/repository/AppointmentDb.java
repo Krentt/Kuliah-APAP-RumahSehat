@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface AppointmentDb extends JpaRepository<AppointmentModel, Long> {
+    AppointmentModel getAppointmentModelByKode(String kode);
 }

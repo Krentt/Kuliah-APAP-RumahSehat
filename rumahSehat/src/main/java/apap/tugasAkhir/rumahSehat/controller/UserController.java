@@ -28,7 +28,8 @@ public class UserController {
     private DokterService dokterService;
     @Autowired
     private ApotekerService apotekerService;
-
+    @Autowired
+    private PasienService pasienService;
     @Autowired
     private RoleService roleService;
 
@@ -78,6 +79,13 @@ public class UserController {
         List<ApotekerModel> listApoteker = apotekerService.getListApoteker();
         model.addAttribute("listApoteker", listApoteker);
         return "user/view-all-apoteker";
+    }
+
+    @GetMapping(value = "/view-pasien")
+    private String viewAllPasien(Model model){
+        List<PasienModel> listPasien = pasienService.getAllPasien();
+        model.addAttribute("listPasien", listPasien);
+        return "user/view-all-pasien";
     }
 
 }

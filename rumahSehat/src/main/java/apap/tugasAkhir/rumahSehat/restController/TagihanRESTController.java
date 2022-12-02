@@ -59,7 +59,7 @@ public class TagihanRESTController {
             Model model) {
         List<JumlahModel> jml = new ArrayList<>();
         List<JumlahModel> jml2 = new ArrayList<>();
-        ResepModel resepModel = new ResepModel(1L, false, LocalDateTime.now(), jml);
+        ResepModel resepModel = new ResepModel(1L, false, LocalDateTime.now(), jml, null); //ToDo: Inget ada relasi appointment
 
         ObatModel obatModel = new ObatModel("1", "Pfi", 100, 100, jml2);
 
@@ -73,10 +73,10 @@ public class TagihanRESTController {
         tagihanModel.setTanggalTerbuat(LocalDateTime.now());
         tagihanModel.setTanggalBayar(LocalDateTime.now());
         tagihanModel.setIsPaid(false);
-        tagihanModel.setResep(resepModel);
-        tagihanModel.setTarifDokter(100);
-        tagihanModel.calculateTotal();
-        tagihanModel.setKode_appointment("APT-1");
+//        tagihanModel.setResep(resepModel); // TODO: bikin error
+//        tagihanModel.setTarifDokter(100);
+//        tagihanModel.calculateTotal();
+//        tagihanModel.setKode_appointment("APT-1");
 
         return tagihanModel;
     }
@@ -90,7 +90,7 @@ public class TagihanRESTController {
             @PathVariable Long id,
             Model model) {
         List<JumlahModel> jml = new ArrayList<>();
-        ResepModel resepModel = new ResepModel(id, false, LocalDateTime.now(), jml);
+        ResepModel resepModel = new ResepModel(id, false, LocalDateTime.now(), jml, null); //ToDo: Inget ada relasi appointment
 
         ObatModel obatModel = new ObatModel();
 
