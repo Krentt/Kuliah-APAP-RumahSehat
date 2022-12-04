@@ -9,6 +9,7 @@ class DrawerScreen extends StatefulWidget {
   @override
   _DrawerScreenState createState() => _DrawerScreenState();
 }
+
 class _DrawerScreenState extends State<DrawerScreen> {
   @override
   Widget build(BuildContext context) {
@@ -122,8 +123,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
               ),
             ),
             GestureDetector(
-              onTap: () =>
-                Provider.of<Authh>(context, listen: false).logout(),
+              onTap: () => Provider.of<Authh>(context, listen: false).logout(),
               child: ListTile(
                 leading: Icon(
                   Icons.logout,
