@@ -34,6 +34,47 @@ class _HomePageState extends State<HomePage> {
           child: Column(
             children: <Widget>[
               Container(
+                alignment: Alignment.center,
+                child: Card(
+                  color: Colors.white70,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(9)),
+                  elevation: 20,
+                  margin: const EdgeInsets.all(20),
+                  child: InkWell(
+                    onTap: () {},
+                    splashColor: Colors.blue,
+                    child: SizedBox(
+                      width: 400,
+                      height: 110,
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Padding(padding:  const EdgeInsets.all(11.0),
+                            child: Icon(
+                              Icons.account_circle,
+                              size: 80,
+                              color: Colors.black,
+                            ),
+                          ),
+                          Padding(padding: const EdgeInsets.all(38.0),
+                          child: Text(
+                            "Pacar soobin Nina",
+                            textAlign: TextAlign.left,
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 26
+                            ),
+                          ),),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              Container(
                 height: 240,
                 child: CarouselSlider(
                   options: CarouselOptions(
