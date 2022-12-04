@@ -14,6 +14,7 @@
             background-repeat: no-repeat;
             background-attachment: fixed;
             background-size: cover;
+            font-family: 'Rubik', sans-serif;
         }
     </style>
 </head>
@@ -48,85 +49,76 @@
     </div>
 </div>
 <br><br>
-<div class="container justify-content-center">
-    <div class="row text-center mt-3 pt-3">
-        <div class="col-md-6 mb-3">
-            <br><br><br>
-            <img src="https://www.linkpicture.com/q/Online-medicine.png" class="img-fluid"
-                 style="max-width: 500px;">
-        </div>
-        <div class="col-md-6 mb-3">
-            <div class="card-header rounded" style="background-color: #BCCEF8;">
-                <br>
-                <h2 class="text-center" style="color:#3F3B6C;"> List of Features: </h2>
-                <br>
-                <div class="d-flex justify-content-center">
-                    <div class="col">
-                        <div class="row justify-content-center"
-                             th:if="${#authorization.expression('hasAuthority(''Admin'')')}">
-                            <a th:href="@{/user/add-dokter}" class="mx-2 btn btn-block text-white"
-                               style="background-color: #3F3B6C;">Menambah
-                                Dokter</a>
-                            <br>
-                        </div>
-                        <div class="row justify-content-center"
-                             th:if="${#authorization.expression('hasAuthority(''Admin'')')}">
-                            <a th:href="@{/user/add-apoteker}" class="mx-2 btn btn-block text-white"
-                               style="background-color: #3F3B6C;">Menambah
-                                Apoteker</a>
-                            <br>
-                        </div>
-                        <div class="row justify-content-center"
-                             th:if="${#authorization.expression('hasAuthority(''Admin'')')}">
-                            <a th:href="@{/user/view-dokter}" class="mx-2 btn btn-block text-white"
-                               style="background-color: #3F3B6C;">Lihat
-                                Semua Dokter</a>
-                            <br>
-                        </div>
-                        <div class="row justify-content-center"
-                             th:if="${#authorization.expression('hasAuthority(''Admin'')')}">
-                            <a th:href="@{/user/view-apoteker}" class="mx-2 btn btn-block text-white"
-                               style="background-color: #3F3B6C;">Lihat
-                                Semua Apoteker</a>
-                            <br>
-                        </div>
-                        <div class="row justify-content-center"
-                             th:if="${#authorization.expression('hasAnyAuthority(''Admin'')')}">
-                            <a th:href="@{/appointment/view-all}" class="mx-2 btn btn-block text-white"
-                               style="background-color: #3F3B6C;">Lihat
-                                Jadwal
-                                Appointment</a>
-                            <br>
-                        </div>
-                        <div class="row justify-content-center"
-                             th:if="${#authorization.expression('hasAnyAuthority(''Dokter'')')}">
-                            <a th:href="@{/appointment/dokter-view-all}" class="mx-2 btn btn-block text-white"
-                               style="background-color: #3F3B6C;">Lihat
-                                Jadwal
-                                Appointment</a>
-                            <br>
-                        </div>
-                        <div class="row justify-content-center"
-                             th:if="${#authorization.expression('hasAnyAuthority(''Admin'',''Apoteker'')')}">
-                            <a th:href="@{/resep/viewall}" class="mx-2 btn btn-block text-white"
-                               style="background-color: #3F3B6C;">Lihat Resep</a>
-                            <br>
-                        </div>
-                        <div class="row justify-content-center"
-                             th:if="${#authorization.expression('hasAuthority(''Dokter'')')}">
-                            <a th:href="@{/resep/add}" class="mx-2 btn btn-block text-white"
-                               style="background-color: #3F3B6C;">Membuat
-                                Resep</a>
-                            <br>
-                        </div>
-                        <div class="row justify-content-center"
-                             th:if="${#authorization.expression('hasAnyAuthority(''Admin'',''Apoteker'')')}">
-                            <a th:href="@{/obat/view-obat}" class="mx-2 btn btn-block text-white"
-                               style="background-color: #3F3B6C;">Lihat
-                                Semua
-                                Obat</a>
-                            <br>
-                        </div>
+<div class="container d-flex justify-content-center">
+    <div class="col-md-6 mb-3">
+        <div class="card-header rounded" style="background-color: #BCCEF8;">
+            <br>
+            <h2 class="text-center" style="color:#3F3B6C;"> List of Features: </h2>
+            <br>
+            <div class="d-flex justify-content-center">
+                <div class="col">
+                    <div class="row justify-content-center"
+                         sec:authorize="hasAuthority('Admin')">
+                        <a th:href="@{/user/add-dokter}" class="mx-2 btn btn-block text-white"
+                           style="background-color: #3F3B6C;">Menambah
+                            Dokter</a>
+                        <br>
+                    </div>
+                    <div class="row justify-content-center"
+                         sec:authorize="hasAuthority('Admin')">
+                        <a th:href="@{/user/add-apoteker}" class="mx-2 btn btn-block text-white"
+                           style="background-color: #3F3B6C;">Menambah
+                            Apoteker</a>
+                        <br>
+                    </div>
+                    <div class="row justify-content-center"
+                         sec:authorize="hasAuthority('Admin')">
+                        <a th:href="@{/user/view-pasien}" class="mx-2 btn btn-block text-white"
+                           style="background-color: #3F3B6C;">Lihat Semua Pasien</a>
+                        <br>
+                    </div>
+                    <div class="row justify-content-center"
+                         sec:authorize="hasAuthority('Admin')">
+                        <a th:href="@{/user/view-dokter}" class="mx-2 btn btn-block text-white"
+                           style="background-color: #3F3B6C;">Lihat
+                            Semua Dokter</a>
+                        <br>
+                    </div>
+                    <div class="row justify-content-center"
+                         sec:authorize="hasAuthority('Admin')">
+                        <a th:href="@{/user/view-apoteker}" class="mx-2 btn btn-block text-white"
+                           style="background-color: #3F3B6C;">Lihat
+                            Semua Apoteker</a>
+                        <br>
+                    </div>
+                    <div class="row justify-content-center"
+                         sec:authorize="hasAnyAuthority('Admin', 'Dokter')">
+                        <a th:href="@{/}" class="mx-2 btn btn-block text-white"
+                           style="background-color: #3F3B6C;">Lihat
+                            Jadwal
+                            Appointment</a>
+                        <br>
+                    </div>
+                    <div class="row justify-content-center"
+                         sec:authorize="hasAnyAuthority('Admin', 'Apoteker')">
+                        <a th:href="@{/resep/viewall}" class="mx-2 btn btn-block text-white"
+                           style="background-color: #3F3B6C;">Lihat Resep</a>
+                        <br>
+                    </div>
+                    <div class="row justify-content-center"
+                         sec:authorize="hasAuthority('Dokter')">
+                        <a th:href="@{/resep/add}" class="mx-2 btn btn-block text-white"
+                           style="background-color: #3F3B6C;">Membuat
+                            Resep</a>
+                        <br>
+                    </div>
+                    <div class="row justify-content-center"
+                         sec:authorize="hasAnyAuthority('Admin', 'Apoteker')">
+                        <a th:href="@{/obat/view-obat}" class="mx-2 btn btn-block text-white"
+                           style="background-color: #3F3B6C;">Lihat
+                            Semua
+                            Obat</a>
+                        <br>
                     </div>
                 </div>
             </div>
