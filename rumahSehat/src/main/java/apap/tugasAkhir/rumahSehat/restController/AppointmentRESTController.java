@@ -72,7 +72,7 @@ public class AppointmentRESTController {
     @GetMapping("pasien-view-all")
     private List<AppointmentDTO> viewAllAppointmentPasien(@RequestHeader("Authorization") String token){
         Map<String, String> decodedToken = decode(token);
-        System.out.println(decodedToken.get("EMAIL"));
+        System.out.println(decodedToken);
         PasienModel pasien = pasienService.getPasienByUsername(decodedToken.get("USERNAME"));
         List<AppointmentModel> listAppointmentPasien = pasien.getAppointmentPasien();
         List<AppointmentDTO> listAppointmentDTO = new ArrayList<>();
