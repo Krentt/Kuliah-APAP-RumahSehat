@@ -30,6 +30,8 @@ public class TagihanRESTController {
     private PasienService pasienService;
     @Autowired
     private TagihanService tagihanService;
+    @Autowired
+    private AppointmentService appointmentService;
 
 
     /**
