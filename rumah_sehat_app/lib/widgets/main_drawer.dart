@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rumah_sehat_app/pages/add_appotintment_page.dart';
 import 'package:rumah_sehat_app/pages/home_page.dart';
 import 'package:provider/provider.dart';
 import '../providers/auth.dart';
@@ -63,9 +64,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
               ),
             ),
             GestureDetector(
-              onTap: () {
-                // Navigator.push(context,MaterialPageRoute(builder: (context)=> CreateAppointment()));
-              },
+              onTap: () =>  Navigator.pushNamed(context, AddAppointmentPage.route),
               child: ListTile(
                 leading: Icon(
                   Icons.add,
