@@ -1,8 +1,14 @@
 package apap.tugasAkhir.rumahSehat.service;
 
 import apap.tugasAkhir.rumahSehat.model.PasienModel;
+import apap.tugasAkhir.rumahSehat.model.TagihanModel;
+
+import java.util.List;
 
 public interface TagihanService {
-    //Cisco: Feat15-16
-    PasienModel getTagihanbyResepId(String id);
+    //Cisco: Feat 16
+    List<TagihanModel> getListTagihanByPasien(PasienModel pasienModel);
+
+    //Cisco: Feat 17
+    TagihanModel getTagihanById(String id);
 }
