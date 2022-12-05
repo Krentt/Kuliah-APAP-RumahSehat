@@ -1,8 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:rumah_sehat_app/pages/add_appotintment_page.dart';
 import 'package:rumah_sehat_app/pages/home_page.dart';
+import 'package:jwt_decode/jwt_decode.dart';
 import 'package:provider/provider.dart';
 import '../providers/auth.dart';
+
+class Account with ChangeNotifier {
+  String? token;
+  String? username;
+  String? email;
+
+  void updateData(tokenData) {
+    token = tokenData;
+    notifyListeners();
+  }
+
+  Future<void> getAccount() async {
+    Map<String, dynamic> payload = Jwt.parseJwt(token.toString());
+    username = payload["USERNAME"];
+    email = payload["EMAIL"];
+    print(payload);
+    print(username);
+    print(email);
+  }
+
+}
 
 class DrawerScreen extends StatefulWidget {
   const DrawerScreen({Key? key}) : super(key: key);
@@ -14,13 +36,15 @@ class DrawerScreen extends StatefulWidget {
 class _DrawerScreenState extends State<DrawerScreen> {
   @override
   Widget build(BuildContext context) {
+    Provider.of<Account>(context, listen: false).getAccount();
+    final prov = Provider.of<Account>(context);
     return Drawer(
       child: SafeArea(
         child: Column(
           children: [
-            const UserAccountsDrawerHeader(
-              accountName: Text("Soobin gantenkk"),
-              accountEmail: Text("ayanknina@gmail.com"),
+             UserAccountsDrawerHeader(
+              accountName: Text(prov.username.toString()),
+              accountEmail: Text(prov.email.toString()),
             ),
             GestureDetector(
               onTap: () {
@@ -64,7 +88,8 @@ class _DrawerScreenState extends State<DrawerScreen> {
               ),
             ),
             GestureDetector(
-              onTap: () =>  Navigator.pushNamed(context, AddAppointmentPage.route),
+              onTap: () =>
+                  Navigator.pushNamed(context, AddAppointmentPage.route),
               child: ListTile(
                 leading: Icon(
                   Icons.add,
