@@ -6,6 +6,7 @@ import apap.tugasAkhir.rumahSehat.model.PasienModel;
 import apap.tugasAkhir.rumahSehat.model.ResepModel;
 import apap.tugasAkhir.rumahSehat.model.TagihanModel;
 import apap.tugasAkhir.rumahSehat.service.*;
+import lombok.extern.slf4j.XSlf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +18,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+@XSlf4j
 @RestController
 @RequestMapping("/tagihan")
 public class TagihanRESTController {
@@ -36,6 +38,7 @@ public class TagihanRESTController {
      * Cisco:Feat16 (Melihat Daftar Tagihan pasien)
      * TODO: Add Pasien from Current Session Token
      * TODO: Functions, HTML
+     * TODO: Action Logging
      */
     @GetMapping(value = "/list")
     private List<TagihanModel> viewListTagihan(
@@ -51,6 +54,7 @@ public class TagihanRESTController {
      * TODO: Add Pasien from Current Session Token
      * TODO: Change Dummy Functions into Smart Functions
      * TODO: Add function membayar (post)
+     * TODO: Action Logging
      * {id} adalah ID dari tagihan (BILL-x)
      */
     @GetMapping(value = "/{id}")

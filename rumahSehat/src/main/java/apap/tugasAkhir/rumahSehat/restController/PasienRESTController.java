@@ -2,12 +2,14 @@ package apap.tugasAkhir.rumahSehat.restController;
 
 import apap.tugasAkhir.rumahSehat.model.*;
 import apap.tugasAkhir.rumahSehat.service.*;
+import lombok.extern.slf4j.XSlf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@XSlf4j
 @RestController
 @RequestMapping("/pasien")
 public class PasienRESTController {
@@ -16,6 +18,7 @@ public class PasienRESTController {
 
     /** Cisco:Feat14 (Melihat Profile Pasien)
      * TODO: Functions, Flutter
+     * TODO: Action Logging
      * {username} adalah username dari akun pasien
      */
     @GetMapping(value = "/{Username}/profile")
@@ -40,6 +43,7 @@ public class PasienRESTController {
 
     /** Cisco:Feat15 (Top Up Saldo Pasien)
      * TODO: Functions, Flutter, POST
+     * TODO: Action Logging
      * {username} adalah username dari akun pasien
      */
     @GetMapping(value = "{Username}/saldo")
@@ -68,6 +72,7 @@ public class PasienRESTController {
 
     /** Cisco:Feat15 (Top Up Saldo Pasien)
      * TODO: Functions, Flutter, POST
+     * TODO: Action Logging
      * {username} adalah username dari akun pasien
      */
     @PostMapping(value = "{Username}/saldo")
