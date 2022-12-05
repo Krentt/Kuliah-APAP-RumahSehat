@@ -20,6 +20,7 @@ class Account with ChangeNotifier {
     username = payload["USERNAME"];
     email = payload["EMAIL"];
   }
+
 }
 
 class DrawerScreen extends StatefulWidget {
