@@ -19,9 +19,6 @@ class Account with ChangeNotifier {
     Map<String, dynamic> payload = Jwt.parseJwt(token.toString());
     username = payload["USERNAME"];
     email = payload["EMAIL"];
-    print(payload);
-    print(username);
-    print(email);
   }
 
 }
@@ -42,9 +39,12 @@ class _DrawerScreenState extends State<DrawerScreen> {
       child: SafeArea(
         child: Column(
           children: [
-             UserAccountsDrawerHeader(
-              accountName: Text(prov.username.toString()),
-              accountEmail: Text(prov.email.toString()),
+            UserAccountsDrawerHeader(
+              accountName: Text(
+                prov.username.toString(),
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
+              accountEmail: Text(prov.email.toString(), style: TextStyle(fontSize: 15),),
             ),
             GestureDetector(
               onTap: () {
@@ -69,6 +69,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
             ),
             GestureDetector(
               onTap: () {
+                // TODO : MASUKIN ROUTE
                 // Navigator.push(context,MaterialPageRoute(builder: (context)=> ViewMyProfile()));
               },
               child: ListTile(
@@ -108,6 +109,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
             ),
             GestureDetector(
               onTap: () {
+                // TODO : MASUKIN ROUTE
                 // Navigator.push(context,MaterialPageRoute(builder: (context)=> ViewAllAppointment()));
               },
               child: ListTile(
@@ -128,6 +130,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
             ),
             GestureDetector(
               onTap: () {
+                // TODO : MASUKIN ROUTE
                 // Navigator.push(context,MaterialPageRoute(builder: (context)=> ViewTagihan()));
               },
               child: ListTile(

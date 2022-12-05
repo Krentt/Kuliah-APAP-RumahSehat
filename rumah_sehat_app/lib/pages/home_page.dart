@@ -47,28 +47,30 @@ class _HomePageState extends State<HomePage> {
                     splashColor: Colors.blue,
                     child: SizedBox(
                       width: 400,
-                      height: 110,
+                      height: 90,
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Padding(padding:  const EdgeInsets.all(11.0),
+                          Padding(
+                            padding: const EdgeInsets.all(11.0),
                             child: Icon(
                               Icons.account_circle,
-                              size: 80,
+                              size: 60,
                               color: Colors.black,
                             ),
                           ),
-                          Padding(padding: const EdgeInsets.all(38.0),
-                          child: Text(
-                            "Pacar soobin Nina",
-                            textAlign: TextAlign.left,
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 26
+                          Padding(
+                            padding: const EdgeInsets.all(30.0),
+                            child: Text(
+                              "Pacar soobin Nina",
+                              textAlign: TextAlign.left,
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 22),
                             ),
-                          ),),
+                          ),
                         ],
                       ),
                     ),
@@ -140,21 +142,18 @@ class _HomePageState extends State<HomePage> {
                               Text(
                                 "Welcome to Rumah Sehat",
                                 style: TextStyle(
-                                    fontSize: 30, fontWeight: FontWeight.bold),
+                                    fontSize: 25, fontWeight: FontWeight.bold),
                               ),
                               SizedBox(height: 15),
                               Text(
-                                "Sehat Bersama kami dengan kemudahan konsultasi",
-                                style: TextStyle(fontSize: 15),
-                              ),
-                              Text(
-                                "kesehatan dalam genggaman",
+                                "Sehat Bersama kami dengan\nkemudahan konsultasi kesehatan\ndalam genggaman",
+                                textAlign: TextAlign.justify,
                                 style: TextStyle(fontSize: 15),
                               ),
                               SizedBox(height: 25),
                               Text(
                                 "Layanan kami",
-                                style: TextStyle(fontSize: 25),
+                                style: TextStyle(fontSize: 20),
                               ),
                             ],
                           )
@@ -181,7 +180,8 @@ class _HomePageState extends State<HomePage> {
                       elevation: 20,
                       margin: const EdgeInsets.all(8),
                       child: InkWell(
-                        onTap: () {},
+                        onTap: () =>
+                        Navigator.pushNamed(context, AddAppointmentPage.route),
                         splashColor: Colors.blue,
                         child: Center(
                           child: Column(
@@ -211,7 +211,9 @@ class _HomePageState extends State<HomePage> {
                       elevation: 20,
                       margin: const EdgeInsets.all(8),
                       child: InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          // TODO : MASUKIN ROUTE
+                        },
                         splashColor: Colors.blue,
                         child: Center(
                           child: Column(
@@ -244,7 +246,9 @@ class _HomePageState extends State<HomePage> {
                       elevation: 20,
                       margin: const EdgeInsets.all(8),
                       child: InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          // TODO : MASUKIN ROUTE
+                        },
                         splashColor: Colors.blue,
                         child: Center(
                           child: Column(
