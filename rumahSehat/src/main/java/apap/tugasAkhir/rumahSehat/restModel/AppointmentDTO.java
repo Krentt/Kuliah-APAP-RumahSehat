@@ -17,4 +17,5 @@ public class AppointmentDTO {
     private boolean isDone;
     private String pasienName;
     private String dokterName;
+    private String kode;
 }
