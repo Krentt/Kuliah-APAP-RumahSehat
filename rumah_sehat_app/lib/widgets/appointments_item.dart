@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:rumah_sehat_app/pages/detail_appointment_page.dart';
 import 'package:rumah_sehat_app/providers/appointment.dart';
 
 class AppointmentItem extends StatelessWidget {
@@ -15,9 +16,9 @@ class AppointmentItem extends StatelessWidget {
     var prov = Provider.of<Appointments>(context, listen: false);
     String date = DateFormat.yMMMd().add_Hm().format(waktuAppointment!);
     return ListTile(
-      // onTap: () {
-      //   Navigator.pushNamed(context, , arguments: id);
-      // },
+      onTap: () {
+        Navigator.pushNamed(context, DetailAppointmentPage.route, arguments: kode);
+      },
       leading: CircleAvatar(
         child: Padding(
           padding: const EdgeInsets.all(5),

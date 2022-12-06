@@ -110,7 +110,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
             ),
             GestureDetector(
               onTap: () => Navigator.pushNamed(context, ListAppointments.route),
-                
+
               child: ListTile(
                 leading: Icon(
                   Icons.today,
