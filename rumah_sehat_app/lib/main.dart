@@ -27,7 +27,10 @@ class MyApp extends StatelessWidget {
           update: (context, auth, dokters) => dokters!..updateData(auth.token)),
       ChangeNotifierProxyProvider<Authh, Account>(
           create: (context) => Account(),
-          update: (context, auth, account) => account!..updateData(auth.token))
+          update: (context, auth, account) => account!..updateData(auth.token)),
+      ChangeNotifierProxyProvider<Authh, Profile>(
+          create: (context) => Profile(),
+          update: (context, auth, profile) => profile!..updateData(auth.token))
     ],
         builder: (context, child) => Consumer<Authh>
           (builder: (context, auth, child) => MaterialApp(
