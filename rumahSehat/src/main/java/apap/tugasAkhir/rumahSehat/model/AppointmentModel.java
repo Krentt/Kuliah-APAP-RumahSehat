@@ -67,8 +67,8 @@ public class AppointmentModel implements Serializable {
     private ResepModel resepModel;
 
     // Relasi dengan tagihan
-//    @JsonManagedReference
-//    @OneToOne(cascade = CascadeType.ALL)
-////    @JoinColumn(name = "id", referencedColumnName = "tagihan_Id") // TODO: ga yakin bener
-//    private TagihanModel tagihanModel;
+    @JsonManagedReference
+    @OneToOne(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "id", referencedColumnName = "tagihan_Id") // TODO: ga yakin bener
+    private TagihanModel tagihanModel;
 }
