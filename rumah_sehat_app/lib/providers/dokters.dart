@@ -31,7 +31,7 @@ class Dokters with ChangeNotifier{
         throw (response.statusCode);
       } else {
         var data = json.decode(response.body) as List<dynamic>;
-        bool state = true;
+        _allDokter.clear();
         if (data != null){
           data.forEach((element) {
             Dokter dokter = Dokter(
@@ -39,17 +39,7 @@ class Dokters with ChangeNotifier{
               username: element["username"],
               tarif: element["tarifDokter"]
             );
-            if (_allDokter.isNotEmpty){
-              _allDokter.forEach((element) {
-                if(element.nama == dokter.nama){
-                  print("Ada dokter yang sama");
-                  state = false;
-                }
-              });
-            }
-            if (state){
-              _allDokter.add(dokter);
-            }
+            _allDokter.add(dokter);
           });
         }
       }

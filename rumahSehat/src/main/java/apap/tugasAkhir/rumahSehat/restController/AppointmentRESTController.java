@@ -9,8 +9,10 @@ import apap.tugasAkhir.rumahSehat.service.DokterService;
 import apap.tugasAkhir.rumahSehat.service.PasienService;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.parameters.P;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -19,6 +21,7 @@ import org.springframework.web.server.ResponseStatusException;
 import javax.validation.Valid;
 import java.util.*;
 
+@Slf4j
 @RestController
 @RequestMapping("/appointment")
 public class AppointmentRESTController {
@@ -72,12 +75,12 @@ public class AppointmentRESTController {
     @GetMapping("pasien-view-all")
     private List<AppointmentDTO> viewAllAppointmentPasien(@RequestHeader("Authorization") String token){
         Map<String, String> decodedToken = decode(token);
-        System.out.println(decodedToken.get("EMAIL"));
         PasienModel pasien = pasienService.getPasienByUsername(decodedToken.get("USERNAME"));
         List<AppointmentModel> listAppointmentPasien = pasien.getAppointmentPasien();
         List<AppointmentDTO> listAppointmentDTO = new ArrayList<>();
         for (AppointmentModel appt : listAppointmentPasien){
             AppointmentDTO appointmentDTO = new AppointmentDTO();
+            appointmentDTO.setKode(appt.getKode());
             appointmentDTO.setPasienName(pasien.getNama());
             appointmentDTO.setDokterName(appt.getDokterModel().getNama());
             appointmentDTO.setWaktuAwal(appt.getWaktuAwal());

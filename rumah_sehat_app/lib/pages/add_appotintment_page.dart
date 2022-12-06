@@ -6,7 +6,7 @@ import 'package:rumah_sehat_app/providers/dokters.dart';
 import '../providers/appointment.dart';
 
 class AddAppointmentPage extends StatefulWidget {
-  static const route = "/add-product";
+  static const route = "/add-appointment";
 
   @override
   State<AddAppointmentPage> createState() => _AddAppointmentPageState();
@@ -75,27 +75,25 @@ class _AddAppointmentPageState extends State<AddAppointmentPage> {
 
 
     void save(String dokter, DateTime waktuAwal) {
-      try {
         Provider.of<Appointments>(context, listen: false)
             .addAppointment(dokter, waktuAwal)
-            .then((value) => Navigator.pop(context));
-      } catch (err) {
-        showDialog(
-          context: context,
-          builder: (context) {
-            return AlertDialog(
-              title: Text("Error Occured"),
-              content: Text("Error : $err"),
-              actions: [
-                TextButton(
-                  onPressed: () => Navigator.pop(context),
-                  child: Text("OKAY"),
-                ),
-              ],
-            );
-          },
-        );
-      }
+            .then((value) => Navigator.pop(context)).catchError((err){
+          showDialog(
+            context: context,
+            builder: (context) {
+              return AlertDialog(
+                title: Text("Error Occured"),
+                content: Text("Error : $err"),
+                actions: [
+                  TextButton(
+                    onPressed: () => Navigator.pop(context),
+                    child: Text("OKAY"),
+                  ),
+                ],
+              );
+            },
+          );
+        });
     }
 
     return Scaffold(

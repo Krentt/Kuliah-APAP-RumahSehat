@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:rumah_sehat_app/pages/add_appotintment_page.dart';
 import 'package:rumah_sehat_app/pages/home_page.dart';
 import 'package:provider/provider.dart';
+import 'package:rumah_sehat_app/pages/list_appointments_page.dart';
 import '../providers/auth.dart';
 
 class DrawerScreen extends StatefulWidget {
@@ -82,9 +83,9 @@ class _DrawerScreenState extends State<DrawerScreen> {
               ),
             ),
             GestureDetector(
-              onTap: () {
+              onTap: () => Navigator.pushNamed(context, ListAppointments.route),
                 // Navigator.push(context,MaterialPageRoute(builder: (context)=> ViewAllAppointment()));
-              },
+
               child: ListTile(
                 leading: Icon(
                   Icons.today,
