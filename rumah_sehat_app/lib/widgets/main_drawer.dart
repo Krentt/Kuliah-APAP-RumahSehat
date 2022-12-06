@@ -3,6 +3,7 @@ import 'package:rumah_sehat_app/pages/add_appotintment_page.dart';
 import 'package:rumah_sehat_app/pages/home_page.dart';
 import 'package:jwt_decode/jwt_decode.dart';
 import 'package:provider/provider.dart';
+import 'package:rumah_sehat_app/pages/list_appointments_page.dart';
 import '../providers/auth.dart';
 
 class Account with ChangeNotifier {
@@ -108,10 +109,8 @@ class _DrawerScreenState extends State<DrawerScreen> {
               ),
             ),
             GestureDetector(
-              onTap: () {
-                // TODO : MASUKIN ROUTE
-                // Navigator.push(context,MaterialPageRoute(builder: (context)=> ViewAllAppointment()));
-              },
+              onTap: () => Navigator.pushNamed(context, ListAppointments.route),
+                
               child: ListTile(
                 leading: Icon(
                   Icons.today,
