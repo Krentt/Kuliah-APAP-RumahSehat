@@ -18,4 +18,5 @@ public class AppointmentDTO {
     private String pasienName;
     private String dokterName;
     private String kode;
+    private String kodeResep;
 }

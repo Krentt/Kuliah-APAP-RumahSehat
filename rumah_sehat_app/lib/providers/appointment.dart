@@ -50,6 +50,7 @@ class Appointments with ChangeNotifier{
             waktuAwal: waktuAwal,
             pasien: payload["USERNAME"],
             dokter: dokter,
+            kodeResep: json.decode(response.body)["body"]["kodeResep"].toString()
           );
           _allAppointments.add(data);
           notifyListeners();
@@ -105,25 +106,7 @@ class Appointments with ChangeNotifier{
     }
   }
 
-  void deleteAppointment(String kode) async {
-    Uri url = Uri.parse("http://10.0.2.2:8080/appointment/delete/$kode");
-    String? finalToken = "Bearer " + token.toString();
-
-    try {
-      var response = await http.delete(url,
-          headers: {
-            "Content-Type" : "application/json",
-            "Authorization" : finalToken
-      });
-
-      if (response.statusCode > 300 || response.statusCode < 200) {
-        throw (response.statusCode);
-      } else {
-        _allAppointments.removeWhere((element) => element.kode == kode);
-        notifyListeners();
-      }
-    } catch (err){
-      rethrow;
-    }
+  Appointment selectByKode(String kode){
+    return _allAppointments.firstWhere((element) => element.kode == kode);
   }
 }
