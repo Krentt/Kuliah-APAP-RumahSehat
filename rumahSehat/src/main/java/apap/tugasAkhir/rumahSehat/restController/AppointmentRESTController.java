@@ -85,6 +85,12 @@ public class AppointmentRESTController {
             appointmentDTO.setDokterName(appt.getDokterModel().getNama());
             appointmentDTO.setWaktuAwal(appt.getWaktuAwal());
             appointmentDTO.setDone(appt.isDone());
+            if (appt.getResepModel() != null) {
+                appointmentDTO.setKodeResep(appt.getResepModel().getId().toString());
+            } else {
+                appointmentDTO.setKodeResep(null);
+            }
+
             listAppointmentDTO.add(appointmentDTO);
         }
         return listAppointmentDTO;

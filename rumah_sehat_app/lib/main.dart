@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rumah_sehat_app/pages/add_appotintment_page.dart';
 import 'package:rumah_sehat_app/pages/auth_page.dart';
+import 'package:rumah_sehat_app/pages/detail_appointment_page.dart';
 import 'package:rumah_sehat_app/pages/home_page.dart';
 import 'package:rumah_sehat_app/pages/list_appointments_page.dart';
 import 'package:rumah_sehat_app/providers/appointment.dart';
@@ -39,7 +40,8 @@ class MyApp extends StatelessWidget {
           home: auth.isAuth ? HomePage() : LoginScreen(),
           routes: {
             AddAppointmentPage.route: (ctx) => AddAppointmentPage(),
-            ListAppointments.route: (ctx) => ListAppointments()
+            ListAppointments.route: (ctx) => ListAppointments(),
+            DetailAppointmentPage.route: (ctx) => DetailAppointmentPage()
           },
         )
         ),
