@@ -40,7 +40,8 @@ public class ResepModel implements Serializable {
 
     // Relasi dengan appointment
     @JsonBackReference
-    @OneToOne(mappedBy = "resepModel")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "kode_appt", referencedColumnName = "kode")
     private AppointmentModel appointment;
 
 }

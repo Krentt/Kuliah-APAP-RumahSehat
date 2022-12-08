@@ -62,10 +62,11 @@ public class ResepController {
         resep.setCreatedAt(LocalDateTime.now());
         resep.setListJumlahModel(new ArrayList<>());
 
-        AppointmentModel appointmentOfResep = resep.getAppointment();
+        AppointmentModel appointmentOfResep = appointmentService.getAppointmentByKode(resep.getAppointment().getKode());
         appointmentOfResep.setResepModel(resep);
-
+        resep.setAppointment(appointmentOfResep);
         resepService.addResep(resep);
+//        appointmentService.createAppointent(appointmentOfResep);
         for (JumlahModel jumlahModel : listJumlahModel){
             ObatModel obat = obatService.getObatById(jumlahModel.getObat().getIdObat());
             jumlahModel.setId((long)jumlahObatService.getListJumlahObat().size() + 1);

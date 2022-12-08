@@ -27,6 +27,7 @@
                 <h2>Tambah Resep</h2>
                 <br>
                 <form th:action="@{/resep/add}" th:object="${resep}" method="POST">
+                    <input type="hidden" th:field="*{appointment.kode}">
 
                     <table class="table">
                         <thead>
