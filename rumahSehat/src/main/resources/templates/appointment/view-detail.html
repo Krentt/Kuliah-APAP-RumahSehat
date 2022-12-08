@@ -76,7 +76,7 @@
         <br><br>
         <div th:if="${#authorization.expression('hasAuthority(''Dokter'')')}">
           <div th:if="${appointment.resepModel == null and appointment.isDone == false}">
-            <a class="btn text-white font-weight-normal btn-block" style="background-color: #3F3B6C;" th:href="@{/}" >Create Resep</a> <!--ToDo: Masukin path -->
+            <a class="btn text-white font-weight-normal btn-block" style="background-color: #3F3B6C;" th:href="@{/resep/add/} + ${appoinment.kode}" >Create Resep</a> <!--ToDo: Masukin path -->
           </div>
 
           <div th:if="${appointment.resepModel != null}">

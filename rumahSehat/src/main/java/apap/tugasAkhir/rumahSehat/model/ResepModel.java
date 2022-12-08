@@ -22,7 +22,6 @@ import java.util.List;
 @Getter
 public class ResepModel implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull
