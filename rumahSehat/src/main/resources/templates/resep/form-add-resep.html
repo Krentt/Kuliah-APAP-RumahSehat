@@ -28,26 +28,25 @@
                 <br>
                 <form th:action="@{/resep/add}" th:object="${resep}" method="POST">
 
-                    Waktu Resep Dibuat: <br>
-                    <input class="form-control" type="datetime-local" th:field="*{createdAt}"/>
-                    <br><br>
-
                     <table class="table">
                         <thead>
                         <th>Obat</th>
                         <th>
-                            <button class="btn btn-primary" type="submit" name="addRow">Tambah Row</button>
+                            <button class="btn btn-primary" type="submit" name="addRow">Tambah Obat</button>
                         </th>
                         </thead>
                         <tbody>
                         <tr th:each="jumlahModel, iterationStatus : *{listJumlahModel}">
                             <td>
-                                <select name="id" th:field="*{listJumlahModel[__${iterationStatus.index}__].id}"
+                                <select name="id" th:field="*{listJumlahModel[__${iterationStatus.index}__].obat.idObat}"
                                         class="form-control">
-                                    <div th:each="jumlahModelEx, iterationStatus2 : ${listJumlahModelExisting}">
-                                        <option th:value="${jumlahModelEx.obat}"></option>
+                                    <div th:each="obat, iterationStatus2 : ${listObatExisting}">
+                                        <option th:value="${obat.idObat}" th:text="${obat.namaObat}"></option>
                                     </div>
                                 </select>
+                            </td>
+                            <td>
+                                <input class="form-control" type="number" th:field="*{listJumlahModel[__${iterationStatus.index}__].kuantitas}" th:required="required"/>
                             </td>
                             <td>
                                 <button th:value="${iterationStatus.index}" class="btn btn-danger" type="submit"
