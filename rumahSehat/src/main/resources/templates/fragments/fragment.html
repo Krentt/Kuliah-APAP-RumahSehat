@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://thymeleaf.org">
+<html lang="en" xmlns:th="http://thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>View Course</title>
@@ -22,6 +23,7 @@
             background-repeat: no-repeat;
             background-attachment: fixed;
             background-size: cover;
+            font-family: 'Rubik', sans-serif;
         }
     </style>
 </head>
@@ -51,8 +53,41 @@
                         <a class="nav-link font-weight-normal" style="color:#F8F3F3;" th:href="@{/}">Beranda</a>
                     </div>
                 </li>
+                <li class="nav-item" th:classappend="${var=='pasien'} ? active"
+                    sec:authorize="hasAuthority('Admin')">
+                    <div th:if="${var=='pasien'}">
+                        <a class="nav-link font-weight-normal" style="color:#3F3B6C;"
+                           th:href="@{/user/view-pasien}">Pasien</a>
+                    </div>
+                    <div th:unless="${var=='pasien'}">
+                        <a class="nav-link font-weight-normal" style="color:#F8F3F3;"
+                           th:href="@{/user/view-pasien}">Pasien</a>
+                    </div>
+                </li>
+                <li class="nav-item" th:classappend="${var=='dokter'} ? active"
+                    sec:authorize="hasAuthority('Admin')">
+                    <div th:if="${var=='dokter'}">
+                        <a class="nav-link font-weight-normal" style="color:#3F3B6C;"
+                           th:href="@{/user/view-dokter}">Dokter</a>
+                    </div>
+                    <div th:unless="${var=='dokter'}">
+                        <a class="nav-link font-weight-normal" style="color:#F8F3F3;"
+                           th:href="@{/user/view-dokter}">Dokter</a>
+                    </div>
+                </li>
+                <li class="nav-item" th:classappend="${var=='apoteker'} ? active"
+                    sec:authorize="hasAuthority('Admin')">
+                    <div th:if="${var=='apoteker'}">
+                        <a class="nav-link font-weight-normal" style="color:#3F3B6C;"
+                           th:href="@{/user/view-apoteker}">Apoteker</a>
+                    </div>
+                    <div th:unless="${var=='apoteker'}">
+                        <a class="nav-link font-weight-normal" style="color:#F8F3F3;"
+                           th:href="@{/user/view-apoteker}">Apoteker</a>
+                    </div>
+                </li>
                 <li class="nav-item" th:classappend="${var=='obat'} ? active"
-                    th:if="${#authorization.expression('hasAnyAuthority(''Admin'',''Apoteker'')')}">
+                    sec:authorize="hasAnyAuthority('Admin','Apoteker')">
                     <div th:if="${var=='obat'}">
                         <a class="nav-link font-weight-normal" style="color:#3F3B6C;"
                            th:href="@{/obat/view-obat}">Obat</a>
@@ -63,7 +98,7 @@
                     </div>
                 </li>
                 <li class="nav-item" th:classappend="${var=='resep'} ? active"
-                    th:if="${#authorization.expression('hasAnyAuthority(''Admin'',''Apoteker'')')}">
+                    sec:authorize="hasAnyAuthority('Admin','Apoteker')">
                     <div th:if="${var=='resep'}">
                         <a class="nav-link font-weight-normal" style="color:#3F3B6C;"
                            th:href="@{/resep/viewall}">Resep</a>
@@ -73,13 +108,22 @@
                            th:href="@{/resep/viewall}">Resep</a>
                     </div>
                 </li>
-                <li class="nav-item" th:classappend="${var=='appointment'} ? active"
-                    th:if="${#authorization.expression('hasAnyAuthority(''Admin'',''Dokter'')')}">
+                <li class="nav-item" th:classappend="${var=='appointmentAdmin'} ? active"
+                    sec:authorize="hasAuthority('Admin')">
                     <div th:if="${var=='appointment'}">
-                        <a class="nav-link font-weight-normal" style="color:#3F3B6C;" th:href="@{/}">Appointment</a>
+                        <a class="nav-link font-weight-normal" style="color:#3F3B6C;" th:href="@{/appointment/view-all}">Appointment</a>
                     </div>
                     <div th:unless="${var=='appointment'}">
-                        <a class="nav-link font-weight-normal" style="color:#F8F3F3;" th:href="@{/}">Appointment</a>
+                        <a class="nav-link font-weight-normal" style="color:#F8F3F3;" th:href="@{/appointment/view-all}">Appointment</a>
+                    </div>
+                </li>
+                <li class="nav-item" th:classappend="${var=='appointmentDokter'} ? active"
+                    sec:authorize="hasAuthority('Dokter')">
+                    <div th:if="${var=='appointment'}">
+                        <a class="nav-link font-weight-normal" style="color:#3F3B6C;" th:href="@{/appointment/dokter-view-all}">Appointment</a>
+                    </div>
+                    <div th:unless="${var=='appointment'}">
+                        <a class="nav-link font-weight-normal" style="color:#F8F3F3;" th:href="@{/appointment/dokter-view-all}">Appointment</a>
                     </div>
                 </li>
             </ul>
@@ -93,10 +137,11 @@
         </div>
     </div>
 </nav>
-<footer th:fragment="footer" class="text-center text-muted">
-    <section style="background-color: #F8F3F3">
+<footer th:fragment="footer" class="text-muted">
+    <br>  <br>  <br>
+    <section style="background-color: #ffffff;">
         <br>
-        <div class="container text-center text-md-start mt-5">
+        <div class="container text-md-start mt-5">
             <!-- Grid row -->
             <div class="row mt-3">
                 <!-- Grid column -->
@@ -172,9 +217,9 @@
         </div>
     </section>
     <!-- Section: Links  -->
-    <div class="border-top bg-light">
+    <div class="border-top text-center" style="background-color: #e3e2e2;">
         <!-- Copyright -->
-        <div class="p-3" >
+        <div class="p-3 text-dark">
             <p>© 2022 Rumah Sehat, Inc. All rights reserved.</p>
         </div>
         <!-- Copyright -->

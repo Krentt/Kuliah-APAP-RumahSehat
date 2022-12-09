@@ -1,7 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:rumah_sehat_app/pages/add_appotintment_page.dart';
 import 'package:rumah_sehat_app/pages/home_page.dart';
+import 'package:jwt_decode/jwt_decode.dart';
 import 'package:provider/provider.dart';
+import 'package:rumah_sehat_app/pages/list_appointments_page.dart';
 import '../providers/auth.dart';
+
+class Account with ChangeNotifier {
+  String? token;
+  String? username;
+  String? email;
+
+  void updateData(tokenData) {
+    token = tokenData;
+    notifyListeners();
+  }
+
+  Future<void> getAccount() async {
+    Map<String, dynamic> payload = Jwt.parseJwt(token.toString());
+    username = payload["USERNAME"];
+    email = payload["EMAIL"];
+  }
+
+}
 
 class DrawerScreen extends StatefulWidget {
   const DrawerScreen({Key? key}) : super(key: key);
@@ -9,16 +30,22 @@ class DrawerScreen extends StatefulWidget {
   @override
   _DrawerScreenState createState() => _DrawerScreenState();
 }
+
 class _DrawerScreenState extends State<DrawerScreen> {
   @override
   Widget build(BuildContext context) {
+    Provider.of<Account>(context, listen: false).getAccount();
+    final prov = Provider.of<Account>(context);
     return Drawer(
       child: SafeArea(
         child: Column(
           children: [
-            const UserAccountsDrawerHeader(
-              accountName: Text("Soobin gantenkk"),
-              accountEmail: Text("ayanknina@gmail.com"),
+            UserAccountsDrawerHeader(
+              accountName: Text(
+                prov.username.toString(),
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
+              accountEmail: Text(prov.email.toString(), style: TextStyle(fontSize: 15),),
             ),
             GestureDetector(
               onTap: () {
@@ -43,6 +70,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
             ),
             GestureDetector(
               onTap: () {
+                // TODO : MASUKIN ROUTE
                 // Navigator.push(context,MaterialPageRoute(builder: (context)=> ViewMyProfile()));
               },
               child: ListTile(
@@ -62,9 +90,8 @@ class _DrawerScreenState extends State<DrawerScreen> {
               ),
             ),
             GestureDetector(
-              onTap: () {
-                // Navigator.push(context,MaterialPageRoute(builder: (context)=> CreateAppointment()));
-              },
+              onTap: () =>
+                  Navigator.pushNamed(context, AddAppointmentPage.route),
               child: ListTile(
                 leading: Icon(
                   Icons.add,
@@ -82,9 +109,8 @@ class _DrawerScreenState extends State<DrawerScreen> {
               ),
             ),
             GestureDetector(
-              onTap: () {
-                // Navigator.push(context,MaterialPageRoute(builder: (context)=> ViewAllAppointment()));
-              },
+              onTap: () => Navigator.pushNamed(context, ListAppointments.route),
+
               child: ListTile(
                 leading: Icon(
                   Icons.today,
@@ -103,6 +129,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
             ),
             GestureDetector(
               onTap: () {
+                // TODO : MASUKIN ROUTE
                 // Navigator.push(context,MaterialPageRoute(builder: (context)=> ViewTagihan()));
               },
               child: ListTile(
@@ -122,8 +149,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
               ),
             ),
             GestureDetector(
-              onTap: () =>
-                Provider.of<Authh>(context, listen: false).logout(),
+              onTap: () => Provider.of<Authh>(context, listen: false).logout(),
               child: ListTile(
                 leading: Icon(
                   Icons.logout,

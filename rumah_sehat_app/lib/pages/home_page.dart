@@ -1,8 +1,25 @@
 import 'dart:developer';
-
+import 'package:jwt_decode/jwt_decode.dart';
 import 'package:flutter/material.dart';
+import 'package:rumah_sehat_app/pages/add_appotintment_page.dart';
 import 'package:rumah_sehat_app/widgets/main_drawer.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:provider/provider.dart';
+
+class Profile with ChangeNotifier {
+  String? token;
+  String? name;
+
+  void updateData(tokenData) {
+    token = tokenData;
+    notifyListeners();
+  }
+
+  Future<void> getProfile() async {
+    Map<String, dynamic> payload = Jwt.parseJwt(token.toString());
+    name = payload["NAME"];
+  }
+}
 
 class HomePage extends StatefulWidget {
   static const route = "/home";
@@ -25,6 +42,8 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
+    Provider.of<Profile>(context, listen: false).getProfile();
+    final prov = Provider.of<Profile>(context);
     return Scaffold(
         appBar: AppBar(
           title: const Text("Rumah Sehat"),
@@ -33,6 +52,49 @@ class _HomePageState extends State<HomePage> {
         body: SingleChildScrollView(
           child: Column(
             children: <Widget>[
+              Container(
+                alignment: Alignment.center,
+                child: Card(
+                  color: Color.fromARGB(255, 88, 163, 188),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(9)),
+                  elevation: 20,
+                  margin: const EdgeInsets.all(20),
+                  child: InkWell(
+                    onTap: () {},
+                    splashColor: Colors.blue,
+                    child: SizedBox(
+                      width: 400,
+                      height: 90,
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(11.0),
+                            child: Icon(
+                              Icons.account_circle,
+                              size: 70,
+                              color: Colors.white,
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(30.0),
+                            child: Text(
+                              prov.name.toString(),
+                              textAlign: TextAlign.left,
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 24),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ),
               Container(
                 height: 240,
                 child: CarouselSlider(
@@ -98,21 +160,18 @@ class _HomePageState extends State<HomePage> {
                               Text(
                                 "Welcome to Rumah Sehat",
                                 style: TextStyle(
-                                    fontSize: 30, fontWeight: FontWeight.bold),
+                                    fontSize: 25, fontWeight: FontWeight.bold),
                               ),
                               SizedBox(height: 15),
                               Text(
-                                "Sehat Bersama kami dengan kemudahan konsultasi",
-                                style: TextStyle(fontSize: 15),
-                              ),
-                              Text(
-                                "kesehatan dalam genggaman",
+                                "Sehat Bersama kami dengan\nkemudahan konsultasi kesehatan\ndalam genggaman",
+                                textAlign: TextAlign.justify,
                                 style: TextStyle(fontSize: 15),
                               ),
                               SizedBox(height: 25),
                               Text(
                                 "Layanan kami",
-                                style: TextStyle(fontSize: 25),
+                                style: TextStyle(fontSize: 20),
                               ),
                             ],
                           )
@@ -134,12 +193,14 @@ class _HomePageState extends State<HomePage> {
                   GestureDetector(
                     onTap: () {},
                     child: Card(
+                      color: Color.fromARGB(255, 238, 171, 115),
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10)),
                       elevation: 20,
                       margin: const EdgeInsets.all(8),
                       child: InkWell(
-                        onTap: () {},
+                        onTap: () => Navigator.pushNamed(
+                            context, AddAppointmentPage.route),
                         splashColor: Colors.blue,
                         child: Center(
                           child: Column(
@@ -148,13 +209,15 @@ class _HomePageState extends State<HomePage> {
                               Icon(
                                 Icons.add,
                                 size: 90,
-                                color: Colors.brown,
+                                color: Colors.white,
                               ),
-                              Text(
-                                "Create Appointment",
-                                softWrap: true,
-                                style: TextStyle(fontSize: 17),
-                              )
+                              Text("Create Appointment",
+                                  softWrap: true,
+                                  style: TextStyle(
+                                    fontSize: 17,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w400,
+                                  )),
                             ],
                           ),
                         ),
@@ -164,12 +227,15 @@ class _HomePageState extends State<HomePage> {
                   GestureDetector(
                     onTap: () {},
                     child: Card(
+                      color: Color.fromARGB(255, 245, 162, 129),
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10)),
                       elevation: 20,
                       margin: const EdgeInsets.all(8),
                       child: InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          // TODO : MASUKIN ROUTE
+                        },
                         splashColor: Colors.blue,
                         child: Center(
                           child: Column(
@@ -178,13 +244,14 @@ class _HomePageState extends State<HomePage> {
                               Icon(
                                 Icons.today,
                                 size: 90,
-                                color: Colors.green,
+                                color: Colors.white,
                               ),
                               Text(
                                 "Appointments",
                                 softWrap: true,
                                 style: TextStyle(
-                                  fontSize: 16,
+                                  fontSize: 17,
+                                  color: Colors.white,
                                   fontWeight: FontWeight.w400,
                                 ),
                               ),
@@ -197,12 +264,15 @@ class _HomePageState extends State<HomePage> {
                   GestureDetector(
                     onTap: () {},
                     child: Card(
+                      color: Color.fromARGB(255, 244, 209, 96),
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10)),
                       elevation: 20,
                       margin: const EdgeInsets.all(8),
                       child: InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          // TODO : MASUKIN ROUTE
+                        },
                         splashColor: Colors.blue,
                         child: Center(
                           child: Column(
@@ -211,13 +281,14 @@ class _HomePageState extends State<HomePage> {
                               Icon(
                                 Icons.payment,
                                 size: 90,
-                                color: Colors.purple,
+                                color: Colors.white,
                               ),
                               Text(
                                 "My Bills",
                                 softWrap: true,
                                 style: TextStyle(
-                                  fontSize: 16,
+                                  fontSize: 17,
+                                  color: Colors.white,
                                   fontWeight: FontWeight.w400,
                                 ),
                               ),

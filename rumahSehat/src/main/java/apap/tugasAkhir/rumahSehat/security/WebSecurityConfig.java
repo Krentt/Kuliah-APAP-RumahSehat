@@ -36,6 +36,8 @@ public class WebSecurityConfig {
                     .antMatchers("/user/view-apoteker").hasAuthority("Admin")
                     .antMatchers("/appointment/view-all").hasAuthority("Admin")
                     .antMatchers("/appointment/dokter-view-all").hasAuthority("Dokter")
+                    .antMatchers("/appointment/{kode}").hasAnyAuthority("Dokter", "Admin")
+                    .antMatchers("/appointment/{kode}/selesai").hasAuthority("Dokter")
                     .anyRequest().authenticated()
                     .and()
                     .formLogin()
@@ -100,7 +102,8 @@ public class WebSecurityConfig {
                             .antMatchers("/tagihan/**")
                             .antMatchers("/pasien/**")
                             .antMatchers("/appointment/add")
-                            .antMatchers("/appointment/pasien-view-all"))
+                            .antMatchers("/appointment/pasien-view-all")
+                            .antMatchers("/dokter/get-all"))
                     // dont authenticate this particular request
                     .authorizeRequests().antMatchers("/authenticate").permitAll()
                     .antMatchers("/signup").permitAll()

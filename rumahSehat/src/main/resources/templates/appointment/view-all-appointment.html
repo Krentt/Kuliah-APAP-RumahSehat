@@ -13,6 +13,7 @@
             background-repeat: no-repeat;
             background-attachment: fixed;
             background-size: cover;
+            font-family: 'Rubik', sans-serif;
         }
     </style>
 </head>
@@ -56,7 +57,7 @@
                                     <td th:if="${appt.isDone} == true" class="text-success"><b>SELESAI</b></td>
                                     <td th:unless="${appt.isDone} == true" class="text-danger"><b>BELUM SELESAI</b></td>
                                     <td>
-                                        <a class="btn btn-light text-white font-weight-normal" style="background-color: #3F3B6C;" th:href="@{/appointment/admin/} + ${appt.kode}" >Detail</a>
+                                        <a class="btn btn-light text-white font-weight-normal" style="background-color: #3F3B6C;" th:href="@{/appointment/} + ${appt.kode}" >Detail</a>
                                     </td>
                                 </tr>
                                 </tbody>
