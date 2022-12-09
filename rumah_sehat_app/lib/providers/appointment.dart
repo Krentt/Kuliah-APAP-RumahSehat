@@ -93,7 +93,8 @@ class Appointments with ChangeNotifier{
                 waktuAwal: DateFormat("dd-MM-yyyy hh:mm").parse(element["waktuAwal"]),
                 dokter: element["dokterName"],
                 isDone: element["done"],
-                pasien: element["pasienName"]
+                pasien: element["pasienName"],
+                kodeResep: element["kodeResep"]
             );
 
               _allAppointments.add(appointment);
