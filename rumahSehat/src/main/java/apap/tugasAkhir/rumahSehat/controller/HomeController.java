@@ -63,8 +63,7 @@ public class HomeController {
 
         // WhiteList Check
         if(!userService.whiteListCheck(username)){
-            redirectAttrs.addFlashAttribute("error", "Maaf, Akun Anda tidak terdaftar di Whitelist!");
-            return new ModelAndView("redirect:/login");
+            return new ModelAndView("redirect:" + Setting.SERVER_LOGOUT + Setting.CLIENT_LOGOUT);
         }
 
         UserModel user = userService.getUserByUsername(username);
