@@ -1,10 +1,10 @@
 package apap.tugasAkhir.rumahSehat.model;
 
-import apap.tugasAkhir.rumahSehat.model.JumlahModel;
-import apap.tugasAkhir.rumahSehat.model.ResepModel;
+import apap.tugasAkhir.rumahSehat.util.StringPrefixedSequenceIdGenerator;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -19,6 +19,13 @@ public class TagihanModel implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     //TODO: Generate according to soal: BILL-x (BILL-1, BILL-2, ...)
+//    @GeneratedValue(strategy = GenerationType.SEQUENCE ,generator = "tagihan_id")
+//    @GenericGenerator(
+//            name="appoint_id", strategy = "apap.tugasAkhir.rumahSehat.util.StringPrefixedSequenceIdGenerator",
+//            parameters = {
+//                    @org.hibernate.annotations.Parameter(name = StringPrefixedSequenceIdGenerator.INCREMENT_PARAM, value = "0"),
+//                    @org.hibernate.annotations.Parameter(name = StringPrefixedSequenceIdGenerator.VALUE_PREFIX_PARAMETER, value = "BILL-")
+//            })
     private String id;
 
     @NotNull

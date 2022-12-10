@@ -5,8 +5,13 @@ import 'package:rumah_sehat_app/pages/auth_page.dart';
 import 'package:rumah_sehat_app/pages/detail_appointment_page.dart';
 import 'package:rumah_sehat_app/pages/home_page.dart';
 import 'package:rumah_sehat_app/pages/list_appointments_page.dart';
+import 'package:rumah_sehat_app/pages/pasien_profile.dart';
+import 'package:rumah_sehat_app/pages/pasien_saldo.dart';
+import 'package:rumah_sehat_app/pages/pasien_tagihan_list.dart';
 import 'package:rumah_sehat_app/providers/appointment.dart';
 import 'package:rumah_sehat_app/providers/dokters.dart';
+import 'package:rumah_sehat_app/providers/pasien.dart';
+import 'package:rumah_sehat_app/providers/tagihan.dart';
 import 'package:rumah_sehat_app/widgets/main_drawer.dart';
 import 'providers/auth.dart';
 
@@ -32,7 +37,13 @@ class MyApp extends StatelessWidget {
           update: (context, auth, account) => account!..updateData(auth.token)),
       ChangeNotifierProxyProvider<Authh, Profile>(
           create: (context) => Profile(),
-          update: (context, auth, profile) => profile!..updateData(auth.token))
+          update: (context, auth, profile) => profile!..updateData(auth.token)),
+      ChangeNotifierProxyProvider<Authh, PasienProvider>(
+          create: (context) => PasienProvider(),
+          update: (context, auth, pasien) => pasien!..updateData(auth.token)),
+      ChangeNotifierProxyProvider<Authh, TagihanProvider>(
+          create: (context) => TagihanProvider(),
+          update: (context, auth, tagihan) => tagihan!..updateData(auth.token))
     ],
         builder: (context, child) => Consumer<Authh>
           (builder: (context, auth, child) => MaterialApp(
@@ -41,7 +52,10 @@ class MyApp extends StatelessWidget {
           routes: {
             AddAppointmentPage.route: (ctx) => AddAppointmentPage(),
             ListAppointments.route: (ctx) => ListAppointments(),
-            DetailAppointmentPage.route: (ctx) => DetailAppointmentPage()
+            DetailAppointmentPage.route: (ctx) => DetailAppointmentPage(),
+            PasienProfile.route: (ctx) => const PasienProfile(),
+            PasienTagihan.route: (ctx) => const PasienTagihan(),
+            PasienSaldo.route: (ctx) => const PasienSaldo(),
           },
         )
         ),

@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:rumah_sehat_app/pages/add_appotintment_page.dart';
-import 'package:rumah_sehat_app/pages/home_page.dart';
 import 'package:jwt_decode/jwt_decode.dart';
 import 'package:provider/provider.dart';
+
 import 'package:rumah_sehat_app/pages/list_appointments_page.dart';
+import 'package:rumah_sehat_app/pages/add_appotintment_page.dart';
+import 'package:rumah_sehat_app/pages/home_page.dart';
+import '../pages/pasien_profile.dart';
+import '../pages/pasien_tagihan_list.dart';
 import '../providers/auth.dart';
 
 class Account with ChangeNotifier {
@@ -69,10 +72,14 @@ class _DrawerScreenState extends State<DrawerScreen> {
               ),
             ),
             GestureDetector(
-              onTap: () {
-                // TODO : MASUKIN ROUTE
-                // Navigator.push(context,MaterialPageRoute(builder: (context)=> ViewMyProfile()));
-              },
+              onTap: () => Navigator.pushNamed(context, PasienProfile.route), //"/pasien/profile"),
+              // {
+              //    TODO (Cisco) : MASUKIN ROUTE
+              //    Navigator.push(context,
+              //   //     MaterialPageRoute(builder: (context) => const PasienProfile()));
+              //
+              //   Navigator.pushNamed(context, PasienProfile.route);
+              // },
               child: ListTile(
                 leading: Icon(
                   Icons.account_circle,
@@ -128,10 +135,11 @@ class _DrawerScreenState extends State<DrawerScreen> {
               ),
             ),
             GestureDetector(
-              onTap: () {
-                // TODO : MASUKIN ROUTE
-                // Navigator.push(context,MaterialPageRoute(builder: (context)=> ViewTagihan()));
-              },
+              onTap: () => Navigator.pushNamed(context, PasienTagihan.route),
+              // {
+              //   // TODO (CISCO) : MASUKIN ROUTE
+              //   Navigator.push(context,MaterialPageRoute(builder: (context)=> const PasienTagihan()));
+              // },
               child: ListTile(
                 leading: Icon(
                   Icons.payment,
