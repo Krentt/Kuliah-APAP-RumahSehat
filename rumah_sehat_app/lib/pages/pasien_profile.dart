@@ -63,6 +63,8 @@ class _PasienProfileState extends State<PasienProfile> {
   @override
   Widget build(BuildContext context) {
     final prov = Provider.of<PasienProvider>(context);
+    print(prov);
+    print(prov.getPasien);
     return Scaffold(
 
       /// Application Header (AppBar)
@@ -126,7 +128,7 @@ class _PasienProfileState extends State<PasienProfile> {
                 ListTile(
                   title: Text(prov.getPasien[0].username,
                     style: const TextStyle(
-                      fontSize: 35,
+                      fontSize: 20,
                       fontWeight: FontWeight.bold,
                       color: Colors.white,
                     ),
@@ -158,7 +160,7 @@ class _PasienProfileState extends State<PasienProfile> {
                     color: Colors.blue,
                     child:
                     ListTile(
-                      title: Text(prov.getPasien[0].saldo as String,
+                      title: Text(prov.getPasien[0].saldo.toString(),
                         style: const TextStyle(
                           fontSize: 35,
                           fontWeight: FontWeight.bold,
@@ -176,9 +178,9 @@ class _PasienProfileState extends State<PasienProfile> {
                   ListTile(
                     title: const Text("Email: ",
                       style: TextStyle(
-                        fontSize: 35,
+                        fontSize: 15,
                         fontWeight: FontWeight.bold,
-                        color: Colors.white,
+                        color: Colors.black,
                       ),
                     ),
                       subtitle: Text(prov.getPasien[0].email)
@@ -187,19 +189,18 @@ class _PasienProfileState extends State<PasienProfile> {
                   ListTile(
                     title: const Text("Umur: ",
                       style: TextStyle(
-                        fontSize: 35,
+                        fontSize: 15,
                         fontWeight: FontWeight.bold,
-                        color: Colors.white,
+                        color: Colors.black,
                       ),
                     ),
-                      subtitle: Text(prov.getPasien[0].umur as String)
+                      subtitle: Text(prov.getPasien[0].umur.toString())
                   ),
                 ],
               ),
             )
           ],
         )
-
 
         /// (other style) Builds List of Pasien Information
         // : ListView.builder(

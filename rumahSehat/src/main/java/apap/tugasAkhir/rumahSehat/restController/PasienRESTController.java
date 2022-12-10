@@ -28,9 +28,11 @@ public class PasienRESTController {
             @RequestHeader("Authorization") String token){
         //Gets Profile from JWT Token
         Map<String, String> decodedToken = decode(token);
-        PasienModel pasienModel = pasienService.getPasienByUsername(decodedToken.get("USERNAME"));
+        log.info("Access Profile (" + decodedToken.get("USERNAME") + ") | Token : {}",token);
 
-        log.info("Access Profile (" + decodedToken.get("USERNAME") + ")");
+
+        PasienModel pasienModel = pasienService.getPasienByUsername(decodedToken.get("USERNAME"));
+        log.info("pasien profile: {}", pasienModel);
         return pasienModel;
     }
 
