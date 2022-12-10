@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 class Tagihan{
   String? id;
-  DateTime? tanggalTerbuat;
-  DateTime? tanggalBayar;
+  String? tanggalTerbuat;
+  String? tanggalBayar;
   bool? isPaid;
   int? total;
   String? kodeAppointment;

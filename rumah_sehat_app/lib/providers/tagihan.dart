@@ -103,26 +103,26 @@ class TagihanProvider with ChangeNotifier{
     }
   }
 
-  /// TODO: Change Tagihan to PAID
-  void deleteAppointment(String kode) async {
-    Uri url = Uri.parse("http://10.0.2.2:8080/appointment/delete/$kode");
-    String? finalToken = "Bearer " + token.toString();
-
-    try {
-      var response = await http.delete(url,
-          headers: {
-            "Content-Type" : "application/json",
-            "Authorization" : finalToken
-      });
-
-      if (response.statusCode > 300 || response.statusCode < 200) {
-        throw (response.statusCode);
-      } else {
-        // _allTagihan.removeWhere((element) => element.kode == kode);
-        notifyListeners();
-      }
-    } catch (err){
-      rethrow;
-    }
-  }
+  // /// TODO: Change Tagihan to PAID
+  // void deleteAppointment(String kode) async {
+  //   Uri url = Uri.parse("http://10.0.2.2:8080/appointment/delete/$kode");
+  //   String? finalToken = "Bearer " + token.toString();
+  //
+  //   try {
+  //     var response = await http.delete(url,
+  //         headers: {
+  //           "Content-Type" : "application/json",
+  //           "Authorization" : finalToken
+  //     });
+  //
+  //     if (response.statusCode > 300 || response.statusCode < 200) {
+  //       throw (response.statusCode);
+  //     } else {
+  //       // _allTagihan.removeWhere((element) => element.kode == kode);
+  //       notifyListeners();
+  //     }
+  //   } catch (err){
+  //     rethrow;
+  //   }
+  // }
 }

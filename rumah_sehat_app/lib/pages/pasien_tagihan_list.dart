@@ -91,6 +91,7 @@ class _PasienTagihanState extends State<PasienTagihan> {
         /// Builds List of Tagihan Information
         /// TODO: Press to open Tagihan Details Page
           : ListView.builder(
+        itemCount: prov.getAllTagihan.length,
         itemBuilder: (context, i) => TagihanWidget(
           prov.getAllTagihan[i].id,
           prov.getAllTagihan[i].kodeAppointment,

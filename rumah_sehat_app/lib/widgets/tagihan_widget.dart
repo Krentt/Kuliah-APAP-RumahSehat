@@ -8,7 +8,7 @@ import 'package:rumah_sehat_app/providers/tagihan.dart';
 
 class TagihanWidget extends StatelessWidget {
   final String? id, kodeAppointment;
-  final DateTime? tanggalTerbuat, tanggalBayar;
+  final String? tanggalTerbuat, tanggalBayar;
   final bool? isPaid;
   final int? total;
 
