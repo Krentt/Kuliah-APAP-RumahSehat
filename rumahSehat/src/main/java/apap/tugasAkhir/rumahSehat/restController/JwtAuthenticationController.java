@@ -7,6 +7,7 @@ import apap.tugasAkhir.rumahSehat.restModel.JwtRequest;
 import apap.tugasAkhir.rumahSehat.restModel.JwtResponse;
 import apap.tugasAkhir.rumahSehat.service.RoleService;
 import apap.tugasAkhir.rumahSehat.service.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.Objects;
 
+@Slf4j
 @Controller
 public class JwtAuthenticationController {
     @Autowired
@@ -41,7 +43,7 @@ public class JwtAuthenticationController {
     @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
     public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest)
             throws Exception {
-
+        log.info("User login API");
         authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
 
         final UserDetails userDetails = jwtInMemoryUserDetailsService
@@ -59,8 +61,10 @@ public class JwtAuthenticationController {
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
         } catch (DisabledException e) {
+            log.info("User Disabled");
             throw new Exception("USER_DISABLED", e);
         } catch (BadCredentialsException e) {
+            log.info("Invalid Credentials!");
             throw new Exception("INVALID_CREDENTIALS", e);
         }
     }
@@ -68,8 +72,10 @@ public class JwtAuthenticationController {
     // Rest Controller PASIEN SIGN UP
     @PostMapping(value = "/signup")
     public ResponseEntity<?> registerPasien(@RequestBody PasienDTO pasienDTO){
+        log.info("User Signup API");
         // Check username
         if (userService.getUserByUsername(pasienDTO.getUsername()) != null){
+            log.info("Username is already taken!");
             return new ResponseEntity<>("Username is already taken!", HttpStatus.BAD_REQUEST);
         }
         PasienModel pasienModel = new PasienModel();

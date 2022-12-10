@@ -7,6 +7,7 @@ import apap.tugasAkhir.rumahSehat.security.xml.ServiceResponse;
 import apap.tugasAkhir.rumahSehat.service.RoleService;
 import apap.tugasAkhir.rumahSehat.service.UserService;
 import apap.tugasAkhir.rumahSehat.setting.Setting;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -25,7 +26,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.security.Principal;
-
+@Slf4j
 @Controller
 public class HomeController {
 
@@ -37,11 +38,13 @@ public class HomeController {
     RoleService roleService;
     @GetMapping("/")
     private String home(){
+        log.info("Access Home Page");
         return "home/home";
     }
 
     @RequestMapping("/login")
     public String login(Model model) {
+        log.info("Access Login Page");
         return "login/login";
     }
 
@@ -50,6 +53,7 @@ public class HomeController {
             @RequestParam(value = "ticket", required = false) String ticket,
             HttpServletRequest request, RedirectAttributes redirectAttrs
     ){
+        log.info("Validate Ticket Admin");
         ServiceResponse serviceResponse = this.webClient.get().uri(
                 String.format(
                         Setting.SERVER_VALIDATE_TICKET,
@@ -63,8 +67,11 @@ public class HomeController {
 
         // WhiteList Check
         if(!userService.whiteListCheck(username)){
+            log.info("User not in Whitelist");
             return new ModelAndView("redirect:" + Setting.SERVER_LOGOUT + Setting.CLIENT_LOGOUT);
         }
+
+        log.info("Whitelist check clear!");
 
         UserModel user = userService.getUserByUsername(username);
 
@@ -86,22 +93,27 @@ public class HomeController {
 
         HttpSession httpSession = request.getSession(true);
         httpSession.setAttribute(HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY, securityContext);
+        log.info("User validated");
 
         return new ModelAndView("redirect:/");
     }
 
     @GetMapping(value = "/logout-sso")
     public ModelAndView logoutSSO(Principal principal){
+        log.info("Access Logout");
         UserModel user = userService.getUserByUsername(principal.getName());
         if(user.getIsSso() == false) {
+            log.info("User Not Admin Logout");
             return new ModelAndView("redirect:/logout");
         }
 
+        log.info("Admin User Logout");
         return new ModelAndView("redirect:" + Setting.SERVER_LOGOUT + Setting.CLIENT_LOGOUT);
     }
 
     @GetMapping(value = "/login-sso")
     public ModelAndView loginSSO(){
+        log.info("User login sso");
         return new ModelAndView("redirect:"+Setting.SERVER_LOGIN + Setting.CLIENT_LOGIN);
     }
 
