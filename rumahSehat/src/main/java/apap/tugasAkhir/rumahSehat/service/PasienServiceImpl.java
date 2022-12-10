@@ -71,10 +71,10 @@ public class PasienServiceImpl implements PasienService{
 
         List<TagihanModel> tagihan = new ArrayList<>();
 
-        for (AppointmentModel ap: appointments
-             ) {
-            tagihan.add(ap.getTagihanModel());
-        }
+//        for (AppointmentModel ap: appointments
+//             ) {
+//            tagihan.add(ap.getTagihanModel());
+//        }
 
         return tagihan;
     }

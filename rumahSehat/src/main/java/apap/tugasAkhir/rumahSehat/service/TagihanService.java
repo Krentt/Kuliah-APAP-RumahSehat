@@ -1,5 +1,6 @@
 package apap.tugasAkhir.rumahSehat.service;
 
+import apap.tugasAkhir.rumahSehat.model.AppointmentModel;
 import apap.tugasAkhir.rumahSehat.model.PasienModel;
 import apap.tugasAkhir.rumahSehat.model.TagihanModel;
 
@@ -11,4 +12,7 @@ public interface TagihanService {
 
     //Cisco: Feat 17
     TagihanModel getTagihanById(String id);
+
+    //Cisco: Feat 17
+    TagihanModel createTagihanByAppointment(AppointmentModel appointmentModel);
 }

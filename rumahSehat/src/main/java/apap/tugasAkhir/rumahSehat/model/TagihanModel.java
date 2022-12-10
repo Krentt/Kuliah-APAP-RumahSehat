@@ -17,48 +17,44 @@ import java.time.LocalDateTime;
 @Entity
 public class TagihanModel implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    //TODO: Generate according to soal: BILL-x (BILL-1, BILL-2, ...)
-//    @GeneratedValue(strategy = GenerationType.SEQUENCE ,generator = "tagihan_id")
-//    @GenericGenerator(
-//            name="appoint_id", strategy = "apap.tugasAkhir.rumahSehat.util.StringPrefixedSequenceIdGenerator",
-//            parameters = {
-//                    @org.hibernate.annotations.Parameter(name = StringPrefixedSequenceIdGenerator.INCREMENT_PARAM, value = "0"),
-//                    @org.hibernate.annotations.Parameter(name = StringPrefixedSequenceIdGenerator.VALUE_PREFIX_PARAMETER, value = "BILL-")
-//            })
+    //Generate according to soal: BILL-x (BILL-1, BILL-2, ...)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE ,generator = "seq_tagihan_id")
+    @GenericGenerator(
+            name="seq_tagihan_id", strategy = "apap.tugasAkhir.rumahSehat.util.StringPrefixedSequenceIdGenerator",
+            parameters = {
+                    @org.hibernate.annotations.Parameter(name = StringPrefixedSequenceIdGenerator.INCREMENT_PARAM, value = "0"),
+                    @org.hibernate.annotations.Parameter(name = StringPrefixedSequenceIdGenerator.VALUE_PREFIX_PARAMETER, value = "BILL-")
+            })
     private String id;
 
-    @NotNull
-    @Size(max = 50)
     @Column(name = "tanggalTerbuat")
     private LocalDateTime tanggalTerbuat;
 
-    @NotNull
-    @Size(max = 50)
     @Column(name = "tanggalBayar")
     private LocalDateTime tanggalBayar;
 
     @NotNull
-    @Size(max = 50)
     @Column(name = "isPaid")
     private Boolean isPaid;
 
     @NotNull
-    @Size(max = 50)
     @Column(name = "total")
     private Integer total;
 
     // Relasi dengan appointment
     @JsonManagedReference
     @OneToOne(cascade = CascadeType.ALL)
-//    @JoinColumn(name = "kode", referencedColumnName = "kodeAppointment") // TODO: ga yakin bener
+    @JoinColumn(name = "appointment_model_kode")
     private AppointmentModel appointmentModel;
 
     public void calculateTotal(){
         int totalCurr = 0;
-        for (JumlahModel j: this.appointmentModel.getResepModel().getListJumlahModel()
-             ) {
-            totalCurr += j.getObat().getHarga() * j.getKuantitas();
+        // If no resep then omit resep
+        if(null != this.appointmentModel.getResepModel()){
+            for (JumlahModel j: this.appointmentModel.getResepModel().getListJumlahModel()
+            ) {
+                totalCurr += j.getObat().getHarga() * j.getKuantitas();
+            }
         }
         this.total = totalCurr + this.appointmentModel.getDokterModel().getTarifDokter();
     }

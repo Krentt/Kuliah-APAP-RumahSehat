@@ -27,9 +27,7 @@ import java.util.List;
 @Getter
 public class AppointmentModel implements Serializable {
     @Id
-//    @GeneratedValue(generator = "system-uuid")
-//    @GenericGenerator(name = "system-uuid", strategy = "uuid")
-    //TODO: Generate according to soal: APT-x (APT-1, APT-2, ...)
+    //Generate according to soal: APT-x (APT-1, APT-2, ...)
     @GeneratedValue(strategy = GenerationType.SEQUENCE ,generator = "appoint_id")
     @GenericGenerator(
             name="appoint_id", strategy = "apap.tugasAkhir.rumahSehat.util.StringPrefixedSequenceIdGenerator",
@@ -51,24 +49,18 @@ public class AppointmentModel implements Serializable {
     // Relasi dengan pasien
     @JsonBackReference(value = "pasien")
     @ManyToOne(fetch=FetchType.EAGER)
-    @JoinColumn(name = "idPasien")
+    @JoinColumn(name = "id_pasien")
     private PasienModel pasienModel;
 
     // Relasi dengan dokter
     @JsonBackReference(value = "dokter")
     @ManyToOne(fetch=FetchType.EAGER)
-    @JoinColumn(name = "idDokter")
+    @JoinColumn(name = "id_dokter")
     private DokterModel dokterModel;
 
 //     Relasi dengan resep
     @JsonManagedReference
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_resep") // TODO: ga yakin bener
+    @JoinColumn(name = "id_resep")
     private ResepModel resepModel;
-
-    // Relasi dengan tagihan
-    @JsonManagedReference
-    @OneToOne(cascade = CascadeType.ALL)
-//    @JoinColumn(name = "id", referencedColumnName = "tagihan_Id") // TODO: ga yakin bener
-    private TagihanModel tagihanModel;
 }

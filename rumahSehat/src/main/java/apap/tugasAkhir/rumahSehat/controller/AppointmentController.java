@@ -1,11 +1,9 @@
 package apap.tugasAkhir.rumahSehat.controller;
 
-import apap.tugasAkhir.rumahSehat.model.AppointmentModel;
-import apap.tugasAkhir.rumahSehat.model.DokterModel;
-import apap.tugasAkhir.rumahSehat.model.PasienModel;
-import apap.tugasAkhir.rumahSehat.model.ResepModel;
+import apap.tugasAkhir.rumahSehat.model.*;
 import apap.tugasAkhir.rumahSehat.service.AppointmentService;
 import apap.tugasAkhir.rumahSehat.service.DokterService;
+import apap.tugasAkhir.rumahSehat.service.TagihanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,6 +24,8 @@ public class AppointmentController {
     AppointmentService appointmentService;
     @Autowired
     DokterService dokterService;
+    @Autowired
+    TagihanService tagihanService;
 
     // Melihat semua daftar appointment (untuk admin)
     @GetMapping("view-all")
@@ -69,7 +69,8 @@ public class AppointmentController {
         appt.setDone(true);
         appointmentService.createAppointent(appt);
 
-        // Todo: Membuat tagihan based on tarif dokter(?)
+        // Cisco: Membuat tagihan from appointment (appt)
+        TagihanModel tagihan = tagihanService.createTagihanByAppointment(appt);
 
         redirectAttrs.addFlashAttribute("success", "Selamat! Appointment telah selesai");
         return new ModelAndView("redirect:/appointment/{kode}");
