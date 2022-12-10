@@ -22,4 +22,15 @@ public class PasienModel extends UserModel{
     private List<AppointmentModel> appointmentPasien;
 
 
+    @Override
+    public String toString() {
+        return "UserModel{" +
+                "id='" + getId() + '\'' +
+                ", nama='" + getNama() + '\'' +
+                '}' +
+                "PasienModel{" +
+                "saldoPasien=" + saldoPasien +
+                ", umurPasien=" + umurPasien +
+                '}';
+    }
 }
