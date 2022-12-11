@@ -17,7 +17,7 @@ class Profile with ChangeNotifier {
 
   Future<void> getProfile() async {
     Map<String, dynamic> payload = Jwt.parseJwt(token.toString());
-    name = payload["NAME"];
+    name = payload["NAMA"];
   }
 }
 
@@ -64,11 +64,11 @@ class _HomePageState extends State<HomePage> {
                     onTap: () {},
                     splashColor: Colors.blue,
                     child: SizedBox(
-                      width: 400,
+                      width: 370,
                       height: 90,
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Padding(
                             padding: const EdgeInsets.all(11.0),

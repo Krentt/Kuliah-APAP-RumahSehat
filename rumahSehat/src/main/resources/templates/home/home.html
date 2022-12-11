@@ -120,6 +120,12 @@
                             Obat</a>
                         <br>
                     </div>
+                    <div class="row justify-content-center"
+                         sec:authorize="hasAuthority('Admin')">
+                        <a th:href="@{/chart/}" class="mx-2 btn btn-block text-white"
+                           style="background-color: #3F3B6C;">Lihat Semua Laporan</a>
+                        <br>
+                    </div>
                 </div>
             </div>
         </div>
@@ -151,7 +157,7 @@
             <br>
             <img src="https://www.linkpicture.com/q/Calendar-of-taking-pills_1.png" class="img-fluid"
                  style="max-width: 210px;">
-            <br>  <br> <br>
+            <br> <br> <br>
             <p>Melihat resep obat di manapun, kapanpun, dengan mudah</p>
         </div>
         <div class="col-md-6 mb-3">
