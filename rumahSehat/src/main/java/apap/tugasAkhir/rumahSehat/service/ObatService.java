@@ -1,7 +1,6 @@
 package apap.tugasAkhir.rumahSehat.service;
 
 import apap.tugasAkhir.rumahSehat.model.ObatModel;
-import apap.tugasAkhir.rumahSehat.model.ResepModel;
 
 import java.util.List;
 

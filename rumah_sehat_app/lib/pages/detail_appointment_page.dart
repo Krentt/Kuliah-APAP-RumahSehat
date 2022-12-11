@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:rumah_sehat_app/pages/detail_resep_page.dart';
 import 'package:rumah_sehat_app/providers/appointment.dart';
 
 class DetailAppointmentPage extends StatefulWidget {
@@ -188,7 +189,9 @@ class _DetailAppointmentPageState extends State<DetailAppointmentPage> {
               padding: const EdgeInsets.all(10),
               margin: const EdgeInsets.only(bottom: 30),
               child: selectedAppointment.kodeResep != null ? ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushNamed(context, DetailResepPage.route, arguments: selectedAppointment.kodeResep);
+                },
                 child: Text(
                   "Detail Resep",
                   style: TextStyle(

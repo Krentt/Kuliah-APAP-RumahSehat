@@ -12,7 +12,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
@@ -103,7 +102,8 @@ public class WebSecurityConfig {
                             .antMatchers("/pasien/**")
                             .antMatchers("/appointment/add")
                             .antMatchers("/appointment/pasien-view-all")
-                            .antMatchers("/dokter/get-all"))
+                            .antMatchers("/dokter/get-all")
+                            .antMatchers("/resep/view/{kode}"))
                     // dont authenticate this particular request
                     .authorizeRequests().antMatchers("/authenticate").permitAll()
                     .antMatchers("/signup").permitAll()

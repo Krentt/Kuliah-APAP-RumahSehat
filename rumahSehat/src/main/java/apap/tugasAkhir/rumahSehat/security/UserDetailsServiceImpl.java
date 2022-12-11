@@ -1,6 +1,5 @@
 package apap.tugasAkhir.rumahSehat.security;
 
-import apap.tugasAkhir.rumahSehat.model.PasienModel;
 import apap.tugasAkhir.rumahSehat.model.UserModel;
 import apap.tugasAkhir.rumahSehat.repository.UserDb;
 import org.springframework.beans.factory.annotation.Autowired;

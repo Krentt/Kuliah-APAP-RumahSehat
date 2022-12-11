@@ -34,6 +34,21 @@
               <div class="col">
                 <h4 class="font-weight-bold" style="color: #3F3B6C;" th:text="'ID Resep: ' + ${resep.id}"></h4>
               </div>
+              <div class="col text-right">
+                <div th:if="${#authorization.expression('hasAuthority(''Apoteker'')')}">
+                  <div th:if="${resep.isDone} == false">
+                    <div th:if="${canConfirm} == true">
+                      <a class="btn btn-danger" th:href="@{/resep/konfirmasi/}+${resep.id}">Confirm</a>
+                    </div>
+                    <div th:if="${canConfirm} == false">
+                      <a class="btn btn-danger"
+                         th:warning="|Stok obat tidak memenuhi, resep tidak dapat dikonfirmasi!|"
+                         onclick="alert(this.getAttribute('warning'))"
+                      >Confirm</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
           <div class="card-body" style="background-color: #F7F9FF;">
@@ -51,6 +66,10 @@
                   <h4 class="" style="color: #3F3B6C"><b>Status Resep</b></h4>
                   <h5 th:if="${resep.isDone} == true" class="text-success"><b>SELESAI</b></h5>
                   <h5 th:unless="${resep.isDone} == true" class="text-danger"><b>BELUM SELESAI</b></h5>
+                </div>
+                <div th:if="${resep.isDone} == true" class="col-sm-6 mt-3">
+                  <h4 class="" style="color: #3F3B6C"><b>Apoteker</b></h4>
+                  <h5 th:text="${resep.apotekerModel.nama}"></h5>
                 </div>
               </div>
               <br><br>
