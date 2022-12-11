@@ -22,7 +22,6 @@ import java.util.List;
 @Getter
 public class ResepModel implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull
@@ -41,7 +40,14 @@ public class ResepModel implements Serializable {
 
     // Relasi dengan appointment
     @JsonBackReference
-    @OneToOne(mappedBy = "resepModel")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "kode_appt", referencedColumnName = "kode")
     private AppointmentModel appointment;
+
+    //Relasi dengan ApotekerModel
+    @JsonBackReference(value = "apoteker")
+    @ManyToOne(fetch=FetchType.EAGER)
+    @JoinColumn(name = "idApoteker")
+    private ApotekerModel apotekerModel;
 
 }

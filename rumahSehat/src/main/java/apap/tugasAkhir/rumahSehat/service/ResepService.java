@@ -9,4 +9,6 @@ public interface ResepService {
     void addResep(ResepModel resep);
 
     List<ResepModel> getListResep();
+
+    ResepModel getResepByIdResep (Long idResep);
 }

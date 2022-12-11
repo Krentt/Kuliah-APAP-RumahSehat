@@ -37,10 +37,12 @@ public class AppointmentRESTController {
     @PostMapping("/add")
     private Map<String,Object> addAppointment(@Valid @RequestBody AppointmentDTO appt, BindingResult bindingResult){
         if(bindingResult.hasFieldErrors()){
+            log.info("Request body has invalid type or missing field");
             throw new ResponseStatusException(
                     HttpStatus.BAD_REQUEST, "Request body has invalid type or missing field."
             );
         } else {
+            log.info("Access Add Appointment API");
             PasienModel pasien = pasienService.getPasienByUsername(appt.getPasienName());
             DokterModel dokter = dokterService.getDokterByUsername(appt.getDokterName());
             Map<String, Object> apiResp = new HashMap<>();
@@ -56,12 +58,14 @@ public class AppointmentRESTController {
                     apiResp.put("header", "Success");
                     apiResp.put("body", appointmentService.createAppointent(appointment));
                 } else {
+                    log.info("[GAGAL ADD] Appointment Bentrok dengan jadwal Dokter!");
                     apiResp.put("header", "Error");
                     apiResp.put("userTrouble", "dokter");
                     apiResp.put("body", appointmentService.checkJadwalDokter(appt.getWaktuAwal(), dokter));
                 }
 
             } else{
+                log.info("[GAGAL ADD] Appointment Bentrok dengan jadwal Pasien!");
                 apiResp.put("header", "Error");
                 apiResp.put("userTrouble", "pasien");
                 apiResp.put("body", appointmentService.checkJadwalPasien(appt.getWaktuAwal(), pasien));
@@ -74,6 +78,7 @@ public class AppointmentRESTController {
 
     @GetMapping("pasien-view-all")
     private List<AppointmentDTO> viewAllAppointmentPasien(@RequestHeader("Authorization") String token){
+        log.info("Access View All Pasien API");
         Map<String, String> decodedToken = decode(token);
         PasienModel pasien = pasienService.getPasienByUsername(decodedToken.get("USERNAME"));
         List<AppointmentModel> listAppointmentPasien = pasien.getAppointmentPasien();

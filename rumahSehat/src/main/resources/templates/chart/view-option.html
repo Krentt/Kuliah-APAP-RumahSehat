@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+  <meta charset="UTF-8">
+  <title>Rumah Sehat</title>
+  <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+  <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+  <style>
+    body {
+      background-image: url('https://www.linkpicture.com/q/Mesh-132.png');
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-size: cover;
+      font-family: 'Rubik', sans-serif;
+    }
+  </style>
+</head>
+<body>
+<nav th:replace="fragments/fragment :: navbar(${'home'})"></nav>
+<div class="container">
+  <div class="row text-center mt-3 py-5">
+    <div class="col mb-3">
+      <div class="alert alert-primary" role="alert" th:text="${success}" th:if="${success}"></div>
+      <div class="alert alert-danger" role="alert" th:text="${error}" th:if="${error}"></div>
+      <!--        END OF FLASH MESSAGE-->
+    </div>
+  </div>
+  <div class="row justify-content-center text-center mt-3 pt-3">
+    <div class="col-md-6 mb-3">
+      <img src="https://www.linkpicture.com/q/medicine-jar-doctor.png" class="img-fluid"
+           style="max-width: 260px;">
+    </div>
+    <div class="col-md-6 mb-3 ">
+      <br><br><br>
+      <h3 class="font-weight-bold">Chart Dokter</h3>
+      <p>Suka lihat grafik? Wah sepertinya anaknya KASDD banget nih, mari kita melihat grafik dokter. Tapi sebelumnyaaaa pilih dulu yuk suka grafik yang pake
+      garis atau grafik yangg kotak kotakk ckckckck HAVE FUN!!!</p>
+      <p>kelompok 057 Mata Kuliah APAP</p>
+    </div>
+  </div>
+</div>
+<br><br>
+<div class="container d-flex justify-content-center">
+  <div class="col-md-6 mb-3">
+    <div class="card-header rounded" style="background-color: #BCCEF8;">
+      <br>
+      <h2 class="text-center" style="color:#3F3B6C;"> List of Charts: </h2>
+      <br>
+      <div class="d-flex justify-content-center">
+        <div class="col">
+          <div class="row justify-content-center"
+               sec:authorize="hasAuthority('Admin')">
+            <a th:href="@{/chart/line-chart}" class="mx-2 btn btn-block text-white"
+               style="background-color: #3F3B6C;">Line Chart</a>
+            <br>
+          </div>
+          <div class="row justify-content-center"
+               sec:authorize="hasAuthority('Admin')">
+            <a th:href="@{/chart/quantity-bar}" class="mx-2 btn btn-block text-white"
+               style="background-color: #3F3B6C;">Total Kuantitas Appointment Bar Chart</a>
+            <br>
+          </div>
+          <div class="row justify-content-center"
+               sec:authorize="hasAuthority('Admin')">
+            <a th:href="@{/chart/income-bar}" class="mx-2 btn btn-block text-white"
+               style="background-color: #3F3B6C;">Total Pendapatan Bar Chart</a>
+            <br>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+<footer th:replace="fragments/fragment :: footer"></footer>
+</html>
