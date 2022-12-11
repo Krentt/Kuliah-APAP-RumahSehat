@@ -15,6 +15,30 @@ class _TagihanDetailsState extends State<TagihanDetails> {
   bool isInit = true;
   bool isLoading = false;
 
+  /// Function to pay tagihan
+  void bayar(String id) {
+    Provider.of<TagihanProvider>(context, listen: false)
+        .bayar(id)
+        .then((value) => Navigator.pop(context)).catchError((err){
+      showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: const Text("Error Occured"),
+            content: Text("Error : $err"),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: const Text("OKAY"),
+              ),
+            ],
+          );
+        },
+      );
+    });
+  }
+
+
   /// Flutter Page Starts Here
   @override
   Widget build(BuildContext context) {
@@ -23,29 +47,6 @@ class _TagihanDetailsState extends State<TagihanDetails> {
     var prov = Provider.of<TagihanProvider>(context, listen: false);
     var selectedTagihan = prov.selectById(idTagihan);
 
-
-    /// Function to pay tagihan
-    void bayar(String id) {
-      Provider.of<TagihanProvider>(context, listen: false)
-          .bayar(id)
-          .then((value) => Navigator.pop(context)).catchError((err){
-        showDialog(
-          context: context,
-          builder: (context) {
-            return AlertDialog(
-              title: const Text("Error Occured"),
-              content: Text("Error : $err"),
-              actions: [
-                TextButton(
-                  onPressed: () => Navigator.pop(context),
-                  child: const Text("OKAY"),
-                ),
-              ],
-            );
-          },
-        );
-      });
-    }
 
     return Scaffold(
       /// Application Header (AppBar)
@@ -201,21 +202,22 @@ class _TagihanDetailsState extends State<TagihanDetails> {
               width: double.infinity,
               margin: const EdgeInsets.only(bottom: 30),
               child:
-                ElevatedButton(
-                  onPressed: () => bayar(selectedTagihan.id.toString()),
-                  child: const Text(
-                    "Bayar",
-                    style: TextStyle(
-                      fontSize: 18,
+                selectedTagihan.isPaid != true ?
+                  ElevatedButton(
+                    onPressed: () => bayar(selectedTagihan.id.toString()),
+                    child: const Text("BAYAR",
+                      style: TextStyle(
+                        fontSize: 18,
+                      ),
                     ),
-                  ),
-                  style: ElevatedButton.styleFrom(
-                    padding: const EdgeInsets.symmetric(vertical: 15),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(100),
+                    style: ElevatedButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(vertical: 15),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(100),
+                      ),
                     ),
-                  ),
-                ),
+                  )
+                    : Container()
               ),
           ],
         ),
