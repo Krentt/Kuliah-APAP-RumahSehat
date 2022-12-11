@@ -5,6 +5,7 @@ import 'package:rumah_sehat_app/pages/add_appotintment_page.dart';
 import 'package:rumah_sehat_app/widgets/main_drawer.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:provider/provider.dart';
+import 'package:rumah_sehat_app/pages/list_appointments_page.dart';
 
 class Profile with ChangeNotifier {
   String? token;
@@ -233,9 +234,7 @@ class _HomePageState extends State<HomePage> {
                       elevation: 20,
                       margin: const EdgeInsets.all(8),
                       child: InkWell(
-                        onTap: () {
-                          // TODO : MASUKIN ROUTE
-                        },
+                        onTap: () => Navigator.pushNamed(context, ListAppointments.route),
                         splashColor: Colors.blue,
                         child: Center(
                           child: Column(
