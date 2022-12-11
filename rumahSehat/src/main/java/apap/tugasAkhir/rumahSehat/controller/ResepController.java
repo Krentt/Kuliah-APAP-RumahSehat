@@ -1,9 +1,6 @@
 package apap.tugasAkhir.rumahSehat.controller;
 
-import apap.tugasAkhir.rumahSehat.model.AppointmentModel;
-import apap.tugasAkhir.rumahSehat.model.JumlahModel;
-import apap.tugasAkhir.rumahSehat.model.ObatModel;
-import apap.tugasAkhir.rumahSehat.model.ResepModel;
+import apap.tugasAkhir.rumahSehat.model.*;
 import apap.tugasAkhir.rumahSehat.service.AppointmentService;
 import apap.tugasAkhir.rumahSehat.service.ResepService;
 import apap.tugasAkhir.rumahSehat.service.ObatService;
@@ -128,6 +125,19 @@ public class ResepController {
         List<ResepModel> listResep = resepService.getListResep();
         model.addAttribute("listResep", listResep);
         return "resep/viewall-resep";
+    }
+
+    @GetMapping("/{idResep}")
+    public String viewDetailResep(@PathVariable(value = "idResep") Long id, Model model){
+        ResepModel resep = resepService.getResepByIdResep(id);
+        AppointmentModel appointment = resep.getAppointment();
+        List<JumlahModel> listJumlahModel = resep.getListJumlahModel();
+
+        model.addAttribute("resep", resep);
+        model.addAttribute("appointment", appointment);
+        model.addAttribute("listJumlahModel", listJumlahModel);
+
+        return "resep/view-detail-resep";
     }
 
 }

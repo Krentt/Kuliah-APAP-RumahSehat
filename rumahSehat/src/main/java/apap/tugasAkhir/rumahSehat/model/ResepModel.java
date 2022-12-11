@@ -44,4 +44,10 @@ public class ResepModel implements Serializable {
     @JoinColumn(name = "kode_appt", referencedColumnName = "kode")
     private AppointmentModel appointment;
 
+    //Relasi dengan ApotekerModel
+    @JsonBackReference(value = "apoteker")
+    @ManyToOne(fetch=FetchType.EAGER)
+    @JoinColumn(name = "idApoteker")
+    private ApotekerModel apotekerModel;
+
 }
