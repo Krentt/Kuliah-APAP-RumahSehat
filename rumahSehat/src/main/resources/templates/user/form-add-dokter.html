@@ -26,29 +26,39 @@
         <h2>Tambah Dokter Baru</h2>
         <br>
         <form th:action="@{/user/add-dokter}" th:object="${dokter}" method="POST">
-          <label for="username">Username</label>
-          <input type="text" id="username" name="username" class="form-control">
+          <div class="form-group">
+            <label for="username">Username <span style="color: red">*</span></label>
+            <input type="text" id="username" name="username" class="form-control" required>
+          </div>
 
-          <label for="nama">Nama</label>
-          <input type="text" id="nama" name="nama" class="form-control">
+          <div class="form-group">
+            <label for="nama">Nama <span style="color: red">*</span></label>
+            <input type="text" id="nama" name="nama" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label for="email">E-mail <span style="color: red">*</span></label>
+            <input type="text" id="email" name="email" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label for="password">Password <span style="color: red">*</span></label>
+            <input type="password" id="password" name="password" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label for="tarif">Tarif <span style="color: red">*</span></label>
+            <input type="number" id="tarif" th:field="${dokter.tarifDokter}" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label for="role">Role</label>
+            <select class="form-control" id="role" disabled>
+              <option th:value="${role.id}" th:text="${role.role}"></option>
+            </select>
+          </div>
 
-          <label for="email">E-mail</label>
-          <input type="text" id="email" name="email" class="form-control">
 
-          <label for="password">Password</label>
-          <input type="text" id="password" name="password" class="form-control">
-
-          <label for="tarif">Tarif</label>
-          <input type="number" id="tarif" th:field="${dokter.tarifDokter}" class="form-control">
-
-          <label for="role">Role</label>
-          <select class="form-control" id="role" disabled>
-            <option th:value="${role.id}" th:text="${role.role}"></option>
-          </select>
           <input type="hidden" name="role" th:value="${role.id}">
           <br>
-          <button type="submit" class="btn btn-primary">Submit</button>
-          <a class="btn btn-link" href="/">Home</a>
+          <a class="btn btn-danger" href="/">CANCEL</a>
+          <button type="submit" class="btn text-white" style="background-color: #3F3B6C;">SUBMIT</button>
         </form>
       </div>
     </div>
