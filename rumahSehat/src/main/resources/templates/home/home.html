@@ -92,8 +92,16 @@
                         <br>
                     </div>
                     <div class="row justify-content-center"
-                         sec:authorize="hasAnyAuthority('Admin', 'Dokter')">
-                        <a th:href="@{/}" class="mx-2 btn btn-block text-white"
+                         sec:authorize="hasAnyAuthority('Admin')">
+                        <a th:href="@{/appointment/view-all}" class="mx-2 btn btn-block text-white"
+                           style="background-color: #3F3B6C;">Lihat
+                            Jadwal
+                            Appointment</a>
+                        <br>
+                    </div>
+                    <div class="row justify-content-center"
+                         sec:authorize="hasAnyAuthority('Dokter')">
+                        <a th:href="@{/appointment/dokter-view-all}" class="mx-2 btn btn-block text-white"
                            style="background-color: #3F3B6C;">Lihat
                             Jadwal
                             Appointment</a>
@@ -106,18 +114,17 @@
                         <br>
                     </div>
                     <div class="row justify-content-center"
-                         sec:authorize="hasAuthority('Dokter')">
-                        <a th:href="@{/resep/add}" class="mx-2 btn btn-block text-white"
-                           style="background-color: #3F3B6C;">Membuat
-                            Resep</a>
-                        <br>
-                    </div>
-                    <div class="row justify-content-center"
                          sec:authorize="hasAnyAuthority('Admin', 'Apoteker')">
                         <a th:href="@{/obat/view-obat}" class="mx-2 btn btn-block text-white"
                            style="background-color: #3F3B6C;">Lihat
                             Semua
                             Obat</a>
+                        <br>
+                    </div>
+                    <div class="row justify-content-center"
+                         sec:authorize="hasAuthority('Admin')">
+                        <a th:href="@{/chart/}" class="mx-2 btn btn-block text-white"
+                           style="background-color: #3F3B6C;">Lihat Semua Laporan</a>
                         <br>
                     </div>
                 </div>
@@ -151,7 +158,7 @@
             <br>
             <img src="https://www.linkpicture.com/q/Calendar-of-taking-pills_1.png" class="img-fluid"
                  style="max-width: 210px;">
-            <br>  <br> <br>
+            <br> <br> <br>
             <p>Melihat resep obat di manapun, kapanpun, dengan mudah</p>
         </div>
         <div class="col-md-6 mb-3">

@@ -50,10 +50,10 @@
                                     th:style="${iterationStatus.even} ? 'font-weight:bold;'">
                                     <td th:text="${resep.id}"></td>
                                     <td th:text="${#temporals.format(resep.createdAt, 'dd MMMM yyyy HH:mm')}"></td>
-                                    <td th:if="${resep.isDone}">Done</td>
-                                    <td th:unless="${resep.isDone}">Not Done</td>
+                                    <td th:if="${resep.isDone}">SELESAI</td>
+                                    <td th:unless="${resep.isDone}">BELUM SELESAI</td>
                                     <td>
-                                        <a class="btn btn-sm btn-primary" th:href="@{/}">Detail</a>
+                                        <a class="btn btn-sm btn-primary"  th:href="@{/resep/} + ${resep.id}">Detail</a>
                                     </td>
 
 
@@ -67,10 +67,7 @@
         </div>
     </div>
 </div>
-<footer th:fragment="footer" class="text-center text-white font-weight-normal" style="color:#3F3B6C;">
-    Copyright &copy; RUMAH SEHAT - 2022
-</footer>
-<br> <br>
+<footer th:replace="fragments/fragment :: footer"></footer>
 </body>
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>

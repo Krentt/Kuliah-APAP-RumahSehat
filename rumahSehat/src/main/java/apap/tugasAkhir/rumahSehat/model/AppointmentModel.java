@@ -60,7 +60,6 @@ public class AppointmentModel implements Serializable {
 
 //     Relasi dengan resep
     @JsonManagedReference
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_resep")
+    @OneToOne(mappedBy = "appointment") // TODO: ga yakin bener
     private ResepModel resepModel;
 }

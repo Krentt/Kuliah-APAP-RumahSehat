@@ -126,6 +126,14 @@
                         <a class="nav-link font-weight-normal" style="color:#F8F3F3;" th:href="@{/appointment/dokter-view-all}">Appointment</a>
                     </div>
                 </li>
+                <li class="nav-item" th:classappend="${var=='chart'} ? active" sec:authorize="hasAuthority('Admin')">
+                    <div th:if="${var=='chart'}">
+                        <a class="nav-link font-weight-normal" style="color:#3F3B6C;" th:href="@{/chart/}">Chart</a>
+                    </div>
+                    <div th:unless="${var=='chart'}">
+                        <a class="nav-link font-weight-normal" style="color:#F8F3F3;" th:href="@{/chart/}">Chart</a>
+                    </div>
+                </li>
             </ul>
             <!--    END OF NAVBAR ITEM-->
 
