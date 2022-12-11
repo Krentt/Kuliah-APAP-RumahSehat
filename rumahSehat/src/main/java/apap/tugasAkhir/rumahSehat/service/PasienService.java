@@ -16,4 +16,6 @@ public interface PasienService {
     List<AppointmentModel> getPasienAppointment(String Username);
 
     List<TagihanModel> getPasienTagihan(String Username);
+
+    PasienModel updatePasienSaldo(PasienModel pasienModel);
 }

@@ -1,15 +1,23 @@
 package apap.tugasAkhir.rumahSehat.restController;
 
 import apap.tugasAkhir.rumahSehat.model.*;
+import apap.tugasAkhir.rumahSehat.restModel.AppointmentDTO;
+import apap.tugasAkhir.rumahSehat.restModel.PasienDTO;
+import apap.tugasAkhir.rumahSehat.restModel.SaldoDTO;
 import apap.tugasAkhir.rumahSehat.service.*;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
+import javax.validation.Valid;
 import java.util.Base64;
+import java.util.HashMap;
 import java.util.Map;
 
 @Slf4j
@@ -59,25 +67,41 @@ public class PasienRESTController {
 
     /** Cisco:Feat15 (Top Up Saldo Pasien)
      * POST Function
-     * TODO: FORM, Flutter, POST
-     * TODO: Action Logging (if Fail)
      */
     @PostMapping(value = "/saldo")
-    private PasienModel viewPasienSaldoPost(
-            @ModelAttribute PasienModel pasienModel,
+    private Map<String, Object> viewPasienSaldoPost(
             @RequestHeader("Authorization") String token,
-            Model model){
-        //Gets Profile from JWT Token
+            @Valid @RequestBody SaldoDTO saldoDTO,
+            BindingResult bindingResult){
         Map<String, String> decodedToken = decode(token);
-        PasienModel pasien = pasienService.getPasienByUsername(decodedToken.get("USERNAME"));
+        PasienModel newPasien;
+        Map<String, Object> apiResp = new HashMap<>();
 
-        //
-        pasien.setSaldoPasien(pasienModel.getSaldoPasien());
-        model.addAttribute("pasien", pasien);
+        if(bindingResult.hasFieldErrors()){
+            log.info("Request body has invalid type or missing field");
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST, "Request body has invalid type or missing field."
+            );
+        } else {
+            log.info("Access Update Saldo API");
+            if (saldoDTO.getSaldo() < 0){
+                log.info("[GAGAL UPDATE] Saldo Tidak Valid");
+
+            } else {
+                log.info("[UPDATE] Saldo Valid");
+                PasienModel pasien = pasienService.getPasienByUsername(decodedToken.get("USERNAME"));
+                pasien.setSaldoPasien(pasien.getSaldoPasien() + saldoDTO.getSaldo());
+
+
+                newPasien = pasienService.updatePasienSaldo(pasien);
+                apiResp.put("body", newPasien);
+
+            }
+        }
 
 
         log.info("Update Saldo POST (" + decodedToken.get("USERNAME") + ")");
-        return pasien;
+        return apiResp;
     }
 
     /**

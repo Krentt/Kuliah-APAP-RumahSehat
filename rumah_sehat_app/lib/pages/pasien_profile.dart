@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rumah_sehat_app/pages/pasien_saldo.dart';
 import 'package:rumah_sehat_app/providers/pasien.dart';
-import 'package:rumah_sehat_app/widgets/pasien_widget.dart';
 
 
 class PasienProfile extends StatefulWidget {
@@ -63,8 +62,8 @@ class _PasienProfileState extends State<PasienProfile> {
   @override
   Widget build(BuildContext context) {
     final prov = Provider.of<PasienProvider>(context);
-    print(prov);
-    print(prov.getPasien);
+    // print(prov);
+    // print(prov.getPasien);
     return Scaffold(
 
       /// Application Header (AppBar)

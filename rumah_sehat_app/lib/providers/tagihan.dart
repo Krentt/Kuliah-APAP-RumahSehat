@@ -26,7 +26,7 @@ class TagihanProvider with ChangeNotifier{
 
   /// TODO: Single Tagihan Page
   Future<void> tagihanDetails() async {
-    Uri url = Uri.parse("http://10.0.2.2:8080/tagihan/{id}/detail"); /// API Endpoint URL
+    Uri url = Uri.parse("http://10.0.2.2:8080/tagihan/{id}/detail");
 
     /// JWT Token
     String? finalToken = "Bearer " + token.toString();
@@ -44,23 +44,27 @@ class TagihanProvider with ChangeNotifier{
       if (response.statusCode > 300 || response.statusCode < 200) {
         throw (response.statusCode);
       } else {
-        String header = json.decode(response.body)["header"];
-        if (header == "Success"){
+        /// read API JSON into data variable list
+        Map<String, dynamic> data = json.decode(response.body);
+        print("data json decoded: " + data.toString()); ///Sudah bisa
 
-          /// JSON Data Sent to API
-          Tagihan data = Tagihan(
-            ///TODO
-          );
-          _tagihan = data; /// Data sent to _pasien for Getter
-          notifyListeners();
-        }
+
+        /// Parse JSON Data Sent by API
+        Tagihan tagihanData = Tagihan(
+            id: data["id"],
+            tanggalTerbuat: data["tanggalTerbuat"],
+            tanggalBayar: data["tanggalBayar"],
+            isPaid: data["isPaid"],
+            total: data["total"]
+        );
+        _tagihan = tagihanData; /// Data sent to _pasien for Getter
       }
     } catch (err){
       rethrow;
     }
   }
 
-  /// TODO: Tagihan List Page
+  /// Tagihan List Page
   Future<void> inisialData() async {
     Uri url = Uri.parse("http://10.0.2.2:8080/tagihan/list");
     String? finalToken = "Bearer " + token.toString();
@@ -101,6 +105,11 @@ class TagihanProvider with ChangeNotifier{
     } catch (err){
       rethrow;
     }
+  }
+
+  /// Function to Select Tagihan by ID
+  Tagihan selectById(String id){
+    return _allTagihan.firstWhere((element) => element.id == id);
   }
 
   // /// TODO: Change Tagihan to PAID

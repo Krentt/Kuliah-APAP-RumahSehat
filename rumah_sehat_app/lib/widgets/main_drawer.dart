@@ -72,14 +72,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
               ),
             ),
             GestureDetector(
-              onTap: () => Navigator.pushNamed(context, PasienProfile.route), //"/pasien/profile"),
-              // {
-              //    TODO (Cisco) : MASUKIN ROUTE
-              //    Navigator.push(context,
-              //   //     MaterialPageRoute(builder: (context) => const PasienProfile()));
-              //
-              //   Navigator.pushNamed(context, PasienProfile.route);
-              // },
+              onTap: () => Navigator.pushNamed(context, PasienProfile.route),
               child: ListTile(
                 leading: Icon(
                   Icons.account_circle,
@@ -136,10 +129,6 @@ class _DrawerScreenState extends State<DrawerScreen> {
             ),
             GestureDetector(
               onTap: () => Navigator.pushNamed(context, PasienTagihan.route),
-              // {
-              //   // TODO (CISCO) : MASUKIN ROUTE
-              //   Navigator.push(context,MaterialPageRoute(builder: (context)=> const PasienTagihan()));
-              // },
               child: ListTile(
                 leading: Icon(
                   Icons.payment,

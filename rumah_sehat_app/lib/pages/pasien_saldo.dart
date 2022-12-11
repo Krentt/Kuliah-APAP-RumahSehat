@@ -17,7 +17,8 @@ class _PasienSaldoState extends State<PasienSaldo> {
   bool isLoading = false;
 
   /// Selected Saldo for dropdown menu
-  String? selectedSaldo;
+  int? selectedSaldo;
+  String? selectedSaldoStr;
   final TextEditingController saldoController = TextEditingController();
 
 
@@ -25,7 +26,7 @@ class _PasienSaldoState extends State<PasienSaldo> {
   void didChangeDependencies() {
     if (isInit) {
       isLoading = true;
-      Provider.of<PasienProvider>(context, listen: false).isiSaldo().then((
+      Provider.of<PasienProvider>(context, listen: false).getPasienProfile().then((
           value) {
         setState(() {
           isLoading = false;
@@ -81,9 +82,10 @@ class _PasienSaldoState extends State<PasienSaldo> {
 
 
     /// TODO : Save Function to Update Saldo
-    void save(String saldo) {
+    void save(int saldo) {
+      // print("Saldoselected : " + saldo.toString());
       Provider.of<PasienProvider>(context, listen: false)
-          .isiSaldo() ///TODO
+          .isiSaldo(saldo)
           .then((value) => Navigator.pop(context)).catchError((err){
         showDialog(
           context: context,
@@ -117,6 +119,18 @@ class _PasienSaldoState extends State<PasienSaldo> {
           children: [
             Column(
               children: [
+                ListTile(
+                  title: Text(prov.getPasien[0].saldo.toString(),
+                    style: const TextStyle(
+                      fontSize: 35,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                    ),
+                  ),
+                    subtitle: const Text("Current Saldo")
+                ),
+                const Divider(),
+
                 /// Header Text
                 const Text(
                   "Add Saldo \n",
@@ -128,10 +142,11 @@ class _PasienSaldoState extends State<PasienSaldo> {
                 /// Dropdown for Saldo Picker
                 DropdownButtonFormField<String>(
                   items: pilihanSaldo,
-                  value: selectedSaldo,
+                  value: selectedSaldoStr,
                   onChanged: (value) {
                     setState(() {
-                      selectedSaldo = value;
+                      selectedSaldo = int.parse(value!);
+                      selectedSaldoStr = value;
                     });
                   },
                   decoration: InputDecoration(

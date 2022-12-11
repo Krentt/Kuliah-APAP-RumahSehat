@@ -78,4 +78,9 @@ public class PasienServiceImpl implements PasienService{
 
         return tagihan;
     }
+
+    @Override
+    public PasienModel updatePasienSaldo(PasienModel pasienModel) {
+        return pasienDb.save(pasienModel);
+    }
 }
