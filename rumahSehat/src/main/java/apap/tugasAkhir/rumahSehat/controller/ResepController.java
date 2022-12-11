@@ -2,13 +2,17 @@ package apap.tugasAkhir.rumahSehat.controller;
 
 import apap.tugasAkhir.rumahSehat.model.*;
 import apap.tugasAkhir.rumahSehat.service.AppointmentService;
+import apap.tugasAkhir.rumahSehat.service.TagihanService;
 import apap.tugasAkhir.rumahSehat.service.ResepService;
 import apap.tugasAkhir.rumahSehat.service.ObatService;
+import apap.tugasAkhir.rumahSehat.service.ApotekerService;
 import apap.tugasAkhir.rumahSehat.service.JumlahObatService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -30,6 +34,12 @@ public class ResepController {
 
     @Autowired
     AppointmentService appointmentService;
+
+    @Autowired
+    TagihanService tagihanService;
+
+    @Autowired
+    ApotekerService apotekerService;
 
     @GetMapping({"/add/{kodeAppointment}"})
     public String addResepFormPage(Model model, @PathVariable String kodeAppointment) {
@@ -133,11 +143,61 @@ public class ResepController {
         AppointmentModel appointment = resep.getAppointment();
         List<JumlahModel> listJumlahModel = resep.getListJumlahModel();
 
+        boolean bisaKonfirmasi = true;
+        if (resep.getIsDone() == false) {
+            for (int i = 0; i < listJumlahModel.size(); i++) {
+                JumlahModel jumlahModel = listJumlahModel.get(i);
+                ObatModel obatModel = jumlahModel.getObat();
+                if (jumlahModel.getKuantitas() > obatModel.getStok()) {
+                    bisaKonfirmasi = false;
+                    break;
+                }
+            }
+
+        }
+        else {
+            bisaKonfirmasi = false;
+        }
+
         model.addAttribute("resep", resep);
         model.addAttribute("appointment", appointment);
         model.addAttribute("listJumlahModel", listJumlahModel);
+        model.addAttribute("canConfirm", bisaKonfirmasi);
 
         return "resep/view-detail-resep";
+    }
+
+
+    @GetMapping("/konfirmasi/{idResep}")
+    public String confirmResep(@PathVariable("idResep") Long id, Model model) {
+        ResepModel resep = resepService.getResepByIdResep(id);
+        AppointmentModel appointment = resep.getAppointment();
+        List<JumlahModel> listJumlahModel = resep.getListJumlahModel();
+
+        int hargaResep = 0;
+        for (int i = 0; i < listJumlahModel.size(); i++) {
+            JumlahModel jumlahModel = listJumlahModel.get(i);
+            hargaResep += (jumlahModel.getObat().getHarga() * jumlahModel.getKuantitas());
+        }
+
+        //TagihanModel tagihan = new TagihanModel();
+        //tagihan.setTanggalTerbuat(LocalDateTime.now());
+        //tagihan.setAppointmentModel(appointment);
+        //tagihan.setIsPaid(false);
+        //tagihan.setTotal(appointment.getDokterModel().getTarifDokter() + hargaResep);
+        //tagihanService.addTagihan(tagihan);
+
+        appointment.setDone(true);
+        appointmentService.createAppointent(appointment);
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String username = auth.getName();
+        ApotekerModel apoteker = apotekerService.getApotekerByUsername(username);
+
+        resep.setApotekerModel(apoteker);
+        resep.setIsDone(true);
+        resepService.addResep(resep);
+        return "redirect:/resep/" + resep.getId();
     }
 
 }
