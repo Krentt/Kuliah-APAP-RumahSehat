@@ -210,9 +210,6 @@ class _DetailAppointmentPageState extends State<DetailAppointmentPage> {
               ),
                 textAlign: TextAlign.center,
               ),
-              decoration: BoxDecoration(
-                border: Border.all(),
-              ),
             ),
           ],
         ),
