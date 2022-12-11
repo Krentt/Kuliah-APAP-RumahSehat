@@ -19,7 +19,6 @@ import java.io.Serializable;
 @Getter
 public class JumlahModel implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @JsonBackReference
