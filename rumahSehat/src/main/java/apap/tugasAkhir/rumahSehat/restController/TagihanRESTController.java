@@ -1,9 +1,10 @@
 package apap.tugasAkhir.rumahSehat.restController;
 
-import apap.tugasAkhir.rumahSehat.model.*;
+import apap.tugasAkhir.rumahSehat.model.PasienModel;
+import apap.tugasAkhir.rumahSehat.model.TagihanModel;
 import apap.tugasAkhir.rumahSehat.restModel.PaymentDTO;
-import apap.tugasAkhir.rumahSehat.restModel.SaldoDTO;
-import apap.tugasAkhir.rumahSehat.service.*;
+import apap.tugasAkhir.rumahSehat.service.PasienService;
+import apap.tugasAkhir.rumahSehat.service.TagihanService;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import lombok.extern.slf4j.Slf4j;
@@ -14,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
-import java.time.LocalDateTime;
 import java.util.*;
 
 @Slf4j
@@ -33,7 +33,7 @@ public class TagihanRESTController {
      * @return JSON List of TagihanModels
      */
     @GetMapping(value = "/list")
-    private List<TagihanModel> viewListTagihan(
+    public List<TagihanModel> viewListTagihan(
             @RequestHeader("Authorization") String token) {
         //Gets Profile from JWT Token
         Map<String, String> decodedToken = decode(token);
@@ -53,7 +53,7 @@ public class TagihanRESTController {
      * Cisco:Feat17 (Melihat Detail Tagihan Pasien & Bayar Tagihan)
      */
     @PostMapping(value = "/detail")
-    private Map<String, Object> bayarTagihan(
+    public Map<String, Object> bayarTagihan(
             @RequestHeader("Authorization") String token,
             @Valid @RequestBody PaymentDTO paymentDTO,
             BindingResult bindingResult) {

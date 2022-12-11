@@ -1,10 +1,8 @@
 package apap.tugasAkhir.rumahSehat.restController;
 
-import apap.tugasAkhir.rumahSehat.model.*;
-import apap.tugasAkhir.rumahSehat.restModel.AppointmentDTO;
-import apap.tugasAkhir.rumahSehat.restModel.PasienDTO;
+import apap.tugasAkhir.rumahSehat.model.PasienModel;
 import apap.tugasAkhir.rumahSehat.restModel.SaldoDTO;
-import apap.tugasAkhir.rumahSehat.service.*;
+import apap.tugasAkhir.rumahSehat.service.PasienService;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import lombok.extern.slf4j.Slf4j;
@@ -32,7 +30,7 @@ public class PasienRESTController {
      * @return PasienModel
      */
     @GetMapping(value = "/profile")
-    private PasienModel viewPasienProfile(
+    public PasienModel viewPasienProfile(
             @RequestHeader("Authorization") String token){
         //Gets Profile from JWT Token
         Map<String, String> decodedToken = decode(token);
@@ -45,12 +43,11 @@ public class PasienRESTController {
     }
 
     /** Cisco:Feat15 (Top Up Saldo Pasien)
-     * TODO: FORM, Flutter
      * GET Function
      * {username} adalah username dari akun pasien
      */
     @GetMapping(value = "/saldo")
-    private PasienModel viewPasienSaldoGet(
+    public PasienModel viewPasienSaldoGet(
             @RequestHeader("Authorization") String token,
             Model model){
         //Gets Profile from JWT Token
@@ -69,7 +66,7 @@ public class PasienRESTController {
      * POST Function
      */
     @PostMapping(value = "/saldo")
-    private Map<String, Object> viewPasienSaldoPost(
+    public Map<String, Object> viewPasienSaldoPost(
             @RequestHeader("Authorization") String token,
             @Valid @RequestBody SaldoDTO saldoDTO,
             BindingResult bindingResult){

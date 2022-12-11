@@ -1,7 +1,6 @@
 package apap.tugasAkhir.rumahSehat.security;
 
 import apap.tugasAkhir.rumahSehat.service.PasienService;
-import apap.tugasAkhir.rumahSehat.service.UserService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;

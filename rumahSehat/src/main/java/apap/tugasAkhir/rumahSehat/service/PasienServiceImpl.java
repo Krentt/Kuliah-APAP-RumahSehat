@@ -3,15 +3,11 @@ package apap.tugasAkhir.rumahSehat.service;
 import apap.tugasAkhir.rumahSehat.model.AppointmentModel;
 import apap.tugasAkhir.rumahSehat.model.PasienModel;
 import apap.tugasAkhir.rumahSehat.model.TagihanModel;
-import apap.tugasAkhir.rumahSehat.model.UserModel;
 import apap.tugasAkhir.rumahSehat.repository.PasienDb;
-import apap.tugasAkhir.rumahSehat.repository.UserDb;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -32,12 +28,12 @@ public class PasienServiceImpl implements PasienService{
 
     /**
      * Gets pasien by username
-     * @param Username search parameter pasien
+     * @param username search parameter pasien
      * @return pasien model with said search param
      */
     @Override
-    public PasienModel getPasienByUsername(String Username) {
-        return pasienDb.findByUsername(Username);
+    public PasienModel getPasienByUsername(String username) {
+        return pasienDb.findByUsername(username);
     }
 
     @Override
@@ -47,37 +43,16 @@ public class PasienServiceImpl implements PasienService{
 
     /**
      * Gets All Appointments for specific pasien
-     * @param Username milik pasien
+     * @param username milik pasien
      * @return List Appoinments milik pasien
      */
     @Override
-    public List<AppointmentModel> getPasienAppointment(String Username) {
-        PasienModel pasienModel = pasienDb.findByUsername(Username);
+    public List<AppointmentModel> getPasienAppointment(String username) {
+        PasienModel pasienModel = pasienDb.findByUsername(username);
 
-        List<AppointmentModel> appointments = new ArrayList<>(pasienModel.getAppointmentPasien());
-
-        return appointments;
+        return pasienModel.getAppointmentPasien();
     }
 
-    /**
-     * Gets All Tagihan for specific pasien
-     * Uses getPasienAppointment
-     * @param Username milik pasien
-     * @return List Tagihan milik Pasien
-     */
-    @Override
-    public List<TagihanModel> getPasienTagihan(String Username) {
-        List<AppointmentModel> appointments = getPasienAppointment(Username);
-
-        List<TagihanModel> tagihan = new ArrayList<>();
-
-//        for (AppointmentModel ap: appointments
-//             ) {
-//            tagihan.add(ap.getTagihanModel());
-//        }
-
-        return tagihan;
-    }
 
     @Override
     public PasienModel updatePasienSaldo(PasienModel pasienModel) {

@@ -1,7 +1,6 @@
 package apap.tugasAkhir.rumahSehat.service;
 
 import apap.tugasAkhir.rumahSehat.model.ObatModel;
-import apap.tugasAkhir.rumahSehat.model.ResepModel;
 import apap.tugasAkhir.rumahSehat.repository.ObatDb;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
