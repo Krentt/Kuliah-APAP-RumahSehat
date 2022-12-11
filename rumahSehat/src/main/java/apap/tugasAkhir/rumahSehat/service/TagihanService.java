@@ -2,6 +2,7 @@ package apap.tugasAkhir.rumahSehat.service;
 
 import apap.tugasAkhir.rumahSehat.model.AppointmentModel;
 import apap.tugasAkhir.rumahSehat.model.PasienModel;
+import apap.tugasAkhir.rumahSehat.model.ResepModel;
 import apap.tugasAkhir.rumahSehat.model.TagihanModel;
 
 import java.util.List;
@@ -17,4 +18,6 @@ public interface TagihanService {
     TagihanModel createTagihanByAppointment(AppointmentModel appointmentModel);
 
     TagihanModel updateTagihan(TagihanModel tagihanModel);
+
+    void addTagihan(TagihanModel tagihan);
 }
