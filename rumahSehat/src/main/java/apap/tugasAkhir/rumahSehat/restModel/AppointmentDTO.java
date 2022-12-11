@@ -1,6 +1,5 @@
 package apap.tugasAkhir.rumahSehat.restModel;
 
-import apap.tugasAkhir.rumahSehat.model.PasienModel;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;

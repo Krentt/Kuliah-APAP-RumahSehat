@@ -1,13 +1,24 @@
 package apap.tugasAkhir.rumahSehat.restController;
 
-import apap.tugasAkhir.rumahSehat.model.*;
-import apap.tugasAkhir.rumahSehat.service.*;
+import apap.tugasAkhir.rumahSehat.model.PasienModel;
+import apap.tugasAkhir.rumahSehat.restModel.SaldoDTO;
+import apap.tugasAkhir.rumahSehat.service.PasienService;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
-import java.util.List;
+import javax.validation.Valid;
+import java.util.Base64;
+import java.util.HashMap;
+import java.util.Map;
 
+@Slf4j
 @RestController
 @RequestMapping("/pasien")
 public class PasienRESTController {
@@ -15,67 +26,92 @@ public class PasienRESTController {
     private PasienService pasienService;
 
     /** Cisco:Feat14 (Melihat Profile Pasien)
-     * TODO: Functions, Flutter
      * {username} adalah username dari akun pasien
+     * @return PasienModel
      */
-    @GetMapping(value = "/{Username}/profile")
-    private PasienModel viewPasienProfile(
-            @PathVariable String Username){
-        PasienModel pasienModel = new PasienModel();
-//        pasienModel = pasienService.getPasienByUsername(Username)
+    @GetMapping(value = "/profile")
+    public PasienModel viewPasienProfile(
+            @RequestHeader("Authorization") String token){
+        //Gets Profile from JWT Token
+        Map<String, String> decodedToken = decode(token);
+        log.info("Access Profile (" + decodedToken.get("USERNAME") + ") | Token : {}",token);
 
-        //Dummy Data Test Set
-        pasienModel.setId("123e4567-e89b-12d3-a456-426614174000");
-        pasienModel.setNama("Test");
-        pasienModel.setUsername(Username);
-        pasienModel.setPassword("ASHDASHD");
-        pasienModel.setEmail("test@test.com");
-        pasienModel.setIsSso(false);
-        pasienModel.setRole(new RoleModel());
-        pasienModel.setSaldoPasien(100L);
-        pasienModel.setUmurPasien(45);
 
+        PasienModel pasienModel = pasienService.getPasienByUsername(decodedToken.get("USERNAME"));
+        log.info("pasien profile: {}", pasienModel);
         return pasienModel;
     }
 
     /** Cisco:Feat15 (Top Up Saldo Pasien)
-     * TODO: Functions, Flutter, POST
+     * GET Function
      * {username} adalah username dari akun pasien
      */
-    @GetMapping(value = "{Username}/saldo")
-    private PasienModel viewPasienSaldoGet(
-            @PathVariable String Username,
+    @GetMapping(value = "/saldo")
+    public PasienModel viewPasienSaldoGet(
+            @RequestHeader("Authorization") String token,
             Model model){
-        PasienModel pasienModel = new PasienModel();
-//        pasienModel = pasienService.getPasienByUsername(Username)
+        //Gets Profile from JWT Token
+        Map<String, String> decodedToken = decode(token);
+        PasienModel pasienModel = pasienService.getPasienByUsername(decodedToken.get("USERNAME"));
 
-        //Dummy Data Test Set
-        pasienModel.setId("123e4567-e89b-12d3-a456-426614174000");
-        pasienModel.setNama("Test2");
-        pasienModel.setUsername(Username);
-        pasienModel.setPassword("ASHDASHD");
-        pasienModel.setEmail("test@test.com");
-        pasienModel.setIsSso(false);
-        pasienModel.setRole(new RoleModel());
-        pasienModel.setSaldoPasien(100L);
-        pasienModel.setUmurPasien(45);
-
-
+        //
         model.addAttribute("saldo", pasienModel.getSaldoPasien());
 
+
+        log.info("Update Saldo GET (" + decodedToken.get("USERNAME") + ")");
         return pasienModel;
     }
 
     /** Cisco:Feat15 (Top Up Saldo Pasien)
-     * TODO: Functions, Flutter, POST
-     * {username} adalah username dari akun pasien
+     * POST Function
      */
-    @PostMapping(value = "{Username}/saldo")
-    private PasienModel viewPasienSaldoPost(
-            @PathVariable String Username,
-            Model model){
-        PasienModel pasien = pasienService.getPasienByUsername(Username);
-        model.addAttribute("pasien", pasien);
-        return pasien;
+    @PostMapping(value = "/saldo")
+    public Map<String, Object> viewPasienSaldoPost(
+            @RequestHeader("Authorization") String token,
+            @Valid @RequestBody SaldoDTO saldoDTO,
+            BindingResult bindingResult){
+        Map<String, String> decodedToken = decode(token);
+        PasienModel newPasien;
+        Map<String, Object> apiResp = new HashMap<>();
+
+        if(bindingResult.hasFieldErrors()){
+            log.info("Request body has invalid type or missing field");
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST, "Request body has invalid type or missing field."
+            );
+        } else {
+            log.info("Access Update Saldo API");
+            if (saldoDTO.getSaldo() < 0){
+                log.info("[GAGAL UPDATE] Saldo Tidak Valid");
+
+            } else {
+                log.info("[UPDATE] Saldo Valid");
+                PasienModel pasien = pasienService.getPasienByUsername(decodedToken.get("USERNAME"));
+                pasien.setSaldoPasien(pasien.getSaldoPasien() + saldoDTO.getSaldo());
+
+
+                newPasien = pasienService.updatePasienSaldo(pasien);
+                apiResp.put("body", newPasien);
+
+            }
+        }
+
+
+        log.info("Update Saldo POST (" + decodedToken.get("USERNAME") + ")");
+        return apiResp;
+    }
+
+    /**
+     * Regex Decoder Function
+     * @param token jwttoken
+     * @return Map<String, String> decoded token (USERNAME, EMAIL, NAMA LENGKAP)
+     */
+    private Map<String, String> decode(String token) {
+        String[] chunks = token.split("\\.");
+        Base64.Decoder decoder = Base64.getUrlDecoder();
+        String payload = new String(decoder.decode(chunks[1]));
+        Gson gson = new Gson();
+        Map<String, String> decodedToken = gson.fromJson(payload, new TypeToken<Map<String, String>>() {}.getType());
+        return decodedToken;
     }
 }

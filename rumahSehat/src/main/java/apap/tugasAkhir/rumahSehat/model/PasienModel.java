@@ -4,9 +4,10 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
 import java.util.List;
 
 @Entity
@@ -24,4 +25,15 @@ public class PasienModel extends UserModel{
     private List<AppointmentModel> appointmentPasien;
 
 
+    @Override
+    public String toString() {
+        return "UserModel{" +
+                "id='" + getId() + '\'' +
+                ", nama='" + getNama() + '\'' +
+                '}' +
+                "PasienModel{" +
+                "saldoPasien=" + saldoPasien +
+                ", umurPasien=" + umurPasien +
+                '}';
+    }
 }
