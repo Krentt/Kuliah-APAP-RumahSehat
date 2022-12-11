@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface ApotekerService {
     List<ApotekerModel> getListApoteker();
+
+    ApotekerModel getApotekerByUsername (String username);
 }
