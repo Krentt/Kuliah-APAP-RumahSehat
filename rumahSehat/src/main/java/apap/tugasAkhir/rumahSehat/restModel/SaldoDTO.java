@@ -5,11 +5,8 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class PasienDTO {
-    private String nama;
+public class SaldoDTO {
     private String username;
-    private String password;
-    private String email;
-    private Integer umurPasien;
+    private Long saldo;
 
 }
