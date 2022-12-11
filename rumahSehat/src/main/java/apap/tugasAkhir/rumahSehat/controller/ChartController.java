@@ -94,7 +94,9 @@ public class ChartController {
 
         for (DokterModel dokter : listDokterChart){
             DokterModel realDokter = dokterService.getDokterByUsername(dokter.getUsername());
-            listDokter.add(realDokter);
+            if (!listDokter.contains(realDokter)){
+                listDokter.add(realDokter);
+            }
         }
 
         List<String> listNamaDokter = new ArrayList<>();
