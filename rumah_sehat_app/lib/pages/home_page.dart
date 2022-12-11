@@ -2,6 +2,7 @@ import 'dart:developer';
 import 'package:jwt_decode/jwt_decode.dart';
 import 'package:flutter/material.dart';
 import 'package:rumah_sehat_app/pages/add_appotintment_page.dart';
+import 'package:rumah_sehat_app/pages/pasien_tagihan_list.dart';
 import 'package:rumah_sehat_app/widgets/main_drawer.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:provider/provider.dart';
@@ -269,9 +270,7 @@ class _HomePageState extends State<HomePage> {
                       elevation: 20,
                       margin: const EdgeInsets.all(8),
                       child: InkWell(
-                        onTap: () {
-                          // TODO : MASUKIN ROUTE
-                        },
+                        onTap: () => Navigator.pushNamed(context, PasienTagihan.route),
                         splashColor: Colors.blue,
                         child: Center(
                           child: Column(
