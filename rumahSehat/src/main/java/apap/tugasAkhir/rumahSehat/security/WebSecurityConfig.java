@@ -103,7 +103,8 @@ public class WebSecurityConfig {
                             .antMatchers("/pasien/**")
                             .antMatchers("/appointment/add")
                             .antMatchers("/appointment/pasien-view-all")
-                            .antMatchers("/dokter/get-all"))
+                            .antMatchers("/dokter/get-all")
+                            .antMatchers("/resep/view/{kode}"))
                     // dont authenticate this particular request
                     .authorizeRequests().antMatchers("/authenticate").permitAll()
                     .antMatchers("/signup").permitAll()
