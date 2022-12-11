@@ -89,7 +89,7 @@ public class ResepController {
             // obat ke jumlah
             obat.getListJumlahModel().add(jumlahModel);
 
-            obat.setStok(obat.getStok()-jumlahModel.getKuantitas());
+            //obat.setStok(obat.getStok()-jumlahModel.getKuantitas());
             obatService.addObat(obat);
 
         }
