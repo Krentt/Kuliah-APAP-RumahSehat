@@ -87,7 +87,6 @@ public class ResepController {
             // obat ke jumlah
             obat.getListJumlahModel().add(jumlahModel);
 
-            //obat.setStok(obat.getStok()-jumlahModel.getKuantitas());
             obatService.addObat(obat);
 
         }
@@ -175,15 +174,17 @@ public class ResepController {
         int hargaResep = 0;
         for (int i = 0; i < listJumlahModel.size(); i++) {
             JumlahModel jumlahModel = listJumlahModel.get(i);
+            jumlahModel.getObat().setStok(jumlahModel.getObat().getStok()-jumlahModel.getKuantitas());
             hargaResep += (jumlahModel.getObat().getHarga() * jumlahModel.getKuantitas());
         }
 
-        //TagihanModel tagihan = new TagihanModel();
-        //tagihan.setTanggalTerbuat(LocalDateTime.now());
-        //tagihan.setAppointmentModel(appointment);
-        //tagihan.setIsPaid(false);
-        //tagihan.setTotal(appointment.getDokterModel().getTarifDokter() + hargaResep);
-        //tagihanService.addTagihan(tagihan);
+        TagihanModel tagihan = new TagihanModel();
+        tagihan.setTanggalTerbuat(LocalDateTime.now());
+        tagihan.setAppointmentModel(appointment);
+        tagihan.setIsPaid(false);
+        tagihan.setTotal(appointment.getDokterModel().getTarifDokter() + hargaResep);
+        tagihanService.addTagihan(tagihan);
+
 
         appointment.setDone(true);
         appointmentService.createAppointent(appointment);
