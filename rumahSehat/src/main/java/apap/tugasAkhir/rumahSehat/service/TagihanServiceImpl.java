@@ -40,4 +40,9 @@ public class TagihanServiceImpl implements TagihanService{
 
         return tagihanDb.save(tagihan);
     }
+
+    @Override
+    public TagihanModel updateTagihan(TagihanModel tagihanModel) {
+        return tagihanDb.save(tagihanModel);
+    }
 }

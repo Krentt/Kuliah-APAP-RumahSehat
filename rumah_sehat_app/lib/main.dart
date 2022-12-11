@@ -9,6 +9,7 @@ import 'package:rumah_sehat_app/pages/list_appointments_page.dart';
 import 'package:rumah_sehat_app/pages/pasien_profile.dart';
 import 'package:rumah_sehat_app/pages/pasien_saldo.dart';
 import 'package:rumah_sehat_app/pages/pasien_tagihan_list.dart';
+import 'package:rumah_sehat_app/pages/tagihan_details.dart';
 import 'package:rumah_sehat_app/providers/appointment.dart';
 import 'package:rumah_sehat_app/providers/dokters.dart';
 import 'package:rumah_sehat_app/providers/pasien.dart';
@@ -60,8 +61,9 @@ class MyApp extends StatelessWidget {
             ListAppointments.route: (ctx) => ListAppointments(),
             DetailAppointmentPage.route: (ctx) => DetailAppointmentPage(),
             PasienProfile.route: (ctx) => const PasienProfile(),
-            PasienTagihan.route: (ctx) => const PasienTagihan(),
             PasienSaldo.route: (ctx) => const PasienSaldo(),
+            PasienTagihan.route: (ctx) => const PasienTagihan(),
+            TagihanDetails.route: (ctx) => const TagihanDetails(),
             DetailAppointmentPage.route: (ctx) => DetailAppointmentPage(),
             DetailResepPage.route: (ctx) => DetailResepPage(),
           },

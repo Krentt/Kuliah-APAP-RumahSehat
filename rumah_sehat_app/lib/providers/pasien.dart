@@ -77,7 +77,7 @@ class PasienProvider with ChangeNotifier{
     }
   }
 
-  /// Function gets pasien saldo
+  /// Function updates pasien saldo
   Future<void> isiSaldo(int saldo) async {
     print("======(LOG) isiSaldo (save)=====");
     print("Backend Saldo: " + saldo.toString());

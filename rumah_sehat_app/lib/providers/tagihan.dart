@@ -24,7 +24,7 @@ class TagihanProvider with ChangeNotifier{
   List<Tagihan> get getAllTagihan => _allTagihan; /// GETTER for all Tagihan pasien
 
 
-  /// TODO: Single Tagihan Page
+  /// Single Tagihan Page
   Future<void> tagihanDetails() async {
     Uri url = Uri.parse("http://10.0.2.2:8080/tagihan/{id}/detail");
 
@@ -112,26 +112,54 @@ class TagihanProvider with ChangeNotifier{
     return _allTagihan.firstWhere((element) => element.id == id);
   }
 
-  // /// TODO: Change Tagihan to PAID
-  // void deleteAppointment(String kode) async {
-  //   Uri url = Uri.parse("http://10.0.2.2:8080/appointment/delete/$kode");
-  //   String? finalToken = "Bearer " + token.toString();
-  //
-  //   try {
-  //     var response = await http.delete(url,
-  //         headers: {
-  //           "Content-Type" : "application/json",
-  //           "Authorization" : finalToken
-  //     });
-  //
-  //     if (response.statusCode > 300 || response.statusCode < 200) {
-  //       throw (response.statusCode);
-  //     } else {
-  //       // _allTagihan.removeWhere((element) => element.kode == kode);
-  //       notifyListeners();
-  //     }
-  //   } catch (err){
-  //     rethrow;
-  //   }
-  // }
+
+  /// Function updates tagihan & cuts saldo
+  Future<void> bayar(String id) async {
+    print("======(LOG) Bayar Tagihan =====");
+    // print("Backend Saldo: " + saldo.toString());
+    Uri url = Uri.parse("http://10.0.2.2:8080/tagihan/detail");
+
+    /// JWT Token
+    String? finalToken = "Bearer " + token.toString();
+    Map<String, dynamic> payload = Jwt.parseJwt(token.toString());
+
+    try{
+      /// Sent Data (POST)
+      final msg = jsonEncode({
+        "id" : id
+      });
+      print(msg.toString());
+      var response = await http.post(
+          url,
+          headers: {
+            "Content-Type" : "application/json",
+            "Authorization" : finalToken
+          },
+          body: msg
+      );
+
+      if (response.statusCode > 300 || response.statusCode < 200) {
+        throw (response.statusCode);
+      } else {
+        // print("response.body: " + response.body);
+
+        /// read API JSON into data variable list
+        Map<String, dynamic> data = json.decode(response.body);
+        // print("data json decoded: " + data.toString());
+
+        Tagihan tagihan = Tagihan(
+            id: data["id"],
+            tanggalTerbuat: data["tanggalTerbuat"],
+            tanggalBayar: data["tanggalBayar"],
+            isPaid: data["isPaid"],
+            total: data["total"]);
+
+        // _pasien[0] = pasienData;
+        notifyListeners();
+        // print("Isi Saldo _pasien" + _pasien.toString());
+      }
+    } catch (err){
+      rethrow;
+    }
+  }
 }

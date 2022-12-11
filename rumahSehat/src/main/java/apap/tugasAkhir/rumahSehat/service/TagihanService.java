@@ -15,4 +15,6 @@ public interface TagihanService {
 
     //Cisco: Feat 17
     TagihanModel createTagihanByAppointment(AppointmentModel appointmentModel);
+
+    TagihanModel updateTagihan(TagihanModel tagihanModel);
 }
