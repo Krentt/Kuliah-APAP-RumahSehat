@@ -6,7 +6,7 @@ services:
     image: localhost:15000/denny/apap-001
     restart: always
     ports:
-      - "10001:8080"
+      - "10057:8080"
     volumes:
       - ./file-storage:/file-storage
       - ./log:/log
