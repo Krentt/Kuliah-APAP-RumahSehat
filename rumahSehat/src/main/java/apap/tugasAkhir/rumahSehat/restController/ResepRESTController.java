@@ -4,8 +4,6 @@ import apap.tugasAkhir.rumahSehat.model.JumlahModel;
 import apap.tugasAkhir.rumahSehat.model.ObatModel;
 import apap.tugasAkhir.rumahSehat.model.ResepModel;
 import apap.tugasAkhir.rumahSehat.restModel.ResepDTO;
-import apap.tugasAkhir.rumahSehat.service.DokterService;
-import apap.tugasAkhir.rumahSehat.service.ObatService;
 import apap.tugasAkhir.rumahSehat.service.ResepService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
