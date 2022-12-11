@@ -13,7 +13,6 @@ import java.util.Arrays;
 import java.util.List;
 
 @Service
-@Slf4j
 public class ChartServiceImpl implements ChartService{
     @Autowired
     AppointmentDb appointmentDb;
@@ -24,8 +23,6 @@ public class ChartServiceImpl implements ChartService{
         for (AppointmentModel appointment : listAppointment) {
             data[appointment.getWaktuAwal().getMonthValue()-1] += appointment.getDokterModel().getTarifDokter();
         }
-
-        System.out.println(Arrays.toString(data));
 
         return data;
     }
@@ -38,7 +35,6 @@ public class ChartServiceImpl implements ChartService{
         List<int[]> hasil = new ArrayList<>();
 
         for (DokterModel dokterModel : dokterModelList) {
-            log.debug(dokterModel.getNama());
             int[] data = new int[12];
             List<AppointmentModel> appointmentModelList = appointmentDb
                     .findAllByDokterModel_UsernameAndWaktuAwalBetween(
@@ -63,7 +59,6 @@ public class ChartServiceImpl implements ChartService{
         List<int[]> hasil = new ArrayList<>();
 
         for (DokterModel dokterModel : dokterModelList) {
-            log.debug(dokterModel.getNama());
             int[] data = new int[akhir.getDayOfMonth()];
             List<AppointmentModel> appointmentModelList = appointmentDb
                     .findAllByDokterModel_UsernameAndWaktuAwalBetween(
