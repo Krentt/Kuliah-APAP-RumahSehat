@@ -24,7 +24,7 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public String encrypt(String password) {
-        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        var passwordEncoder = new BCryptPasswordEncoder();
         return passwordEncoder.encode(password);
     }
     @Override
