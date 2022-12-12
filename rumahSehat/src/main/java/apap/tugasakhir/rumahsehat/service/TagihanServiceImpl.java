@@ -16,7 +16,7 @@ public class TagihanServiceImpl implements TagihanService{
 
     @Override
     public List<TagihanModel> getListTagihanByPasien(PasienModel pasienModel) {
-        return tagihanDb.findTagihanModelByAppointmentModel_PasienModel(pasienModel);
+        return tagihanDb.findTagihanModelByAppointmentModelPasienModel(pasienModel);
     }
 
     @Override

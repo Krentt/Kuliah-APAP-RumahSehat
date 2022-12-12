@@ -1,8 +1,8 @@
 import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
-import 'package:rumah_sehat_app/models/dokter.dart';
 import 'package:http/http.dart' as http;
+import 'package:rumah_sehat_app/models/dokter.dart';
 
 class Dokters with ChangeNotifier{
 

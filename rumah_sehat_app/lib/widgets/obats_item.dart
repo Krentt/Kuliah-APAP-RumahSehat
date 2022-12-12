@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import 'package:rumah_sehat_app/pages/detail_appointment_page.dart';
-import 'package:rumah_sehat_app/providers/appointment.dart';
 
 import '../providers/resep.dart';
 

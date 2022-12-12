@@ -1,8 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import 'package:rumah_sehat_app/providers/appointment.dart';
 import 'package:rumah_sehat_app/providers/resep.dart';
 import 'package:rumah_sehat_app/widgets/obats_item.dart';
 

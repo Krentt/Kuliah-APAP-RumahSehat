@@ -1,12 +1,12 @@
-import 'dart:developer';
-import 'package:jwt_decode/jwt_decode.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:jwt_decode/jwt_decode.dart';
+import 'package:provider/provider.dart';
 import 'package:rumah_sehat_app/pages/add_appotintment_page.dart';
+import 'package:rumah_sehat_app/pages/list_appointments_page.dart';
+import 'package:rumah_sehat_app/pages/pasien_profile.dart';
 import 'package:rumah_sehat_app/pages/pasien_tagihan_list.dart';
 import 'package:rumah_sehat_app/widgets/main_drawer.dart';
-import 'package:carousel_slider/carousel_slider.dart';
-import 'package:provider/provider.dart';
-import 'package:rumah_sehat_app/pages/list_appointments_page.dart';
 
 class Profile with ChangeNotifier {
   String? token;
@@ -63,7 +63,7 @@ class _HomePageState extends State<HomePage> {
                   elevation: 20,
                   margin: const EdgeInsets.all(20),
                   child: InkWell(
-                    onTap: () {},
+                    onTap: () => Navigator.pushNamed(context, PasienProfile.route),
                     splashColor: Colors.blue,
                     child: SizedBox(
                       width: 370,

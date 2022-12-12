@@ -26,6 +26,8 @@ public class TagihanRESTController {
     private TagihanService tagihanService;
 
     String strusername = "USERNAME";
+    private static final String STR_STATUS = "Status";
+    private static final String STR_MESSAGE = "Message";
 
     /**
      * Cisco:Feat16 (Melihat Daftar Tagihan pasien)
@@ -78,14 +80,14 @@ public class TagihanRESTController {
             var error = false;
             if (saldo < tagihanModel.getTotal()) {
                 log.info("[ERROR] Saldo anda tidak mencukupi");
-                apiResponse.put("Status", "ERROR");
-                apiResponse.put("Message", "Saldo anda tidak mencukupi");
+                apiResponse.put(STR_STATUS, "ERROR");
+                apiResponse.put(STR_MESSAGE, "Saldo anda tidak mencukupi");
                 error = true;
             }
             if (tagihanModel.getIsPaid()) {
                 log.info("[ERROR] Tagihan sudah terbayar");
-                apiResponse.put("Status", "ERROR");
-                apiResponse.put("Message", "Tagihan sudah terbayar");
+                apiResponse.put(STR_STATUS, "ERROR");
+                apiResponse.put(STR_MESSAGE, "Tagihan sudah terbayar");
                 error = true;
             }
 
@@ -96,6 +98,11 @@ public class TagihanRESTController {
 
                 tagihanModel.setIsPaid(true);
                 tagihanService.updateTagihan(tagihanModel);
+
+                apiResponse.put(STR_STATUS, "OK");
+                apiResponse.put(STR_MESSAGE, "Tagihan Dibayar");
+                apiResponse.put("Tagihan", tagihanModel);
+                apiResponse.put("Pasien", pasienModel);
 
             }
         }

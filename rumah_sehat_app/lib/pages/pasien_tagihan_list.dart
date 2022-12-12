@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:rumah_sehat_app/pages/tagihan_details.dart';
-import 'package:rumah_sehat_app/providers/pasien.dart';
 import 'package:rumah_sehat_app/providers/tagihan.dart';
-import 'package:rumah_sehat_app/widgets/pasien_widget.dart';
 import 'package:rumah_sehat_app/widgets/tagihan_widget.dart';
 
 class PasienTagihan extends StatefulWidget {

@@ -35,7 +35,7 @@ public class ChartServiceImpl implements ChartService{
         for (DokterModel dokterModel : dokterModelList) {
             var data = new int[12];
             List<AppointmentModel> appointmentModelList = appointmentDb
-                    .findAllByDokterModel_UsernameAndWaktuAwalBetween(
+                    .findAllByDokterModelUsernameAndWaktuAwalBetween(
                             dokterModel.getUsername(),
                             awal,
                             akhir
@@ -59,7 +59,7 @@ public class ChartServiceImpl implements ChartService{
         for (DokterModel dokterModel : dokterModelList) {
             var data = new int[akhir.getDayOfMonth()];
             List<AppointmentModel> appointmentModelList = appointmentDb
-                    .findAllByDokterModel_UsernameAndWaktuAwalBetween(
+                    .findAllByDokterModelUsernameAndWaktuAwalBetween(
                             dokterModel.getUsername(),
                             awal,
                             akhir

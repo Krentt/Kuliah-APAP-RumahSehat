@@ -44,7 +44,7 @@ public class UserController {
 
     @PostMapping(value = "/add-dokter")
     public String addDokterSubmit(@ModelAttribute DokterDTO dokterDTO, Model model){
-        DokterModel user = new DokterModel();
+        var user = new DokterModel();
         user.setTarifDokter(dokterDTO.getTarifDokter());
         user.setNama(dokterDTO.getNama());
         user.setEmail(dokterDTO.getEmail());
@@ -68,7 +68,7 @@ public class UserController {
 
     @PostMapping(value = "/add-apoteker")
     public String addApotekerSubmit(@ModelAttribute ApotekerDTO apotekerDTO, Model model){
-        ApotekerModel user = new ApotekerModel();
+        var user = new ApotekerModel();
         user.setNama(apotekerDTO.getNama());
         user.setEmail(apotekerDTO.getEmail());
         user.setPassword(apotekerDTO.getPassword());

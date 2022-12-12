@@ -71,6 +71,6 @@ public class AppointmentServiceImpl implements AppointmentService{
 
     @Override
     public List<AppointmentModel> findAllByDokterandWaktuAwalInBetween(DokterModel dokterModel, LocalDateTime awal, LocalDateTime akhir) {
-        return  appointmentDb.findAllByDokterModel_UsernameAndWaktuAwalBetween(dokterModel.getUsername(),awal,akhir);
+        return  appointmentDb.findAllByDokterModelUsernameAndWaktuAwalBetween(dokterModel.getUsername(),awal,akhir);
     }
 }
