@@ -69,6 +69,13 @@
                     const config = {
                         type: 'line',
                         data: data,
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            }
+                        }
                     };
 
                     const myChart = new Chart(

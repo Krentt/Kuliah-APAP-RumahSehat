@@ -39,6 +39,7 @@ public class ChartController {
 
         model.addAttribute("dataPendapatan", chartService.getDataPendapatan(listAppointment));
         model.addAttribute("tahun",date.getYear());
+        log.info("access chart");
         return "chart/view-option";
     }
 
@@ -50,6 +51,7 @@ public class ChartController {
         List<DokterModel> listDokter = dokterService.getListDokter();
         model.addAttribute("chart", chartDTO);
         model.addAttribute("listDokter", listDokter);
+        log.info("access chart bulan");
         return "chart/add-dokter-line";
     }
 
@@ -61,6 +63,7 @@ public class ChartController {
         List<DokterModel> listDokter = dokterService.getListDokter();
         model.addAttribute("chart", chartDTO);
         model.addAttribute("listDokter", listDokter);
+        log.info("access chart tahun");
         return "chart/add-dokter-line-tahun";
     }
 
@@ -78,6 +81,7 @@ public class ChartController {
 
         model.addAttribute("chart", chart);
         model.addAttribute("listDokter", listDokter);
+        log.info("access add row bulan");
 
         return "chart/add-dokter-line";
     }
@@ -96,6 +100,7 @@ public class ChartController {
 
         model.addAttribute("chart", chart);
         model.addAttribute("listDokter", listDokter);
+        log.info("access delete row bulan");
 
         return "chart/add-dokter-line";
     }
@@ -121,7 +126,7 @@ public class ChartController {
 
         List<int[]> listData = chartService.getDataLineBulan(chart.getYearMonth().getYear(),chart.getYearMonth().getMonthValue(), listDokterDb);
 
-        log.info("masuk bulan");
+        log.info("access submit chart bulan");
 
         LocalDateTime awal = LocalDateTime.of(chart.getYearMonth().getYear(), chart.getYearMonth().getMonthValue(), 1, 0, 0);
         LocalDateTime akhir = awal.plusMonths(1).minusMinutes(1);
@@ -153,7 +158,7 @@ public class ChartController {
 
         model.addAttribute("chart", chart);
         model.addAttribute("listDokter", listDokter);
-
+        log.info("access add row chart tahun");
         return "chart/add-dokter-line-tahun";
     }
 
@@ -171,6 +176,7 @@ public class ChartController {
 
         model.addAttribute("chart", chart);
         model.addAttribute("listDokter", listDokter);
+        log.info("access delete row chart tahun");
 
         return "chart/add-dokter-line-tahun";
     }
@@ -183,8 +189,6 @@ public class ChartController {
         if(chart.getDokterModelList() == null){
             chart.setDokterModelList(new ArrayList<>());
         }
-
-        log.info("line chart tahun");
 
         List<DokterModel> listDokterChart = chart.getDokterModelList();
         List<DokterModel> listDokterDb = new ArrayList<>();
@@ -202,6 +206,7 @@ public class ChartController {
         model.addAttribute("periode",chart.getYear());
         model.addAttribute("listData", listData);
         model.addAttribute("listDokter", listNamaDokter);
+        log.info("access save line chart tahun");
         return "chart/total-appt-line";
     }
 
