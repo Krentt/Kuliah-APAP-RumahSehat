@@ -4,6 +4,8 @@ import apap.tugasakhir.rumahsehat.model.ApotekerModel;
 import apap.tugasakhir.rumahsehat.model.DokterModel;
 import apap.tugasakhir.rumahsehat.model.PasienModel;
 import apap.tugasakhir.rumahsehat.model.RoleModel;
+import apap.tugasakhir.rumahsehat.restmodel.ApotekerDTO;
+import apap.tugasakhir.rumahsehat.restmodel.DokterDTO;
 import apap.tugasakhir.rumahsehat.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -41,8 +43,15 @@ public class UserController {
     }
 
     @PostMapping(value = "/add-dokter")
-    public String addDokterSubmit(@ModelAttribute DokterModel user, Model model){
+    public String addDokterSubmit(@ModelAttribute DokterDTO dokterDTO, Model model){
+        DokterModel user = new DokterModel();
+        user.setTarifDokter(dokterDTO.getTarifDokter());
+        user.setNama(dokterDTO.getNama());
+        user.setEmail(dokterDTO.getEmail());
+        user.setPassword(dokterDTO.getPassword());
+        user.setUsername(dokterDTO.getUsername());
         user.setIsSso(false);
+        user.setRole(dokterDTO.getRole());
         userService.addUser(user);
         model.addAttribute("user", user);
         return "redirect:/user/view-dokter";
@@ -58,8 +67,14 @@ public class UserController {
     }
 
     @PostMapping(value = "/add-apoteker")
-    public String addApotekerSubmit(@ModelAttribute ApotekerModel user, Model model){
+    public String addApotekerSubmit(@ModelAttribute ApotekerDTO apotekerDTO, Model model){
+        ApotekerModel user = new ApotekerModel();
+        user.setNama(apotekerDTO.getNama());
+        user.setEmail(apotekerDTO.getEmail());
+        user.setPassword(apotekerDTO.getPassword());
+        user.setUsername(apotekerDTO.getUsername());
         user.setIsSso(false);
+        user.setRole(apotekerDTO.getRole());
         userService.addUser(user);
         model.addAttribute("user", user);
         return "redirect:/user/view-apoteker";
