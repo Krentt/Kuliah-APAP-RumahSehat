@@ -17,7 +17,7 @@ class Dokters with ChangeNotifier{
   List<Dokter> get allDokter => _allDokter;
   
   Future<void> inisialData() async {
-    Uri url = Uri.parse("http://10.0.2.2:8080/dokter/get-all");
+    Uri url = Uri.parse("https://apap-057.cs.ui.ac.id/dokter/get-all");
     String? finalToken = "Bearer " + token.toString();
 
     try{

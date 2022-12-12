@@ -35,7 +35,7 @@ class PasienProvider with ChangeNotifier{
     // print(finalToken); ///Sudah bisa
     Map<String, dynamic> payload = Jwt.parseJwt(token.toString());
 
-    Uri url = Uri.parse("http://10.0.2.2:8080/pasien/profile"); /// API Endpoint URL
+    Uri url = Uri.parse("https://apap-057.cs.ui.ac.id/pasien/profile"); /// API Endpoint URL
 
 
     try{
@@ -81,7 +81,7 @@ class PasienProvider with ChangeNotifier{
   Future<void> isiSaldo(int saldo) async {
     print("======(LOG) isiSaldo (save)=====");
     print("Backend Saldo: " + saldo.toString());
-    Uri url = Uri.parse("http://10.0.2.2:8080/pasien/saldo");
+    Uri url = Uri.parse("https://apap-057.cs.ui.ac.id/pasien/saldo");
 
     /// JWT Token
     String? finalToken = "Bearer " + token.toString();
