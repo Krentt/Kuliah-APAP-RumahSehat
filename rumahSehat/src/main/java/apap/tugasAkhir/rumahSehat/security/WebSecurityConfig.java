@@ -33,6 +33,7 @@ public class WebSecurityConfig {
                     .antMatchers("/user/add-apoteker").hasAuthority("Admin")
                     .antMatchers("/user/view-dokter").hasAuthority("Admin")
                     .antMatchers("/user/view-apoteker").hasAuthority("Admin")
+                    .antMatchers("/user/view-pasien").hasAuthority("Admin")
                     .antMatchers("/appointment/view-all").hasAuthority("Admin")
                     .antMatchers("/chart/").hasAuthority("Admin")
                     .antMatchers("/chart/bulanan-line").hasAuthority("Admin")
