@@ -2,7 +2,6 @@ package apap.tugasAkhir.rumahSehat.service;
 
 import apap.tugasAkhir.rumahSehat.model.AppointmentModel;
 import apap.tugasAkhir.rumahSehat.model.PasienModel;
-import apap.tugasAkhir.rumahSehat.model.TagihanModel;
 
 import java.util.List;
 

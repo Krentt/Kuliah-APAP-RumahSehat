@@ -3,13 +3,11 @@ package apap.tugasAkhir.rumahSehat.service;
 import apap.tugasAkhir.rumahSehat.model.AppointmentModel;
 import apap.tugasAkhir.rumahSehat.model.DokterModel;
 import apap.tugasAkhir.rumahSehat.repository.AppointmentDb;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @Service
