@@ -48,7 +48,7 @@
     <div class="card m-4 p-4">
         <div class="card-body">
             <div class="justify-content-center">
-                <h2 th:text= "'Laporan Pendapatan Dokter Tahun '+ ${tahun}" class="text-center"></h2>
+                <h2 th:text= "'Laporan Pemasukan Semua Dokter Tahun '+ ${tahun}" class="text-center"></h2>
                 <div class="chart-container" style="position: relative; height:500px; width:800px">
                     <canvas id="myChart"></canvas>
                 </div>
@@ -58,7 +58,7 @@
                     const data = {
                         labels: labels,
                         datasets: [{
-                            label: 'Pendapatan Dokter Periode Tahunan',
+                            label: 'Pemasukan Dokter',
                             data: [[${dataPendapatan}]],
                             fill: true,
                             borderColor: 'rgb(75, 192, 192)',
