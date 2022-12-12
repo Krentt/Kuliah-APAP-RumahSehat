@@ -99,7 +99,7 @@ public class ChartController {
     @PostMapping(value = "/apptLine-bulan", params = {"deleteRow"})
     public String deleteRowDokterLine(
             @ModelAttribute ChartDTO chart,
-            @RequestParam("deleteRowLine") Integer row,
+            @RequestParam("deleteRow") Integer row,
             Model model
     ){
 
@@ -174,7 +174,7 @@ public class ChartController {
     @PostMapping(value = "/apptLine-tahun", params = {"deleteRow"})
     public String deleteRowDokterLine2(
             @ModelAttribute ChartDTO chart,
-            @RequestParam("deleteRowLine") Integer row,
+            @RequestParam("deleteRow") Integer row,
             Model model
     ){
 
