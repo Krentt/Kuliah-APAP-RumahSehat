@@ -15,7 +15,6 @@ import org.springframework.security.web.context.HttpSessionSecurityContextReposi
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.servlet.ModelAndView;
@@ -43,7 +42,7 @@ public class HomeController {
         return "home/home";
     }
 
-    @RequestMapping("/login")
+    @GetMapping("/login")
     public String login(Model model) {
         log.info("Access Login Page");
         return "login/login";
