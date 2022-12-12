@@ -2,7 +2,6 @@ package apap.tugasAkhir.rumahSehat.service;
 
 import apap.tugasAkhir.rumahSehat.model.AppointmentModel;
 import apap.tugasAkhir.rumahSehat.model.PasienModel;
-import apap.tugasAkhir.rumahSehat.model.ResepModel;
 import apap.tugasAkhir.rumahSehat.model.TagihanModel;
 import apap.tugasAkhir.rumahSehat.repository.TagihanDb;
 import org.springframework.beans.factory.annotation.Autowired;
