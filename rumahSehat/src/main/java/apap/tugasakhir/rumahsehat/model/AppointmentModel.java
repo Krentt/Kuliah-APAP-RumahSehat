@@ -1,6 +1,5 @@
 package apap.tugasakhir.rumahsehat.model;
 
-import apap.tugasakhir.rumahsehat.util.StringPrefixedSequenceIdGenerator;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
@@ -13,6 +12,9 @@ import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
+import static apap.tugasakhir.rumahsehat.util.StringPrefixedSequenceIdGenerator.VALUE_PREFIX_PARAMETER;
+import static org.hibernate.id.enhanced.SequenceStyleGenerator.INCREMENT_PARAM;
+
 @Entity
 @Table(name = "appointment")
 @Setter
@@ -24,8 +26,8 @@ public class AppointmentModel implements Serializable {
     @GenericGenerator(
             name="appoint_id", strategy = "apap.tugasakhir.rumahsehat.util.StringPrefixedSequenceIdGenerator",
             parameters = {
-            @org.hibernate.annotations.Parameter(name = StringPrefixedSequenceIdGenerator.INCREMENT_PARAM, value = "0"),
-            @org.hibernate.annotations.Parameter(name = StringPrefixedSequenceIdGenerator.VALUE_PREFIX_PARAMETER, value = "APT-")
+            @org.hibernate.annotations.Parameter(name = INCREMENT_PARAM, value = "0"),
+            @org.hibernate.annotations.Parameter(name = VALUE_PREFIX_PARAMETER, value = "APT-")
     })
     private String kode;
 
