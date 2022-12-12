@@ -8,7 +8,6 @@ import com.google.gson.reflect.TypeToken;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -50,15 +49,10 @@ public class PasienRESTController {
      */
     @GetMapping(value = "/saldo")
     public PasienModel viewPasienSaldoGet(
-            @RequestHeader("Authorization") String token,
-            Model model){
+            @RequestHeader("Authorization") String token){
         //Gets Profile from JWT Token
         Map<String, String> decodedToken = decode(token);
         var pasienModel = pasienService.getPasienByUsername(decodedToken.get(strusername));
-
-        //
-        model.addAttribute("saldo", pasienModel.getSaldoPasien());
-
 
         log.info("Update Saldo GET (" + decodedToken.get(strusername) + ")");
         return pasienModel;

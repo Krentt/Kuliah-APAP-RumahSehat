@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_login/flutter_login.dart';
 import 'package:provider/provider.dart';
-import 'package:rumah_sehat_app/pages/home_page.dart';
 import 'package:rumah_sehat_app/providers/auth.dart';
 
 const users = const {

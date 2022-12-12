@@ -2,11 +2,9 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
-import 'package:intl/intl.dart';
 import 'package:jwt_decode/jwt_decode.dart';
 import 'package:rumah_sehat_app/models/tagihan.dart';
 
-import '../models/appointment.dart';
 import '../models/pasien.dart';
 
 class TagihanProvider with ChangeNotifier{

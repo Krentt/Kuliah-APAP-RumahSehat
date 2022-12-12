@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:jwt_decode/jwt_decode.dart';
 import 'package:provider/provider.dart';
-
-import 'package:rumah_sehat_app/pages/list_appointments_page.dart';
 import 'package:rumah_sehat_app/pages/add_appotintment_page.dart';
 import 'package:rumah_sehat_app/pages/home_page.dart';
+import 'package:rumah_sehat_app/pages/list_appointments_page.dart';
+
 import '../pages/pasien_profile.dart';
 import '../pages/pasien_tagihan_list.dart';
 import '../providers/auth.dart';
