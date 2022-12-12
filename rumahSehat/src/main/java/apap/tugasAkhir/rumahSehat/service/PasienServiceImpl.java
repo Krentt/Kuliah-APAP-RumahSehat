@@ -12,7 +12,7 @@ import java.util.List;
 @Service
 public class PasienServiceImpl implements PasienService, Serializable {
     @Autowired
-    private PasienDb pasienDb;
+    private transient PasienDb pasienDb;
 
 
     /** Cisco:Feature 14
