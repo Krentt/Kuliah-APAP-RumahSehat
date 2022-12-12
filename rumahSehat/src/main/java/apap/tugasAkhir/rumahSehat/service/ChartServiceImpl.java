@@ -16,7 +16,7 @@ public class ChartServiceImpl implements ChartService{
     AppointmentDb appointmentDb;
 
     public int[] getDataPendapatan(List<AppointmentModel> listAppointment) {
-        int[] data = new int[12];
+        var data = new int[12];
 
         for (AppointmentModel appointment : listAppointment) {
             data[appointment.getWaktuAwal().getMonthValue()-1] += appointment.getDokterModel().getTarifDokter();
@@ -27,13 +27,13 @@ public class ChartServiceImpl implements ChartService{
 
     @Override
     public List<int[]> getDataLineTahun(int year, List<DokterModel> dokterModelList) {
-        LocalDateTime awal = LocalDateTime.of(year, 1, 1, 0, 0);
+        var awal = LocalDateTime.of(year, 1, 1, 0, 0);
         LocalDateTime akhir = awal.plusYears(1).minusMinutes(1);
 
         List<int[]> hasil = new ArrayList<>();
 
         for (DokterModel dokterModel : dokterModelList) {
-            int[] data = new int[12];
+            var data = new int[12];
             List<AppointmentModel> appointmentModelList = appointmentDb
                     .findAllByDokterModel_UsernameAndWaktuAwalBetween(
                             dokterModel.getUsername(),
@@ -51,13 +51,13 @@ public class ChartServiceImpl implements ChartService{
 
     @Override
     public List<int[]> getDataLineBulan(int year, int month, List<DokterModel> dokterModelList) {
-        LocalDateTime awal = LocalDateTime.of(year, month, 1, 0, 0);
+        var awal = LocalDateTime.of(year, month, 1, 0, 0);
         LocalDateTime akhir = awal.plusMonths(1).minusMinutes(1);
 
         List<int[]> hasil = new ArrayList<>();
 
         for (DokterModel dokterModel : dokterModelList) {
-            int[] data = new int[akhir.getDayOfMonth()];
+            var data = new int[akhir.getDayOfMonth()];
             List<AppointmentModel> appointmentModelList = appointmentDb
                     .findAllByDokterModel_UsernameAndWaktuAwalBetween(
                             dokterModel.getUsername(),

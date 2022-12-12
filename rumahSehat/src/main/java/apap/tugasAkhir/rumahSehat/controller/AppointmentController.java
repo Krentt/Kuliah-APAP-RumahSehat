@@ -2,8 +2,6 @@ package apap.tugasAkhir.rumahSehat.controller;
 
 import apap.tugasAkhir.rumahSehat.model.AppointmentModel;
 import apap.tugasAkhir.rumahSehat.model.DokterModel;
-import apap.tugasAkhir.rumahSehat.model.PasienModel;
-import apap.tugasAkhir.rumahSehat.model.ResepModel;
 import apap.tugasAkhir.rumahSehat.service.AppointmentService;
 import apap.tugasAkhir.rumahSehat.service.DokterService;
 import apap.tugasAkhir.rumahSehat.service.TagihanService;
@@ -49,9 +47,9 @@ public class AppointmentController {
 
     @GetMapping("/{kode}")
     public String viewDetailAppointmentAdmin(@PathVariable(value = "kode") String kode, Model model){
-        AppointmentModel appt = appointmentService.getAppointmentByKode(kode);
-        DokterModel dokter = appt.getDokterModel();
-        PasienModel pasien = appt.getPasienModel();
+        var appt = appointmentService.getAppointmentByKode(kode);
+        var dokter = appt.getDokterModel();
+        var pasien = appt.getPasienModel();
         model.addAttribute("dokter", dokter);
         model.addAttribute("pasien", pasien);
         model.addAttribute("appointment", appt);
@@ -63,7 +61,7 @@ public class AppointmentController {
         AppointmentModel appt = appointmentService.getAppointmentByKode(kode);
 
         if (appt.getResepModel() != null) {
-            ResepModel resep = appt.getResepModel();
+            var resep = appt.getResepModel();
             if (!resep.getIsDone()){
                 redirectAttrs.addFlashAttribute("error", "Resep belum dikonfirmasi oleh Apoteker!");
                 return new ModelAndView("redirect:/appointment/{kode}");

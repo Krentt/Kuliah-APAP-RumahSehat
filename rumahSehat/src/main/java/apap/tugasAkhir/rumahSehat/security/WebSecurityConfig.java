@@ -18,10 +18,17 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig {
+
+
     @Configuration
     public static class UILoginWebSecurityConfigurerAdapter extends WebSecurityConfigurerAdapter {
         @Override
         protected void configure(HttpSecurity httpSecurity) throws Exception {
+
+            var roleAdmin = "Admin";
+            var roleDokter = "Dokter";
+            var roleApoteker = "Apoteker";
+
             httpSecurity
                     .authorizeRequests()
                     .antMatchers("/css/**").permitAll()

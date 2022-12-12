@@ -6,12 +6,14 @@ import apap.tugasAkhir.rumahSehat.repository.PasienDb;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
+import java.io.Serializable;
 import java.util.List;
 
 @Service
-public class PasienServiceImpl implements PasienService{
+public class PasienServiceImpl implements PasienService, Serializable {
     @Autowired
-    private PasienDb pasienDb;
+    private transient PasienDb pasienDb;
 
 
     /** Cisco:Feature 14
