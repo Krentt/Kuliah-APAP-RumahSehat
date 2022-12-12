@@ -47,7 +47,7 @@ public class TagihanModel implements Serializable {
     private AppointmentModel appointmentModel;
 
     public void calculateTotal(){
-        int totalCurr = 0;
+        var totalCurr = 0;
         // If no resep then omit resep
         if(null != this.appointmentModel.getResepModel()){
             for (JumlahModel j: this.appointmentModel.getResepModel().getListJumlahModel()

@@ -25,6 +25,8 @@ public class PasienRESTController {
     @Autowired
     private PasienService pasienService;
 
+    String strusername = "USERNAME";
+
     /** Cisco:Feat14 (Melihat Profile Pasien)
      * {username} adalah username dari akun pasien
      * @return PasienModel
@@ -34,10 +36,10 @@ public class PasienRESTController {
             @RequestHeader("Authorization") String token){
         //Gets Profile from JWT Token
         Map<String, String> decodedToken = decode(token);
-        log.info("Access Profile (" + decodedToken.get("USERNAME") + ") | Token : {}",token);
+        log.info("Access Profile (" + decodedToken.get(strusername) + ") | Token : {}",token);
 
 
-        PasienModel pasienModel = pasienService.getPasienByUsername(decodedToken.get("USERNAME"));
+        var pasienModel = pasienService.getPasienByUsername(decodedToken.get(strusername));
         log.info("pasien profile: {}", pasienModel);
         return pasienModel;
     }
@@ -52,13 +54,13 @@ public class PasienRESTController {
             Model model){
         //Gets Profile from JWT Token
         Map<String, String> decodedToken = decode(token);
-        PasienModel pasienModel = pasienService.getPasienByUsername(decodedToken.get("USERNAME"));
+        var pasienModel = pasienService.getPasienByUsername(decodedToken.get(strusername));
 
         //
         model.addAttribute("saldo", pasienModel.getSaldoPasien());
 
 
-        log.info("Update Saldo GET (" + decodedToken.get("USERNAME") + ")");
+        log.info("Update Saldo GET (" + decodedToken.get(strusername) + ")");
         return pasienModel;
     }
 
@@ -86,7 +88,7 @@ public class PasienRESTController {
 
             } else {
                 log.info("[UPDATE] Saldo Valid");
-                PasienModel pasien = pasienService.getPasienByUsername(decodedToken.get("USERNAME"));
+                PasienModel pasien = pasienService.getPasienByUsername(decodedToken.get(strusername));
                 pasien.setSaldoPasien(pasien.getSaldoPasien() + saldoDTO.getSaldo());
 
 
@@ -97,7 +99,7 @@ public class PasienRESTController {
         }
 
 
-        log.info("Update Saldo POST (" + decodedToken.get("USERNAME") + ")");
+        log.info("Update Saldo POST (" + decodedToken.get(strusername) + ")");
         return apiResp;
     }
 
@@ -108,10 +110,9 @@ public class PasienRESTController {
      */
     private Map<String, String> decode(String token) {
         String[] chunks = token.split("\\.");
-        Base64.Decoder decoder = Base64.getUrlDecoder();
-        String payload = new String(decoder.decode(chunks[1]));
-        Gson gson = new Gson();
-        Map<String, String> decodedToken = gson.fromJson(payload, new TypeToken<Map<String, String>>() {}.getType());
-        return decodedToken;
+        var decoder = Base64.getUrlDecoder();
+        var payload = new String(decoder.decode(chunks[1]));
+        var gson = new Gson();
+        return gson.fromJson(payload, new TypeToken<Map<String, String>>() {}.getType());
     }
 }

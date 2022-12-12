@@ -15,13 +15,10 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.Objects;
 
@@ -40,13 +37,13 @@ public class JwtAuthenticationController {
     private UserService userService;
 
 
-    @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
-    public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest)
+    @PostMapping(value = "/authenticate")
+    public ResponseEntity<JwtResponse> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest)
             throws Exception {
         log.info("User login API");
         authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
 
-        final UserDetails userDetails = jwtInMemoryUserDetailsService
+        final var userDetails = jwtInMemoryUserDetailsService
                 .loadUserByUsername(authenticationRequest.getUsername());
 
         final String token = jwtTokenUtil.generateToken(userDetails);
@@ -78,7 +75,7 @@ public class JwtAuthenticationController {
             log.info("Username is already taken!");
             return new ResponseEntity<>("Username is already taken!", HttpStatus.BAD_REQUEST);
         }
-        PasienModel pasienModel = new PasienModel();
+        var pasienModel = new PasienModel();
         pasienModel.setNama(pasienDTO.getNama());
         pasienModel.setUsername(pasienDTO.getUsername());
         pasienModel.setPassword(pasienDTO.getPassword());
@@ -86,15 +83,14 @@ public class JwtAuthenticationController {
         pasienModel.setSaldoPasien(0L);
         pasienModel.setUmurPasien(pasienDTO.getUmurPasien());
         pasienModel.setIsSso(false);
-        pasienModel.setRole(roleService.getById(Long.valueOf(2)));
+        pasienModel.setRole(roleService.getById(2L));
         userService.addUser(pasienModel);
 
-        final UserDetails userDetails = jwtInMemoryUserDetailsService
+        final var userDetails = jwtInMemoryUserDetailsService
                 .loadUserByUsername(pasienModel.getUsername());
 
         final String token = jwtTokenUtil.generateToken(userDetails);
 
         return ResponseEntity.ok(new JwtResponse(token));
-//        return new ResponseEntity<>("User registered succesfully", HttpStatus.OK);
     }
 }

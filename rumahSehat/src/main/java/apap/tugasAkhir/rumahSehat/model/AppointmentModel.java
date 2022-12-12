@@ -52,6 +52,6 @@ public class AppointmentModel implements Serializable {
 
 //     Relasi dengan resep
     @JsonManagedReference
-    @OneToOne(mappedBy = "appointment") // TODO: ga yakin bener
+    @OneToOne(mappedBy = "appointment")
     private ResepModel resepModel;
 }
