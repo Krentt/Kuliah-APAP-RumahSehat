@@ -35,6 +35,8 @@ public class HomeController {
     @Autowired
     RoleService roleService;
 
+    String strRedirect = "redirect:";
+
     @GetMapping("/")
     public String home() {
         log.info("Access Home Page");
@@ -68,7 +70,7 @@ public class HomeController {
         // WhiteList Check
         if (!userService.whiteListCheck(username)) {
             log.info("User not in Whitelist");
-            return new ModelAndView("redirect:" + Setting.SERVER_LOGOUT + Setting.CLIENT_LOGOUT);
+            return new ModelAndView(strRedirect + Setting.SERVER_LOGOUT + Setting.CLIENT_LOGOUT);
         }
 
         log.info("Whitelist check clear!");
@@ -108,13 +110,13 @@ public class HomeController {
         }
 
         log.info("Admin User Logout");
-        return new ModelAndView("redirect:" + Setting.SERVER_LOGOUT + Setting.CLIENT_LOGOUT);
+        return new ModelAndView(strRedirect + Setting.SERVER_LOGOUT + Setting.CLIENT_LOGOUT);
     }
 
     @GetMapping(value = "/login-sso")
     public ModelAndView loginSSO() {
         log.info("User login sso");
-        return new ModelAndView("redirect:" + Setting.SERVER_LOGIN + Setting.CLIENT_LOGIN);
+        return new ModelAndView(strRedirect + Setting.SERVER_LOGIN + Setting.CLIENT_LOGIN);
     }
 
 }
