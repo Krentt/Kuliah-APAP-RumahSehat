@@ -22,7 +22,7 @@ public class AppointmentModel implements Serializable {
     //Generate according to soal: APT-x (APT-1, APT-2, ...)
     @GeneratedValue(strategy = GenerationType.SEQUENCE ,generator = "appoint_id")
     @GenericGenerator(
-            name="appoint_id", strategy = "apap.tugasAkhir.rumahSehat.util.StringPrefixedSequenceIdGenerator",
+            name="appoint_id", strategy = "apap.tugasakhir.rumahsehat.util.StringPrefixedSequenceIdGenerator",
             parameters = {
             @org.hibernate.annotations.Parameter(name = StringPrefixedSequenceIdGenerator.INCREMENT_PARAM, value = "0"),
             @org.hibernate.annotations.Parameter(name = StringPrefixedSequenceIdGenerator.VALUE_PREFIX_PARAMETER, value = "APT-")
