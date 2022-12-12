@@ -26,6 +26,10 @@ class Authh with ChangeNotifier{
     Uri url = Uri.parse("https://apap-057.cs.ui.ac.id/signup");
 
     try{
+      if (username == null || password == null || email == null || umur == null || nama == null){
+        throw("Data diri tidak boleh kosong!");
+      }
+
       var response = await http.post(url,
           headers: {
         "Content-Type" : "application/json"
