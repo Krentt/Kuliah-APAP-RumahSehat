@@ -19,7 +19,7 @@ public class TagihanModel implements Serializable {
     //Generate according to soal: BILL-x (BILL-1, BILL-2, ...)
     @GeneratedValue(strategy = GenerationType.SEQUENCE ,generator = "seq_tagihan_id")
     @GenericGenerator(
-            name="seq_tagihan_id", strategy = "apap.tugasAkhir.rumahSehat.util.StringPrefixedSequenceIdGenerator",
+            name="seq_tagihan_id", strategy = "apap.tugasakhir.rumahsehat.util.StringPrefixedSequenceIdGenerator",
             parameters = {
                     @org.hibernate.annotations.Parameter(name = StringPrefixedSequenceIdGenerator.INCREMENT_PARAM, value = "0"),
                     @org.hibernate.annotations.Parameter(name = StringPrefixedSequenceIdGenerator.VALUE_PREFIX_PARAMETER, value = "BILL-")
