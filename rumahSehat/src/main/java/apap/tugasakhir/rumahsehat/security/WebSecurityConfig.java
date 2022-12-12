@@ -40,6 +40,7 @@ public class WebSecurityConfig {
                     .antMatchers("/user/add-apoteker").hasAuthority(roleAdmin)
                     .antMatchers("/user/view-dokter").hasAuthority(roleAdmin)
                     .antMatchers("/user/view-apoteker").hasAuthority(roleAdmin)
+                    .antMatchers("/user/view-pasien").hasAuthority(roleAdmin)
                     .antMatchers("/appointment/view-all").hasAuthority(roleAdmin)
                     .antMatchers("/chart/").hasAuthority(roleAdmin)
                     .antMatchers("/chart/bulanan-line").hasAuthority(roleAdmin)
