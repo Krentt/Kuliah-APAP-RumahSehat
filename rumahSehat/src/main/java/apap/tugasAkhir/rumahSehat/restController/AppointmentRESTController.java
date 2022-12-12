@@ -23,17 +23,17 @@ import java.util.*;
 @RestController
 @RequestMapping("/appointment")
 public class AppointmentRESTController {
-
     @Autowired
     AppointmentService appointmentService;
-
     @Autowired
     PasienService pasienService;
     @Autowired
     DokterService dokterService;
 
+    String apiRespHeader = "header";
+
     @PostMapping("/add")
-    private Map<String,Object> addAppointment(@Valid @RequestBody AppointmentDTO appt, BindingResult bindingResult){
+    public Map<String,Object> addAppointment(@Valid @RequestBody AppointmentDTO appt, BindingResult bindingResult){
         if(bindingResult.hasFieldErrors()){
             log.info("Request body has invalid type or missing field");
             throw new ResponseStatusException(
@@ -48,23 +48,23 @@ public class AppointmentRESTController {
             if (appointmentService.checkJadwalPasien(appt.getWaktuAwal(), pasien) == null){
 
                 if (appointmentService.checkJadwalDokter(appt.getWaktuAwal(), dokter) == null){
-                    AppointmentModel appointment = new AppointmentModel();
+                    var appointment = new AppointmentModel();
                     appointment.setDone(false);
                     appointment.setPasienModel(pasienService.getPasienByUsername(appt.getPasienName()));
                     appointment.setDokterModel(dokterService.getDokterByUsername(appt.getDokterName()));
                     appointment.setWaktuAwal(appt.getWaktuAwal());
-                    apiResp.put("header", "Success");
+                    apiResp.put(apiRespHeader, "Success");
                     apiResp.put("body", appointmentService.createAppointent(appointment));
                 } else {
                     log.info("[GAGAL ADD] Appointment Bentrok dengan jadwal Dokter!");
-                    apiResp.put("header", "Error");
+                    apiResp.put(apiRespHeader, "Error");
                     apiResp.put("userTrouble", "dokter");
                     apiResp.put("body", appointmentService.checkJadwalDokter(appt.getWaktuAwal(), dokter));
                 }
 
             } else{
                 log.info("[GAGAL ADD] Appointment Bentrok dengan jadwal Pasien!");
-                apiResp.put("header", "Error");
+                apiResp.put(apiRespHeader, "Error");
                 apiResp.put("userTrouble", "pasien");
                 apiResp.put("body", appointmentService.checkJadwalPasien(appt.getWaktuAwal(), pasien));
             }
@@ -75,14 +75,14 @@ public class AppointmentRESTController {
     }
 
     @GetMapping("pasien-view-all")
-    private List<AppointmentDTO> viewAllAppointmentPasien(@RequestHeader("Authorization") String token){
+    public List<AppointmentDTO> viewAllAppointmentPasien(@RequestHeader("Authorization") String token){
         log.info("Access View All Pasien API");
         Map<String, String> decodedToken = decode(token);
         PasienModel pasien = pasienService.getPasienByUsername(decodedToken.get("USERNAME"));
         List<AppointmentModel> listAppointmentPasien = pasien.getAppointmentPasien();
         List<AppointmentDTO> listAppointmentDTO = new ArrayList<>();
         for (AppointmentModel appt : listAppointmentPasien){
-            AppointmentDTO appointmentDTO = new AppointmentDTO();
+            var appointmentDTO = new AppointmentDTO();
             appointmentDTO.setKode(appt.getKode());
             appointmentDTO.setPasienName(pasien.getNama());
             appointmentDTO.setDokterName(appt.getDokterModel().getNama());
@@ -101,11 +101,10 @@ public class AppointmentRESTController {
 
     private Map<String, String> decode(String token) {
         String[] chunks = token.split("\\.");
-        Base64.Decoder decoder = Base64.getUrlDecoder();
-        String payload = new String(decoder.decode(chunks[1]));
-        Gson gson = new Gson();
-        Map<String, String> decodedToken = gson.fromJson(payload, new TypeToken<Map<String, String>>() {}.getType());
-        return decodedToken;
+        var decoder = Base64.getUrlDecoder();
+        var payload = new String(decoder.decode(chunks[1]));
+        var gson = new Gson();
+        return gson.fromJson(payload, new TypeToken<Map<String, String>>() {}.getType());
     }
 
 }

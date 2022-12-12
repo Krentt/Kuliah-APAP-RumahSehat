@@ -33,9 +33,14 @@ public class ResepController {
     @Autowired
     ApotekerService apotekerService;
 
+    String strresep = "resep";
+    String strlistobatexisting = "listObatExisting";
+
+    String urlresepformaddresep = "resep/form-add-resep";
+
     @GetMapping({"/add/{kodeAppointment}"})
     public String addResepFormPage(Model model, @PathVariable String kodeAppointment) {
-        ResepModel resep = new ResepModel();
+        var resep = new ResepModel();
         List <ObatModel> listObat = obatService.getListObat();
 
         // resep ke appointment
@@ -47,9 +52,9 @@ public class ResepController {
         resep.setListJumlahModel(listJumlahModelNew);
         resep.getListJumlahModel().add(new JumlahModel());
 
-        model.addAttribute("resep", resep);
-        model.addAttribute("listObatExisting", listObat);
-        return "resep/form-add-resep";
+        model.addAttribute(strresep, resep);
+        model.addAttribute(strlistobatexisting, listObat);
+        return urlresepformaddresep;
     }
 
     @PostMapping(value="/add", params = {"save"})
@@ -65,14 +70,13 @@ public class ResepController {
         appointmentOfResep.setResepModel(resep);
         resep.setAppointment(appointmentOfResep);
         resepService.addResep(resep);
-//        appointmentService.createAppointent(appointmentOfResep);
         for (JumlahModel jumlahModel : listJumlahModel){
             ObatModel obat = obatService.getObatById(jumlahModel.getObat().getIdObat());
             jumlahModel.setId((long)jumlahObatService.getListJumlahObat().size() + 1);
             jumlahModel.setResep(resep);
             jumlahModel.setObat(obat);
 
-            if(obat.getListJumlahModel() == null || obat.getListJumlahModel().size() == 0){
+            if(obat.getListJumlahModel() == null || obat.getListJumlahModel().isEmpty()){
                 obat.setListJumlahModel(new ArrayList<>());
             }
 
@@ -89,23 +93,23 @@ public class ResepController {
     }
 
     @PostMapping(value="/add", params={"addRow"})
-    private String addRowObatMultiple(
+    public String addRowObatMultiple(
             @ModelAttribute ResepModel resep,
             Model model
     ){
-        if (resep.getListJumlahModel() == null || resep.getListJumlahModel().size() == 0){
+        if (resep.getListJumlahModel() == null || resep.getListJumlahModel().isEmpty()){
             resep.setListJumlahModel(new ArrayList<>());
         }
         resep.getListJumlahModel().add(new JumlahModel());
         List<ObatModel> listObat = obatService.getListObat();
-        model.addAttribute("resep", resep);
-        model.addAttribute("listObatExisting", listObat);
+        model.addAttribute(strresep, resep);
+        model.addAttribute(strlistobatexisting, listObat);
 
-        return "resep/form-add-resep";
+        return urlresepformaddresep;
     }
 
     @PostMapping(value = "/add", params = {"deleteRow"})
-    private String deleteRowObatMultiple(
+    public String deleteRowObatMultiple(
             @ModelAttribute ResepModel resep,
             @RequestParam("deleteRow") Integer row,
             Model model
@@ -114,10 +118,10 @@ public class ResepController {
 
         List<ObatModel> listObat = obatService.getListObat();
 
-        model.addAttribute("resep", resep);
-        model.addAttribute("listObatExisting", listObat);
+        model.addAttribute(strresep, resep);
+        model.addAttribute(strlistobatexisting, listObat);
 
-        return "resep/form-add-resep";
+        return urlresepformaddresep;
     }
 
     @GetMapping("/viewall")
@@ -148,7 +152,7 @@ public class ResepController {
             bisaKonfirmasi = false;
         }
 
-        model.addAttribute("resep", resep);
+        model.addAttribute(strresep, resep);
         model.addAttribute("appointment", appointment);
         model.addAttribute("listJumlahModel", listJumlahModel);
         model.addAttribute("canConfirm", bisaKonfirmasi);

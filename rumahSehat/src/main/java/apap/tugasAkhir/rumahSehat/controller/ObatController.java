@@ -18,7 +18,7 @@ public class ObatController {
     ObatService obatService;
 
     @GetMapping(value = "/view-obat")
-    private String viewAllObat(Model model){
+    public String viewAllObat(Model model){
         List<ObatModel> listObat = obatService.getListObat();
         model.addAttribute("listObat", listObat);
         log.info("access daftar obat");

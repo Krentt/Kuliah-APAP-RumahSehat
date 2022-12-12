@@ -26,7 +26,7 @@ public class TagihanServiceImpl implements TagihanService{
 
     @Override
     public TagihanModel createTagihanByAppointment(AppointmentModel appointmentModel) {
-        TagihanModel tagihan = new TagihanModel();
+        var tagihan = new TagihanModel();
         tagihan.setTanggalTerbuat(appointmentModel.getWaktuAwal());
         tagihan.setTanggalBayar(appointmentModel.getWaktuAwal().plusWeeks(2));
         tagihan.setIsPaid(false);

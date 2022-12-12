@@ -26,7 +26,7 @@ public class ResepRESTController {
     @GetMapping("view/{kode}")
     public ResepDTO getResepByKode(@PathVariable Long kode){
         ResepModel resep = resepService.getResepByIdResep(kode);
-        ResepDTO resepDTO = new ResepDTO();
+        var resepDTO = new ResepDTO();
         resepDTO.setId(resep.getId());
         resepDTO.setDone(resep.getIsDone());
         resepDTO.setCreatedAt(resep.getCreatedAt());

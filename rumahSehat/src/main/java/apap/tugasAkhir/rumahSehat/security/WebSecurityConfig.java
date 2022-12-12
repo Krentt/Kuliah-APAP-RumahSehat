@@ -18,33 +18,40 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig {
+
+
     @Configuration
     public static class UILoginWebSecurityConfigurerAdapter extends WebSecurityConfigurerAdapter {
         @Override
         protected void configure(HttpSecurity httpSecurity) throws Exception {
+
+            var roleAdmin = "Admin";
+            var roleDokter = "Dokter";
+            var roleApoteker = "Apoteker";
+
             httpSecurity
                     .authorizeRequests()
                     .antMatchers("/css/**").permitAll()
                     .antMatchers("/js/**").permitAll()
                     .antMatchers("/login-sso","/validate-ticket").permitAll()
-                    .antMatchers("/obat/view-obat").hasAnyAuthority("Admin","Apoteker")
-                    .antMatchers("/obat/{idObat}/update").hasAuthority("Apoteker")
-                    .antMatchers("/user/add-dokter").hasAuthority("Admin")
-                    .antMatchers("/user/add-apoteker").hasAuthority("Admin")
-                    .antMatchers("/user/view-dokter").hasAuthority("Admin")
-                    .antMatchers("/user/view-apoteker").hasAuthority("Admin")
-                    .antMatchers("/appointment/view-all").hasAuthority("Admin")
-                    .antMatchers("/chart/").hasAuthority("Admin")
-                    .antMatchers("/chart/bulanan-line").hasAuthority("Admin")
-                    .antMatchers("/chart/tahunan-line").hasAuthority("Admin")
-                    .antMatchers("/chart/apptLine-bulan").hasAuthority("Admin")
-                    .antMatchers("/chart/pptLine-tahun").hasAuthority("Admin")
-                    .antMatchers("/chart/quantity-bar").hasAuthority("Admin")
-                    .antMatchers("/chart/income-bar").hasAuthority("Admin")
-                    .antMatchers("/chart/appointment-bar").hasAuthority("Admin")
-                    .antMatchers("/appointment/dokter-view-all").hasAuthority("Dokter")
-                    .antMatchers("/appointment/{kode}").hasAnyAuthority("Dokter", "Admin")
-                    .antMatchers("/appointment/{kode}/selesai").hasAuthority("Dokter")
+                    .antMatchers("/obat/view-obat").hasAnyAuthority(roleAdmin,roleApoteker)
+                    .antMatchers("/obat/{idObat}/update").hasAuthority(roleApoteker)
+                    .antMatchers("/user/add-dokter").hasAuthority(roleAdmin)
+                    .antMatchers("/user/add-apoteker").hasAuthority(roleAdmin)
+                    .antMatchers("/user/view-dokter").hasAuthority(roleAdmin)
+                    .antMatchers("/user/view-apoteker").hasAuthority(roleAdmin)
+                    .antMatchers("/appointment/view-all").hasAuthority(roleAdmin)
+                    .antMatchers("/chart/").hasAuthority(roleAdmin)
+                    .antMatchers("/chart/bulanan-line").hasAuthority(roleAdmin)
+                    .antMatchers("/chart/tahunan-line").hasAuthority(roleAdmin)
+                    .antMatchers("/chart/apptLine-bulan").hasAuthority(roleAdmin)
+                    .antMatchers("/chart/pptLine-tahun").hasAuthority(roleAdmin)
+                    .antMatchers("/chart/quantity-bar").hasAuthority(roleAdmin)
+                    .antMatchers("/chart/income-bar").hasAuthority(roleAdmin)
+                    .antMatchers("/chart/appointment-bar").hasAuthority(roleAdmin)
+                    .antMatchers("/appointment/dokter-view-all").hasAuthority(roleDokter)
+                    .antMatchers("/appointment/{kode}").hasAnyAuthority(roleDokter, roleAdmin)
+                    .antMatchers("/appointment/{kode}/selesai").hasAuthority(roleDokter)
                     .anyRequest().authenticated()
                     .and()
                     .formLogin()

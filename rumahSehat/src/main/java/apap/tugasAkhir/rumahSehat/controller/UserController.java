@@ -29,9 +29,11 @@ public class UserController {
     @Autowired
     private RoleService roleService;
 
+
+
     @GetMapping(value = "/add-dokter")
-    private String addDokterFormPage(Model model){
-        DokterModel dokter = new DokterModel();
+    public String addDokterFormPage(Model model){
+        var dokter = new DokterModel();
         RoleModel role = roleService.getById(3L);
         model.addAttribute("dokter", dokter);
         model.addAttribute("role", role);
@@ -39,7 +41,7 @@ public class UserController {
     }
 
     @PostMapping(value = "/add-dokter")
-    private String addDokterSubmit(@ModelAttribute DokterModel user, Model model){
+    public String addDokterSubmit(@ModelAttribute DokterModel user, Model model){
         user.setIsSso(false);
         userService.addUser(user);
         model.addAttribute("user", user);
@@ -47,8 +49,8 @@ public class UserController {
     }
 
     @GetMapping(value = "/add-apoteker")
-    private String addApotekerFormPage(Model model){
-        ApotekerModel apoteker = new ApotekerModel();
+    public String addApotekerFormPage(Model model){
+        var apoteker = new ApotekerModel();
         RoleModel role = roleService.getById(4L);
         model.addAttribute("apoteker", apoteker);
         model.addAttribute("role", role);
@@ -56,7 +58,7 @@ public class UserController {
     }
 
     @PostMapping(value = "/add-apoteker")
-    private String addApotekerSubmit(@ModelAttribute ApotekerModel user, Model model){
+    public String addApotekerSubmit(@ModelAttribute ApotekerModel user, Model model){
         user.setIsSso(false);
         userService.addUser(user);
         model.addAttribute("user", user);
@@ -64,21 +66,21 @@ public class UserController {
     }
 
     @GetMapping(value = "/view-dokter")
-    private String viewAllDokter(Model model){
+    public String viewAllDokter(Model model){
         List<DokterModel> listDokter = dokterService.getListDokter();
         model.addAttribute("listDokter", listDokter);
         return "user/view-all-dokter";
     }
 
     @GetMapping(value = "/view-apoteker")
-    private String viewAllApoteker(Model model){
+    public String viewAllApoteker(Model model){
         List<ApotekerModel> listApoteker = apotekerService.getListApoteker();
         model.addAttribute("listApoteker", listApoteker);
         return "user/view-all-apoteker";
     }
 
     @GetMapping(value = "/view-pasien")
-    private String viewAllPasien(Model model){
+    public String viewAllPasien(Model model){
         List<PasienModel> listPasien = pasienService.getAllPasien();
         model.addAttribute("listPasien", listPasien);
         return "user/view-all-pasien";

@@ -1,6 +1,5 @@
 package apap.tugasAkhir.rumahSehat.restController;
 
-import apap.tugasAkhir.rumahSehat.model.PasienModel;
 import apap.tugasAkhir.rumahSehat.model.TagihanModel;
 import apap.tugasAkhir.rumahSehat.restModel.PaymentDTO;
 import apap.tugasAkhir.rumahSehat.service.PasienService;
@@ -26,6 +25,7 @@ public class TagihanRESTController {
     @Autowired
     private TagihanService tagihanService;
 
+    String strusername = "USERNAME";
 
     /**
      * Cisco:Feat16 (Melihat Daftar Tagihan pasien)
@@ -37,14 +37,14 @@ public class TagihanRESTController {
             @RequestHeader("Authorization") String token) {
         //Gets Profile from JWT Token
         Map<String, String> decodedToken = decode(token);
-        PasienModel pasienModel = pasienService.getPasienByUsername(decodedToken.get("USERNAME"));
+        var pasienModel = pasienService.getPasienByUsername(decodedToken.get(strusername));
 
 
         //Gets Tagihan List for Pasien
         List<TagihanModel> tagihanModelList = new ArrayList<>(tagihanService.getListTagihanByPasien(pasienModel));
 
 
-        log.info("Access List Tagihan (" + decodedToken.get("USERNAME") + ")");
+        log.info("Access List Tagihan (" + decodedToken.get(strusername) + ")");
         return tagihanModelList;
     }
 
@@ -59,13 +59,13 @@ public class TagihanRESTController {
             BindingResult bindingResult) {
         //Gets Profile from JWT Token
         Map<String, String> decodedToken = decode(token);
-        log.info("Update Tagihan (" + decodedToken.get("USERNAME") + ")");
+        log.info("Update Tagihan (" + decodedToken.get(strusername) + ")");
 
-        PasienModel pasienModel = pasienService.getPasienByUsername(decodedToken.get("USERNAME"));
+        var pasienModel = pasienService.getPasienByUsername(decodedToken.get(strusername));
         Map<String, Object> apiResponse = new HashMap<>();
 
         //Gets Specific Tagihan & Saldo pasien
-        TagihanModel tagihanModel = tagihanService.getTagihanById(paymentDTO.getId());
+        var tagihanModel = tagihanService.getTagihanById(paymentDTO.getId());
         Long saldo = pasienModel.getSaldoPasien();
 
         if(bindingResult.hasFieldErrors()){
@@ -75,7 +75,7 @@ public class TagihanRESTController {
             );
         } else {
             log.info("[CHECK UPDATE] Bayar Tagihan");
-            boolean error = false;
+            var error = false;
             if (saldo < tagihanModel.getTotal()) {
                 log.info("[ERROR] Saldo anda tidak mencukupi");
                 apiResponse.put("Status", "ERROR");
@@ -100,7 +100,7 @@ public class TagihanRESTController {
             }
         }
 
-        log.info("END Update Tagihan (" + decodedToken.get("USERNAME") + ")");
+        log.info("END Update Tagihan (" + decodedToken.get(strusername) + ")");
         return apiResponse;
     }
 
@@ -111,11 +111,10 @@ public class TagihanRESTController {
      */
     private Map<String, String> decode(String token) {
         String[] chunks = token.split("\\.");
-        Base64.Decoder decoder = Base64.getUrlDecoder();
-        String payload = new String(decoder.decode(chunks[1]));
-        Gson gson = new Gson();
-        Map<String, String> decodedToken = gson.fromJson(payload, new TypeToken<Map<String, String>>() {
+        var decoder = Base64.getUrlDecoder();
+        var payload = new String(decoder.decode(chunks[1]));
+        var gson = new Gson();
+        return gson.fromJson(payload, new TypeToken<Map<String, String>>() {
         }.getType());
-        return decodedToken;
     }
 }

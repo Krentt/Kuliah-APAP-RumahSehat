@@ -20,7 +20,7 @@ public class DokterRESTController {
     DokterService dokterService;
 
     @GetMapping("/get-all")
-    private List<DokterModel> viewAllDokter(){
+    public List<DokterModel> viewAllDokter(){
         log.info("Get All Dokter!");
         return dokterService.getListDokter();
     }
