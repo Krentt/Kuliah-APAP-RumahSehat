@@ -312,7 +312,7 @@ public class ChartController {
             model.addAttribute("ylabel", "Jumlah Appointment");
         } else {
             for (DokterModel dokter : listDokter){
-                long income = 0L;
+                var income = 0L;
                 if (dokter.getAppointmentDokter() != null){
                     income = ((long) dokter.getAppointmentDokter().size() * dokter.getTarifDokter());
                 }
