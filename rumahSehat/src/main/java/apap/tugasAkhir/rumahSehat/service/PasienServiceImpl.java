@@ -2,12 +2,10 @@ package apap.tugasAkhir.rumahSehat.service;
 
 import apap.tugasAkhir.rumahSehat.model.AppointmentModel;
 import apap.tugasAkhir.rumahSehat.model.PasienModel;
-import apap.tugasAkhir.rumahSehat.model.TagihanModel;
 import apap.tugasAkhir.rumahSehat.repository.PasienDb;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -48,7 +46,7 @@ public class PasienServiceImpl implements PasienService{
      */
     @Override
     public List<AppointmentModel> getPasienAppointment(String username) {
-        PasienModel pasienModel = pasienDb.findByUsername(username);
+        var pasienModel = pasienDb.findByUsername(username);
 
         return pasienModel.getAppointmentPasien();
     }

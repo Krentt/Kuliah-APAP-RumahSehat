@@ -1,17 +1,11 @@
 package apap.tugasAkhir.rumahSehat.controller;
 
 import apap.tugasAkhir.rumahSehat.model.*;
-import apap.tugasAkhir.rumahSehat.service.ApotekerService;
-import apap.tugasAkhir.rumahSehat.service.AppointmentService;
-import apap.tugasAkhir.rumahSehat.service.JumlahObatService;
-import apap.tugasAkhir.rumahSehat.service.ObatService;
-import apap.tugasAkhir.rumahSehat.service.ResepService;
-import apap.tugasAkhir.rumahSehat.service.TagihanService;
+import apap.tugasAkhir.rumahSehat.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -48,7 +42,7 @@ public class ResepController {
         AppointmentModel appointment = appointmentService.getAppointmentByKode(kodeAppointment);
         resep.setAppointment(appointment);
 
-        List<JumlahModel> listJumlahModelNew = new ArrayList<JumlahModel>();
+        List<JumlahModel> listJumlahModelNew = new ArrayList<>();
 
         resep.setListJumlahModel(listJumlahModelNew);
         resep.getListJumlahModel().add(new JumlahModel());
@@ -116,8 +110,7 @@ public class ResepController {
             @RequestParam("deleteRow") Integer row,
             Model model
     ) {
-        final Integer rowId = Integer.valueOf(row);
-        resep.getListJumlahModel().remove(rowId.intValue());
+        resep.getListJumlahModel().remove(row.intValue());
 
         List<ObatModel> listObat = obatService.getListObat();
 
@@ -140,11 +133,10 @@ public class ResepController {
         AppointmentModel appointment = resep.getAppointment();
         List<JumlahModel> listJumlahModel = resep.getListJumlahModel();
 
-        boolean bisaKonfirmasi = true;
-        if (resep.getIsDone() == false) {
-            for (int i = 0; i < listJumlahModel.size(); i++) {
-                JumlahModel jumlahModel = listJumlahModel.get(i);
-                ObatModel obatModel = jumlahModel.getObat();
+        var bisaKonfirmasi = true;
+        if (!resep.getIsDone()) {
+            for (JumlahModel jumlahModel : listJumlahModel) {
+                var obatModel = jumlahModel.getObat();
                 if (jumlahModel.getKuantitas() > obatModel.getStok()) {
                     bisaKonfirmasi = false;
                     break;
@@ -171,14 +163,13 @@ public class ResepController {
         AppointmentModel appointment = resep.getAppointment();
         List<JumlahModel> listJumlahModel = resep.getListJumlahModel();
 
-        int hargaResep = 0;
-        for (int i = 0; i < listJumlahModel.size(); i++) {
-            JumlahModel jumlahModel = listJumlahModel.get(i);
-            jumlahModel.getObat().setStok(jumlahModel.getObat().getStok()-jumlahModel.getKuantitas());
+        var hargaResep = 0;
+        for (JumlahModel jumlahModel : listJumlahModel) {
+            jumlahModel.getObat().setStok(jumlahModel.getObat().getStok() - jumlahModel.getKuantitas());
             hargaResep += (jumlahModel.getObat().getHarga() * jumlahModel.getKuantitas());
         }
 
-        TagihanModel tagihan = new TagihanModel();
+        var tagihan = new TagihanModel();
         tagihan.setTanggalTerbuat(LocalDateTime.now());
         tagihan.setAppointmentModel(appointment);
         tagihan.setIsPaid(false);
@@ -189,7 +180,7 @@ public class ResepController {
         appointment.setDone(true);
         appointmentService.createAppointent(appointment);
 
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        var auth = SecurityContextHolder.getContext().getAuthentication();
         String username = auth.getName();
         ApotekerModel apoteker = apotekerService.getApotekerByUsername(username);
 
