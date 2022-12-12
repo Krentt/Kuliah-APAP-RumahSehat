@@ -31,9 +31,9 @@
 
 | NPM | Nama Lengkap | Fitur yang akan diselesaikan  |
 | ----------| --- | ---------- | 
-| 2006596573 | Marvel Krent | 2 3 4 5 |
-| 2006596743 | Siti Fatimah Tuma'ninah | 1 12 13 |
-| 1906299143 | Shabiqa Amani | 9 10 11 |
+| 2006596573 | Marvel Krent | 2 3 4 5 6 7 8 11(mobile) 20(bar chart) |
+| 2006596743 | Siti Fatimah Tuma'ninah | 1 12 13 20(line chart) |
+| 1906299143 | Shabiqa Amani | 9 10 11(website) |
 | 2006596604 | Cisco Salya Wicaksana | 14 15 16 17 |
-| 1806235694 | Syauqi Muhammad Dhiya Ulhaq | 6 7 8 |
+| 1806235694 | Syauqi Muhammad Dhiya Ulhaq | - |
 ---
