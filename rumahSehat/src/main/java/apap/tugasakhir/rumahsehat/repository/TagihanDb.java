@@ -9,7 +9,7 @@ import java.util.List;
 
 @Repository
 public interface TagihanDb extends JpaRepository<TagihanModel, Long> {
-    List<TagihanModel> findTagihanModelByAppointmentModel_PasienModel(PasienModel pasienModel);
+    List<TagihanModel> findTagihanModelByAppointmentModelPasienModel(PasienModel pasienModel);
 
     TagihanModel findById(String id);
 }

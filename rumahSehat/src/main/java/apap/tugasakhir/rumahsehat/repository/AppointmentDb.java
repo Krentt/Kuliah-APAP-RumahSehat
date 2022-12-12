@@ -13,5 +13,5 @@ public interface AppointmentDb extends JpaRepository<AppointmentModel, Long> {
 
     List<AppointmentModel> findAllByWaktuAwalBetween(LocalDateTime awal, LocalDateTime akhir);
 
-    List<AppointmentModel> findAllByDokterModel_UsernameAndWaktuAwalBetween(String username,LocalDateTime awal, LocalDateTime akhir);
+    List<AppointmentModel> findAllByDokterModelUsernameAndWaktuAwalBetween(String username,LocalDateTime awal, LocalDateTime akhir);
 }
