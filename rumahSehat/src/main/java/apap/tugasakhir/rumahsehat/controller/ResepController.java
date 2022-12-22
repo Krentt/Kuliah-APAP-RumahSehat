@@ -1,6 +1,7 @@
 package apap.tugasakhir.rumahsehat.controller;
 
 import apap.tugasakhir.rumahsehat.model.*;
+import apap.tugasakhir.rumahsehat.restmodel.ResepModelDTO;
 import apap.tugasakhir.rumahsehat.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -58,7 +59,9 @@ public class ResepController {
     }
 
     @PostMapping(value="/add", params = {"save"})
-    public String addResepSubmit(@ModelAttribute ResepModel resep, Model model) {
+    public String addResepSubmit(@ModelAttribute ResepModelDTO resepDTO, Model model) {
+        ResepModel resep = setResepFromDto(resepDTO);
+
        List<JumlahModel> listJumlahModel = resep.getListJumlahModel();
         Long idResep = (long) resepService.getListResep().size() + 1;
         resep.setId(idResep);
@@ -94,9 +97,10 @@ public class ResepController {
 
     @PostMapping(value="/add", params={"addRow"})
     public String addRowObatMultiple(
-            @ModelAttribute ResepModel resep,
+            @ModelAttribute ResepModelDTO resepDTO,
             Model model
     ){
+        ResepModel resep = setResepFromDto(resepDTO);
         if (resep.getListJumlahModel() == null || resep.getListJumlahModel().isEmpty()){
             resep.setListJumlahModel(new ArrayList<>());
         }
@@ -110,10 +114,11 @@ public class ResepController {
 
     @PostMapping(value = "/add", params = {"deleteRow"})
     public String deleteRowObatMultiple(
-            @ModelAttribute ResepModel resep,
+            @ModelAttribute ResepModelDTO resepDTO,
             @RequestParam("deleteRow") Integer row,
             Model model
     ) {
+        var resep = setResepFromDto(resepDTO);
         resep.getListJumlahModel().remove(row.intValue());
 
         List<ObatModel> listObat = obatService.getListObat();
@@ -192,6 +197,17 @@ public class ResepController {
         resep.setIsDone(true);
         resepService.addResep(resep);
         return "redirect:/resep/" + resep.getId();
+    }
+
+    public ResepModel setResepFromDto(ResepModelDTO resepDTO){
+        var resep = new ResepModel();
+        resep.setId(resepDTO.getId());
+        resep.setIsDone(resepDTO.getIsDone());
+        resep.setCreatedAt(resepDTO.getCreatedAt());
+        resep.setListJumlahModel(resepDTO.getListJumlahModel());
+        resep.setAppointment(resepDTO.getAppointment());
+        resep.setApotekerModel(resepDTO.getApotekerModel());
+        return resep;
     }
 
 }

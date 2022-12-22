@@ -7,6 +7,8 @@ import apap.tugasakhir.rumahsehat.restmodel.PasienDTO;
 import apap.tugasakhir.rumahsehat.security.JwtTokenUtil;
 import apap.tugasakhir.rumahsehat.service.RoleService;
 import apap.tugasakhir.rumahsehat.service.UserService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -58,21 +60,21 @@ public class JwtAuthenticationController {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
         } catch (DisabledException e) {
             log.info("User Disabled");
-            throw new SecurityException("USER_DISABLED", e);
+            throw new DisabledException("USER_DISABLED", e);
         } catch (BadCredentialsException e) {
             log.info("Invalid Credentials!");
-            throw new SecurityException("INVALID_CREDENTIALS", e);
+            throw new BadCredentialsException("INVALID_CREDENTIALS", e);
         }
     }
 
     // Rest Controller PASIEN SIGN UP
     @PostMapping(value = "/signup")
-    public ResponseEntity<?> registerPasien(@RequestBody PasienDTO pasienDTO){
+    public ResponseEntity<String> registerPasien(@RequestBody PasienDTO pasienDTO){
         log.info("User Signup API");
         // Check username
         if (userService.getUserByUsername(pasienDTO.getUsername()) != null){
             log.info("Username is already taken!");
-            return new ResponseEntity<>("Username is already taken!", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("{ \"error\": \"Username is already taken!\" }", HttpStatus.BAD_REQUEST);
         }
         var pasienModel = new PasienModel();
         pasienModel.setNama(pasienDTO.getNama());
@@ -90,6 +92,11 @@ public class JwtAuthenticationController {
 
         final String token = jwtTokenUtil.generateToken(userDetails);
 
-        return ResponseEntity.ok(new JwtResponse(token));
+        var mapper = new ObjectMapper();
+        try {
+            return ResponseEntity.ok(mapper.writeValueAsString(new JwtResponse(token)));
+        } catch (JsonProcessingException e) {
+            return new ResponseEntity<>("{ \"error\": \"Internal system error!\" }", HttpStatus.BAD_REQUEST);
+        }
     }
 }

@@ -1,30 +1,32 @@
 package apap.tugasakhir.rumahsehat.model;
 
+import apap.tugasakhir.rumahsehat.util.StringPrefixedSequenceIdGenerator;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.id.enhanced.SequenceStyleGenerator;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
-import static apap.tugasakhir.rumahsehat.util.StringPrefixedSequenceIdGenerator.VALUE_PREFIX_PARAMETER;
-import static org.hibernate.id.enhanced.SequenceStyleGenerator.INCREMENT_PARAM;
-
 @Getter
 @Setter
 @Entity
 public class TagihanModel implements Serializable {
+    private static final StringPrefixedSequenceIdGenerator stringPrefixedSequenceIdGenerator = new StringPrefixedSequenceIdGenerator();
+
+
     @Id
     //Generate according to soal: BILL-x (BILL-1, BILL-2, ...)
     @GeneratedValue(strategy = GenerationType.SEQUENCE ,generator = "seq_tagihan_id")
     @GenericGenerator(
             name="seq_tagihan_id", strategy = "apap.tugasakhir.rumahsehat.util.StringPrefixedSequenceIdGenerator",
             parameters = {
-                    @org.hibernate.annotations.Parameter(name = INCREMENT_PARAM, value = "0"),
-                    @org.hibernate.annotations.Parameter(name = VALUE_PREFIX_PARAMETER, value = "BILL-")
+                    @org.hibernate.annotations.Parameter(name = SequenceStyleGenerator.INCREMENT_PARAM, value = "0"),
+                    @org.hibernate.annotations.Parameter(name = StringPrefixedSequenceIdGenerator.VALUE_PREFIX_PARAMETER, value = "BILL-")
             })
     private String id;
 

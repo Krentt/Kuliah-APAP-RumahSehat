@@ -1,6 +1,10 @@
 package apap.tugasakhir.rumahsehat.setting;
 
 public class Setting {
+    private Setting() {
+        throw new IllegalStateException("Setting class");
+    }
+
     public static final String CLIENT_BASE_URL = "http://localhost:8080";
     public static final String CLIENT_LOGIN = CLIENT_BASE_URL + "/validate-ticket";
     public static final String CLIENT_LOGOUT = CLIENT_BASE_URL + "/logout";

@@ -36,7 +36,7 @@ class _LoginScreen extends State<LoginScreen> {
       try{
         await Provider.of<Authh>(context, listen: false).signup(data.name, data.password, data.additionalSignupData!["email"], data.additionalSignupData!["umur"], data.additionalSignupData!["nama"]);
       } catch (err){
-        return "Sign Up Gagal!";
+        return "Sign Up Gagal! " + err.toString();
       }
       return null;
     });
