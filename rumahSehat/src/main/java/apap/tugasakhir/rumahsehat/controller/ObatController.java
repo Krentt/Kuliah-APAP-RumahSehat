@@ -36,12 +36,7 @@ public class ObatController {
 
     @PostMapping(value = "/{idObat}/update")
     public String updateObatSubmitPage(@ModelAttribute ObatDTO obat, Model model) {
-        var obatModel = new ObatModel();
-        obatModel.setIdObat(obat.getIdObat());
-        obatModel.setNamaObat(obat.getNamaObat());
-        obatModel.setStok(obat.getStok());
-        obatModel.setHarga(obat.getHarga());
-        obatModel.setListJumlahModel(obat.getListJumlahModel());
+        var obatModel = obat.toModel();
 
         ObatModel updatedObat= obatService.updateObat(obatModel);
         model.addAttribute("idObat", updatedObat.getIdObat());

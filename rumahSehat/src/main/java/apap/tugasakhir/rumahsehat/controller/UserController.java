@@ -44,14 +44,7 @@ public class UserController {
 
     @PostMapping(value = "/add-dokter")
     public String addDokterSubmit(@ModelAttribute DokterDTO dokterDTO, Model model){
-        var user = new DokterModel();
-        user.setTarifDokter(dokterDTO.getTarifDokter());
-        user.setNama(dokterDTO.getNama());
-        user.setEmail(dokterDTO.getEmail());
-        user.setPassword(dokterDTO.getPassword());
-        user.setUsername(dokterDTO.getUsername());
-        user.setIsSso(false);
-        user.setRole(dokterDTO.getRole());
+        var user = dokterDTO.toUserModel();
         userService.addUser(user);
         model.addAttribute("user", user);
         return "redirect:/user/view-dokter";
@@ -68,13 +61,7 @@ public class UserController {
 
     @PostMapping(value = "/add-apoteker")
     public String addApotekerSubmit(@ModelAttribute ApotekerDTO apotekerDTO, Model model){
-        var user = new ApotekerModel();
-        user.setNama(apotekerDTO.getNama());
-        user.setEmail(apotekerDTO.getEmail());
-        user.setPassword(apotekerDTO.getPassword());
-        user.setUsername(apotekerDTO.getUsername());
-        user.setIsSso(false);
-        user.setRole(apotekerDTO.getRole());
+        var user = apotekerDTO.toUserModel();
         userService.addUser(user);
         model.addAttribute("user", user);
         return "redirect:/user/view-apoteker";

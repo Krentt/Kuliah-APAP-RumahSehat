@@ -1,6 +1,7 @@
 package apap.tugasakhir.rumahsehat.restmodel;
 
 import apap.tugasakhir.rumahsehat.model.JumlahModel;
+import apap.tugasakhir.rumahsehat.model.ObatModel;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,4 +15,14 @@ public class ObatDTO {
     private Integer stok;
     private Integer harga;
     private List<JumlahModel> listJumlahModel;
+
+    public ObatModel toModel(){
+        var obatModel = new ObatModel();
+        obatModel.setIdObat(this.idObat);
+        obatModel.setNamaObat(this.namaObat);
+        obatModel.setStok(this.stok);
+        obatModel.setHarga(this.harga);
+        obatModel.setListJumlahModel(this.listJumlahModel);
+        return obatModel;
+    }
 }
