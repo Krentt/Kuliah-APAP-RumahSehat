@@ -38,8 +38,7 @@ public class JwtAuthenticationController {
 
 
     @PostMapping(value = "/authenticate")
-    public ResponseEntity<JwtResponse> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest)
-            throws Exception {
+    public ResponseEntity<JwtResponse> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest) {
         log.info("User login API");
         authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
 
@@ -51,7 +50,7 @@ public class JwtAuthenticationController {
         return ResponseEntity.ok(new JwtResponse(token));
     }
 
-    private void authenticate(String username, String password) throws Exception {
+    private void authenticate(String username, String password) throws RuntimeException {
         Objects.requireNonNull(username);
         Objects.requireNonNull(password);
 
@@ -59,10 +58,10 @@ public class JwtAuthenticationController {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
         } catch (DisabledException e) {
             log.info("User Disabled");
-            throw new Exception("USER_DISABLED", e);
+            throw new RuntimeException("USER_DISABLED", e);
         } catch (BadCredentialsException e) {
             log.info("Invalid Credentials!");
-            throw new Exception("INVALID_CREDENTIALS", e);
+            throw new RuntimeException("INVALID_CREDENTIALS", e);
         }
     }
 

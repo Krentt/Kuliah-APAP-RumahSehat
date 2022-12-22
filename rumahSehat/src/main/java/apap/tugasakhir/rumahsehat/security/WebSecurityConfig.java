@@ -17,7 +17,11 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
-public class WebSecurityConfig {
+class WebSecurityConfig {
+
+    private WebSecurityConfig(){
+        throw new IllegalStateException("WebSecurityConfig");
+    }
 
 
     @Configuration
@@ -66,7 +70,7 @@ public class WebSecurityConfig {
         }
 
 
-        public BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        private static final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
         @Autowired
         private UserDetailsService userDetailsService;
@@ -96,7 +100,7 @@ public class WebSecurityConfig {
             auth.userDetailsService(jwtUserDetailsService).passwordEncoder(encoder);
         }
 
-        public BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        private static final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
         @Bean
         @Override
