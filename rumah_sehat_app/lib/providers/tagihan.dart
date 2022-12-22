@@ -24,7 +24,7 @@ class TagihanProvider with ChangeNotifier{
 
   /// Single Tagihan Page
   Future<void> tagihanDetails() async {
-    Uri url = Uri.parse("http://10.0.2.2:8080/tagihan/{id}/detail");
+    Uri url = Uri.parse("https://apap-057.cs.ui.ac.id/tagihan/{id}/detail");
 
     /// JWT Token
     String? finalToken = "Bearer " + token.toString();
@@ -64,7 +64,7 @@ class TagihanProvider with ChangeNotifier{
 
   /// Tagihan List Page
   Future<void> inisialData() async {
-    Uri url = Uri.parse("http://10.0.2.2:8080/tagihan/list");
+    Uri url = Uri.parse("https://apap-057.cs.ui.ac.id/tagihan/list");
     String? finalToken = "Bearer " + token.toString();
 
     try{
@@ -115,7 +115,7 @@ class TagihanProvider with ChangeNotifier{
   Future<void> bayar(String id) async {
     print("======(LOG) Bayar Tagihan =====");
     // print("Backend Saldo: " + saldo.toString());
-    Uri url = Uri.parse("http://10.0.2.2:8080/tagihan/detail");
+    Uri url = Uri.parse("https://apap-057.cs.ui.ac.id/tagihan/detail");
 
     /// JWT Token
     String? finalToken = "Bearer " + token.toString();

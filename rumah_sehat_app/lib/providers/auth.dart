@@ -23,7 +23,7 @@ class Authh with ChangeNotifier{
 
 
   Future<void> signup(String? username, String? password, String? email, String? umur, String? nama) async{
-    Uri url = Uri.parse("http://10.0.2.2:8080/signup");
+    Uri url = Uri.parse("https://apap-057.cs.ui.ac.id/signup");
 
     try{
       if (username == null || password == null || email == null || umur == null || nama == null){
@@ -56,7 +56,7 @@ class Authh with ChangeNotifier{
   }
 
   Future<void> login(String? username, String? password) async{
-    Uri url = Uri.parse("http://10.0.2.2:8080/authenticate");
+    Uri url = Uri.parse("https://apap-057.cs.ui.ac.id/authenticate");
 
     try{
       var response = await http.post(url,

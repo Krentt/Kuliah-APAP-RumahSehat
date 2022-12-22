@@ -23,7 +23,7 @@ class Reseps with ChangeNotifier{
   }
 
   Future<void> inisialData(String kode) async {
-    Uri url = Uri.parse("http://10.0.2.2:8080/resep/view/$kode");
+    Uri url = Uri.parse("https://apap-057.cs.ui.ac.id/resep/view/$kode");
     String? finalToken = "Bearer " + token.toString();
 
     try{

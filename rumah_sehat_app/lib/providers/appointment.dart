@@ -19,7 +19,7 @@ class Appointments with ChangeNotifier{
   List<Appointment> get allAppointments => _allAppointments;
 
   Future<void> addAppointment(String dokter, DateTime waktuAwal) async {
-    Uri url = Uri.parse("http://10.0.2.2:8080/appointment/add");
+    Uri url = Uri.parse("https://apap-057.cs.ui.ac.id/appointment/add");
     final f = DateFormat('dd-MM-yyyy hh:mm');
     String? finalToken = "Bearer " + token.toString();
     Map<String, dynamic> payload = Jwt.parseJwt(token.toString());
@@ -68,7 +68,7 @@ class Appointments with ChangeNotifier{
   }
 
   Future<void> inisialData() async {
-    Uri url = Uri.parse("http://10.0.2.2:8080/appointment/pasien-view-all");
+    Uri url = Uri.parse("https://apap-057.cs.ui.ac.id/appointment/pasien-view-all");
     String? finalToken = "Bearer " + token.toString();
 
     try{
