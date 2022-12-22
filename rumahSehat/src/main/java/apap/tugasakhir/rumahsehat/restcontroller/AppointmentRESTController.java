@@ -54,7 +54,7 @@ public class AppointmentRESTController {
                     appointment.setDokterModel(dokterService.getDokterByUsername(appt.getDokterName()));
                     appointment.setWaktuAwal(appt.getWaktuAwal());
                     apiResp.put(apiRespHeader, "Success");
-                    apiResp.put("body", appointmentService.createAppointent(appointment));
+                    apiResp.put("body", appointmentService.createAppointment(appointment));
                 } else {
                     log.info("[GAGAL ADD] Appointment Bentrok dengan jadwal Dokter!");
                     apiResp.put(apiRespHeader, "Error");

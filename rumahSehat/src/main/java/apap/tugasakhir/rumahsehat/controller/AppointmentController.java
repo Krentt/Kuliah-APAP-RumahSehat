@@ -2,6 +2,7 @@ package apap.tugasakhir.rumahsehat.controller;
 
 import apap.tugasakhir.rumahsehat.model.AppointmentModel;
 import apap.tugasakhir.rumahsehat.model.DokterModel;
+import apap.tugasakhir.rumahsehat.model.TagihanModel;
 import apap.tugasakhir.rumahsehat.service.AppointmentService;
 import apap.tugasakhir.rumahsehat.service.DokterService;
 import apap.tugasakhir.rumahsehat.service.TagihanService;
@@ -68,10 +69,10 @@ public class AppointmentController {
             }
         }
         appt.setDone(true);
-        appointmentService.createAppointent(appt);
+        appointmentService.createAppointment(appt);
 
         // Cisco: Membuat tagihan from appointment (appt)
-        tagihanService.createTagihanByAppointment(appt);
+        tagihanService.createTagihanByAppointment(appt, new TagihanModel());
 
         redirectAttrs.addFlashAttribute("success", "Selamat! Appointment telah selesai");
         return new ModelAndView("redirect:/appointment/{kode}");

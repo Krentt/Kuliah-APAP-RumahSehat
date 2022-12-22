@@ -1,10 +1,8 @@
 package apap.tugasakhir.rumahsehat.restmodel;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-@Getter
-@Setter
+@Data
 public class PasienDTO {
     private String nama;
     private String username;

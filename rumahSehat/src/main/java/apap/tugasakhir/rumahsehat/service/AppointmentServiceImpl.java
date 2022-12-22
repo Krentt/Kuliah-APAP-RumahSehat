@@ -21,10 +21,16 @@ public class AppointmentServiceImpl implements AppointmentService{
     }
 
     @Override
-    public AppointmentModel createAppointent(AppointmentModel appt) {
+    public AppointmentModel createAppointment(AppointmentModel appt) {
         return appointmentDb.save(appt);
     }
 
+    /**
+     * Mencari Appointment pada waktu tertenu
+     * @param waktuAwalInput waktu appointment dimulai yang dicari
+     * @param dokter yang memilikki appointment
+     * @return appt yang mulai pada waktuAwalInput or NULL if not found
+     */
     @Override
     public AppointmentModel checkJadwalDokter(LocalDateTime waktuAwalInput, DokterModel dokter) {
 
@@ -35,6 +41,12 @@ public class AppointmentServiceImpl implements AppointmentService{
         return null;
     }
 
+    /**
+     * Mencari Appointment pada waktu tertenu
+     * @param waktuAwalInput waktu appointment dimulai yang dicari
+     * @param pasien yang memilikki appointment
+     * @return appt yang mulai pada waktuAwalInput or NULL if not found
+     */
     @Override
     public AppointmentModel checkJadwalPasien(LocalDateTime waktuAwalInput, PasienModel pasien) {
 
@@ -45,18 +57,19 @@ public class AppointmentServiceImpl implements AppointmentService{
         return null;
     }
 
-    private boolean checkWaktu(LocalDateTime waktuAwalInput, AppointmentModel apptPasien) {
-        LocalDateTime waktuAwalPasien = apptPasien.getWaktuAwal();
-        LocalDateTime waktuAkhirPasien = apptPasien.getWaktuAwal().plusHours(1L);
-        if (waktuAwalInput.isEqual(waktuAwalPasien)){
+    private boolean checkWaktu(LocalDateTime waktuAwalInput, AppointmentModel appointmentModel) {
+        LocalDateTime waktuAwal = appointmentModel.getWaktuAwal();
+        LocalDateTime waktuAkhir = appointmentModel.getWaktuAwal().plusHours(1L);
+        if (waktuAwalInput.isEqual(waktuAwal)){
             return true;
         } else {
-            if (waktuAwalInput.isAfter(waktuAwalPasien) && waktuAwalInput.isBefore(waktuAkhirPasien)) {
+            if (waktuAwalInput.isAfter(waktuAwal) && waktuAwalInput.isBefore(waktuAkhir)) {
                 return true;
             }
         }
 
-        return waktuAwalInput.plusHours(1L).isAfter(waktuAwalPasien) && waktuAwalInput.plusHours(1L).isBefore(waktuAkhirPasien);
+        return waktuAwalInput.plusHours(1L).isAfter(waktuAwal) &&
+                waktuAwalInput.plusHours(1L).isBefore(waktuAkhir);
     }
 
     @Override

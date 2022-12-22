@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface AppointmentService {
     List<AppointmentModel> getListAppointment();
-    AppointmentModel createAppointent(AppointmentModel appt);
+    AppointmentModel createAppointment(AppointmentModel appt);
     AppointmentModel checkJadwalDokter(LocalDateTime waktuAwalInput, DokterModel dokter);
     AppointmentModel checkJadwalPasien(LocalDateTime waktuAwalInput, PasienModel pasien);
     AppointmentModel getAppointmentByKode(String kode);

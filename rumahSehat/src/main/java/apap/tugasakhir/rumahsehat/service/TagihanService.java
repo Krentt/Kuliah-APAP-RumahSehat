@@ -14,9 +14,9 @@ public interface TagihanService {
     TagihanModel getTagihanById(String id);
 
     //Cisco: Feat 17
-    TagihanModel createTagihanByAppointment(AppointmentModel appointmentModel);
+    TagihanModel createTagihanByAppointment(AppointmentModel appointmentModel, TagihanModel tagihan);
 
     TagihanModel updateTagihan(TagihanModel tagihanModel);
 
-    void addTagihan(TagihanModel tagihan);
+    TagihanModel addTagihan(TagihanModel tagihan);
 }

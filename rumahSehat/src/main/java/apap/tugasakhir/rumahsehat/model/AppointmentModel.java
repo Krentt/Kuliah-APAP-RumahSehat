@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.id.enhanced.SequenceStyleGenerator;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -20,13 +21,13 @@ import java.time.LocalDateTime;
 public class AppointmentModel implements Serializable {
     @Id
     //Generate according to soal: APT-x (APT-1, APT-2, ...)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE ,generator = "appoint_id")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "appoint_id")
     @GenericGenerator(
-            name="appoint_id", strategy = "apap.tugasakhir.rumahsehat.util.StringPrefixedSequenceIdGenerator",
+            name = "appoint_id", strategy = "apap.tugasakhir.rumahsehat.util.StringPrefixedSequenceIdGenerator",
             parameters = {
-            @org.hibernate.annotations.Parameter(name = StringPrefixedSequenceIdGenerator.INCREMENT_PARAM, value = "0"),
-            @org.hibernate.annotations.Parameter(name = StringPrefixedSequenceIdGenerator.VALUE_PREFIX_PARAMETER, value = "APT-")
-    })
+                    @org.hibernate.annotations.Parameter(name = SequenceStyleGenerator.INCREMENT_PARAM, value = "0"),
+                    @org.hibernate.annotations.Parameter(name = StringPrefixedSequenceIdGenerator.VALUE_PREFIX_PARAMETER, value = "APT-")
+            })
     private String kode;
 
     @NotNull
@@ -35,22 +36,22 @@ public class AppointmentModel implements Serializable {
     private LocalDateTime waktuAwal;
 
     @NotNull
-    @Column(name="isDone")
+    @Column(name = "isDone")
     private boolean isDone;
 
     // Relasi dengan pasien
     @JsonBackReference(value = "pasien")
-    @ManyToOne(fetch=FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_pasien")
     private PasienModel pasienModel;
 
     // Relasi dengan dokter
     @JsonBackReference(value = "dokter")
-    @ManyToOne(fetch=FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_dokter")
     private DokterModel dokterModel;
 
-//     Relasi dengan resep
+    // Relasi dengan resep
     @JsonManagedReference
     @OneToOne(mappedBy = "appointment")
     private ResepModel resepModel;

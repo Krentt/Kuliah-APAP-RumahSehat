@@ -13,16 +13,22 @@ public class ObatServiceImpl implements ObatService {
     ObatDb obatDb;
 
     @Override
-    public List<ObatModel> getListObat(){return obatDb.findAll();}
+    public List<ObatModel> getListObat() {
+        return obatDb.findAll();
+    }
 
     @Override
-    public ObatModel getObatById(String idObat){return obatDb.findByIdObat(idObat);}
+    public ObatModel getObatById(String idObat) {
+        return obatDb.findByIdObat(idObat);
+    }
 
     @Override
-    public ObatModel updateObat(ObatModel obat){return obatDb.save(obat);}
+    public ObatModel updateObat(ObatModel obat) {
+        return obatDb.save(obat);
+    }
 
     @Override
-    public void addObat(ObatModel obat){
-        obatDb.save(obat);
+    public ObatModel addObat(ObatModel obat) {
+        return obatDb.save(obat);
     }
 }
