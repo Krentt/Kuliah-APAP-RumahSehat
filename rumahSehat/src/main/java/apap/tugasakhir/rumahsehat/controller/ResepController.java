@@ -187,7 +187,7 @@ public class ResepController {
 
 
         appointment.setDone(true);
-        appointmentService.createAppointent(appointment);
+        appointmentService.createAppointment(appointment);
 
         var auth = SecurityContextHolder.getContext().getAuthentication();
         String username = auth.getName();

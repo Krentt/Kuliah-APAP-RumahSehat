@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface ResepService {
 
-    void addResep(ResepModel resep);
+    ResepModel addResep(ResepModel resep);
 
     List<ResepModel> getListResep();
 

@@ -70,7 +70,7 @@ public class TagihanRESTController {
         var tagihanModel = tagihanService.getTagihanById(paymentDTO.getId());
         Long saldo = pasienModel.getSaldoPasien();
 
-        if(bindingResult.hasFieldErrors()){
+        if (bindingResult.hasFieldErrors()) {
             log.info("Request body has invalid type or missing field");
             throw new ResponseStatusException(
                     HttpStatus.BAD_REQUEST, "Request body has invalid type or missing field."
@@ -113,6 +113,7 @@ public class TagihanRESTController {
 
     /**
      * Regex Decoder Function
+     *
      * @param token jwttoken
      * @return Map<String, String> decoded token (USERNAME, EMAIL, NAMA LENGKAP)
      */

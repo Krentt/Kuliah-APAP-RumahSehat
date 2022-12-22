@@ -8,5 +8,5 @@ public interface ObatService {
     List<ObatModel> getListObat();
     ObatModel getObatById(String idObat);
     ObatModel updateObat(ObatModel obat);
-    void addObat(ObatModel obat);
+    ObatModel addObat(ObatModel obat);
 }

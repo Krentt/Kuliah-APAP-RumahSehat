@@ -1,16 +1,14 @@
 package apap.tugasakhir.rumahsehat.restmodel;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
-@Setter
-@Getter
+@Data
 public class ResepDTO {
     private Long id;
     private boolean isDone;

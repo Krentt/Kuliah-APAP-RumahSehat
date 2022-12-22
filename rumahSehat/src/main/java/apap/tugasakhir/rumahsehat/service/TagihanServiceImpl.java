@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class TagihanServiceImpl implements TagihanService{
+public class TagihanServiceImpl implements TagihanService {
     @Autowired
     private TagihanDb tagihanDb;
 
@@ -25,8 +25,7 @@ public class TagihanServiceImpl implements TagihanService{
     }
 
     @Override
-    public TagihanModel createTagihanByAppointment(AppointmentModel appointmentModel) {
-        var tagihan = new TagihanModel();
+    public TagihanModel createTagihanByAppointment(AppointmentModel appointmentModel, TagihanModel tagihan) {
         tagihan.setTanggalTerbuat(appointmentModel.getWaktuAwal());
         tagihan.setTanggalBayar(appointmentModel.getWaktuAwal().plusWeeks(2));
         tagihan.setIsPaid(false);
@@ -42,7 +41,7 @@ public class TagihanServiceImpl implements TagihanService{
     }
 
     @Override
-    public void addTagihan(TagihanModel tagihan){
-        tagihanDb.save(tagihan);
+    public TagihanModel addTagihan(TagihanModel tagihan) {
+        return tagihanDb.save(tagihan);
     }
 }

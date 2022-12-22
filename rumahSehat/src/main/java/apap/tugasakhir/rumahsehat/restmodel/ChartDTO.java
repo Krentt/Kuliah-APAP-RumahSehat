@@ -1,14 +1,12 @@
 package apap.tugasakhir.rumahsehat.restmodel;
 
 import apap.tugasakhir.rumahsehat.model.DokterModel;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import java.time.YearMonth;
 import java.util.List;
 
-@Getter
-@Setter
+@Data
 public class ChartDTO {
     private String method;
     private YearMonth yearMonth;

@@ -21,9 +21,9 @@ public class TagihanModel implements Serializable {
 
     @Id
     //Generate according to soal: BILL-x (BILL-1, BILL-2, ...)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE ,generator = "seq_tagihan_id")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_tagihan_id")
     @GenericGenerator(
-            name="seq_tagihan_id", strategy = "apap.tugasakhir.rumahsehat.util.StringPrefixedSequenceIdGenerator",
+            name = "seq_tagihan_id", strategy = "apap.tugasakhir.rumahsehat.util.StringPrefixedSequenceIdGenerator",
             parameters = {
                     @org.hibernate.annotations.Parameter(name = SequenceStyleGenerator.INCREMENT_PARAM, value = "0"),
                     @org.hibernate.annotations.Parameter(name = StringPrefixedSequenceIdGenerator.VALUE_PREFIX_PARAMETER, value = "BILL-")
@@ -50,11 +50,11 @@ public class TagihanModel implements Serializable {
     @JoinColumn(name = "appointment_model_kode")
     private AppointmentModel appointmentModel;
 
-    public void calculateTotal(){
+    public void calculateTotal() {
         var totalCurr = 0;
         // If no resep then omit resep
-        if(null != this.appointmentModel.getResepModel()){
-            for (JumlahModel j: this.appointmentModel.getResepModel().getListJumlahModel()
+        if (null != this.appointmentModel.getResepModel()) {
+            for (JumlahModel j : this.appointmentModel.getResepModel().getListJumlahModel()
             ) {
                 totalCurr += j.getObat().getHarga() * j.getKuantitas();
             }

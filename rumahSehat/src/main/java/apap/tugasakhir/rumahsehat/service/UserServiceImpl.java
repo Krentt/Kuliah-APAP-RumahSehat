@@ -11,15 +11,15 @@ import java.util.Collections;
 import java.util.List;
 
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
     @Autowired
     private UserDb userDb;
 
     @Override
-    public void addUser(UserModel user) {
+    public UserModel addUser(UserModel user) {
         String pass = encrypt(user.getPassword());
         user.setPassword(pass);
-        userDb.save(user);
+        return userDb.save(user);
     }
 
     @Override
@@ -27,6 +27,7 @@ public class UserServiceImpl implements UserService{
         var passwordEncoder = new BCryptPasswordEncoder();
         return passwordEncoder.encode(password);
     }
+
     @Override
     public UserModel getUserByUsername(String username) {
         return userDb.findByUsername(username);

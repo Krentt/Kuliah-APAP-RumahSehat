@@ -1,13 +1,11 @@
 package apap.tugasakhir.rumahsehat.restmodel;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import java.io.Serializable;
 
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
 public class JwtResponse implements Serializable {
     private static final long serialVersionUID = -8091879091924046844L;

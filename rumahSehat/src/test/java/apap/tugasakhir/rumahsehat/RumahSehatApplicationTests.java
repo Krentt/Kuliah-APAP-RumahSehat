@@ -12,10 +12,15 @@ class RumahSehatApplicationTests {
 
 	@Autowired
 	AppointmentController appointmentController;
+	@Autowired
 	ChartController chartController;
+	@Autowired
 	HomeController homeController;
+	@Autowired
 	ObatController obatController;
+	@Autowired
 	ResepController resepController;
+	@Autowired
 	UserController userController;
 
 	@Test
